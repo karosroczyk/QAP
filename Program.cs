@@ -133,7 +133,7 @@ namespace QAP
             // Generacja pierwszej populacji 
             List<List<int>> FirstPopulation = GenerateFirstPopulation(inputdata.MatrixD.Count);
 
-            int num_of_iter = 100;
+            int num_of_iter = 10;
 
             while (num_of_iter != 0)
             {
@@ -160,7 +160,6 @@ namespace QAP
                     }
                 }
 
-                // Hej testuje gita 
                 Console.WriteLine("------------------------");
                 num_of_iter--;
             }
