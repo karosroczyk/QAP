@@ -159,6 +159,8 @@ namespace QAP
                         Console.WriteLine();
                     }
                 }
+
+                // Hej testuje gita 
                 Console.WriteLine("------------------------");
                 num_of_iter--;
             }
