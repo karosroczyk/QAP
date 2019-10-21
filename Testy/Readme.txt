@@ -1,6 +1,6 @@
 File : script.py
 
-Działa prawidłowo dla postaci pliku:
+Działa prawidłowo dla postaci pliku (nie zadziała gdy obydwie macierze będą połączone):
 
   12
    
