@@ -28,35 +28,37 @@ namespace QAP
                 new List<int>(){2,3,4,5,0,1},
                 new List<int>(){1,2,3,4,5,0}
             };*/
-                MatrixF = new List<List<int>>(){
-                new List<int>(){0, 1, 2 ,3, 1, 2, 3 ,4 ,2 ,3 ,4 ,5},
-                new List<int>(){1, 0, 1, 2, 2, 1, 2, 3, 3, 2 ,3 ,4},
-                new List<int>(){2, 1, 0, 1, 3, 2, 1, 2 ,4 ,3 ,2 ,3},
-                new List<int>(){3, 2, 1, 0 ,4 ,3 ,2 ,1 ,5 ,4, 3, 2},
-                new List<int>(){1, 2, 3, 4 ,0 ,1 ,2 ,3 ,1 ,2 ,3 ,4 },
-                new List<int>(){2, 1, 2, 3, 1 ,0 ,1 ,2 ,2 ,1 ,2 ,3, },
-                new List<int>(){3, 2 ,1 ,2 ,2 ,1 ,0 ,1 ,3 ,2, 1 ,2 },
-                new List<int>(){4, 3, 2, 1, 3, 2 ,1 ,0 ,4, 3, 2, 1 },
-                new List<int>(){2, 3, 4 ,5 ,1 ,2 ,3 ,4 ,0 ,1 ,2 ,3 },
-                new List<int>(){3, 2 ,3 ,4 ,2 ,1 ,2 ,3 ,1 ,0, 1, 2 },
-                new List<int>(){4, 3, 2, 3 ,3 ,2 ,1 ,2 ,2 ,1 ,0 ,1 },
-                new List<int>(){5, 4, 3, 2, 4 ,3 ,2 ,1 ,3 ,2 ,1 ,0 }
-            };
+
+            MatrixF = new List<List<int>>(){
+    new List<int>(){0, 1, 2, 2, 3, 4, 4, 5, 3, 5, 6, 7},
+    new List<int>(){1, 0, 1, 1, 2, 3, 3, 4, 2, 4, 5, 6},
+    new List<int>(){2, 1, 0, 2, 1, 2, 2, 3, 1, 3, 4, 5},
+    new List<int>(){2, 1, 2, 0, 1, 2, 2, 3, 3, 3, 4, 5},
+    new List<int>(){3, 2, 1, 1, 0, 1, 1, 2, 2, 2, 3, 4},
+    new List<int>(){4, 3, 2, 2, 1, 0, 2, 3, 3, 1, 2, 3},
+    new List<int>(){4, 3, 2, 2, 1, 2, 0, 1, 3, 1, 2, 3},
+    new List<int>(){5, 4, 3, 3, 2, 3, 1, 0, 4, 2, 1, 2},
+    new List<int>(){3, 2, 1, 3, 2, 3, 3, 4, 0, 4, 5, 6},
+    new List<int>(){5, 4, 3, 3, 2, 1, 1, 2, 4, 0, 1, 2},
+    new List<int>(){6, 5, 4, 4, 3, 2, 2, 1, 5, 1, 0, 1},
+    new List<int>(){7, 6, 5, 5, 4, 3, 3, 2, 6, 2, 1, 0}
+    };
+
 
             MatrixD = new List<List<int>>(){
-                new List<int>(){0 , 5 , 2 , 4,  1,  0,  0,  6,  2,  1,  1,  1},
-                new List<int>(){5,  0,  3,  0,  2,  2,  2,  0,  4,  5,  0,  0},
-                new List<int>(){2,  3,  0,  0,  0,  0,  0,  5,  5,  2,  2,  2},
-                new List<int>(){ 4,  0,  0,  0,  5,  2,  2, 10,  0,  0,  5,  5 },
-                new List<int>(){ 1,  2,  0,  5,  0, 10,  0,  0,  0,  5,  1,  1},
-                new List<int>(){0,  2,  0,  2, 10,  0,  5,  1,  1,  5,  4,  0 },
-                new List<int>(){0,  2,  0,  2,  0,  5,  0, 10,  5,  2,  3,  3 },
-                new List<int>(){6,  0,  5, 10,  0,  1, 10,  0,  0,  0,  5,  0},
-                new List<int>(){ 2,  4,  5,  0,  0,  1,  5,  0,  0,  0, 10, 10},
-                new List<int>(){ 1,  5,  2,  0,  5,  5,  2,  0,  0,  0,  5,  0},
-                new List<int>(){1,  0,  2,  5,  1,  4,  3,  5, 10,  5,  0,  2},
-                new List<int>(){1,  0,  2,  5,  1,  0,  3,  0, 10,  0,  2,  0 }
-            };
+    new List<int>(){0, 3, 4, 6, 8, 5, 6, 6, 5, 1, 4, 6},
+    new List<int>(){3, 0, 6, 3, 7, 9, 9, 2, 2, 7, 4, 7},
+    new List<int>(){4, 6, 0, 2, 6, 4, 4, 4, 2, 6, 3, 6},
+    new List<int>(){6, 3, 2, 0, 5, 5, 3, 3, 9, 4, 3, 6},
+    new List<int>(){8, 7, 6, 5, 0, 4, 3, 4, 5, 7, 6, 7},
+    new List<int>(){5, 9, 4, 5, 4, 0, 8, 5, 5, 5, 7, 5},
+    new List<int>(){6, 9, 4, 3, 3, 8, 0, 6, 8, 4, 6, 7},
+    new List<int>(){6, 2, 4, 3, 4, 5, 6, 0, 1, 5, 5, 3},
+    new List<int>(){5, 2, 2, 9, 5, 5, 8, 1, 0, 4, 5, 2},
+    new List<int>(){1, 7, 6, 4, 7, 5, 4, 5, 4, 0, 7, 7},
+    new List<int>(){4, 4, 3, 3, 6, 7, 6, 5, 5, 7, 0, 9},
+    new List<int>(){6, 7, 6, 6, 7, 5, 7, 3, 2, 7, 9, 0}
+    };
         }
 
         public InputData(List<List<int>> MatrixD_, List<List<int>> MatrixF_)
@@ -65,12 +67,12 @@ namespace QAP
             MatrixF = MatrixF_;
         }
 
-        public int ObjectiveFunction(List<int> NewLayout )
+        public int ObjectiveFunction(List<int> NewLayout)
         {
             int Value = 0;
-            for (int i = 0; i<NewLayout.Count; i++)
+            for (int i = 0; i < NewLayout.Count; i++)
             {
-                for(int j = 0; j<NewLayout.Count; j++)
+                for (int j = 0; j < NewLayout.Count; j++)
                 {
                     if (j != i)
                     {
@@ -79,6 +81,16 @@ namespace QAP
                 }
             }
             return Value;
+        }
+
+        public List<int> ObjectiveFunctionVector(List<List<int>> Population)
+        {
+            List<int> ResultsOfObjectiveFunction = new List<int>();
+            foreach (var vec in Population)
+            {
+                ResultsOfObjectiveFunction.Add(ObjectiveFunction(vec));
+            }
+            return ResultsOfObjectiveFunction;
         }
     }
 }
