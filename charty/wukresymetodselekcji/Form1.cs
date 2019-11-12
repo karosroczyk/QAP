@@ -15,17 +15,17 @@ namespace wukresymetodselekcji
         public Form1()
         {
             InitializeComponent();
-            chart1.Titles.Add("Prawdopodobieństwo wylosowania danego osobnika w metodzie rankingowej");
+            chart1.Titles.Add("Prawdopodobieństwo wylosowania danego osobnika w metodzie ruletki");
 
             /*foreach (var elem in tab)
             {
                 chart1.Series["Series1"].Points.AddXY(elem.ToString(), elem);
             }*/
-            chart1.Series["Series1"].Points.AddXY("Osobnik 1", "1");
-            chart1.Series["Series1"].Points.AddXY("Osobnik 2", "2");
-            chart1.Series["Series1"].Points.AddXY("Osobnik 3", "3");
-            chart1.Series["Series1"].Points.AddXY("Osobnik 4", "4");
-            chart1.Series["Series1"].Points.AddXY("Osobnik 5", "5");
+            chart1.Series["Series1"].Points.AddXY("Osobnik 1", "373");
+            chart1.Series["Series1"].Points.AddXY("Osobnik 2", "254");
+            chart1.Series["Series1"].Points.AddXY("Osobnik 3", "156");
+            chart1.Series["Series1"].Points.AddXY("Osobnik 4", "202");
+            chart1.Series["Series1"].Points.AddXY("Osobnik 5", "10");
 
 
         }
@@ -33,5 +33,6 @@ namespace wukresymetodselekcji
         private void Chart1_Click(object sender, EventArgs e)
         {
         }
+
     }
 }
