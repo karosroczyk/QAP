@@ -105,7 +105,7 @@ namespace kolejnaprobachartu
 
             // Generacja pierwszej populacji 
             Mutation mutationdata = new Mutation(FirstPopulation, switchCase);
-            int num_of_iter = 20000;
+            int num_of_iter = 50000;
 
             //List<int> MutatedIndividual2 = mutationdata.TournamentMethond();
             while (num_of_iter != 0)
@@ -123,6 +123,10 @@ namespace kolejnaprobachartu
                 }
                 var wyniki = inputdata.ObjectiveFunctionVector(FirstPopulation);
                 toChart.Add(wyniki.Min());
+                if(num_of_iter == 1)
+                {
+                    MessageBox.Show(wyniki.Min().ToString());
+                }
 
                 num_of_iter--;
             }

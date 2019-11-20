@@ -37,6 +37,19 @@ namespace kolejnaprobachartu
             return WhichIndividuals;
         }
 
+        public List<int> RandomWitoutRestrictions2()
+        {
+            List<int> WhichIndividuals = new List<int>();
+            int number = 3;
+            var rand = new System.Random();
+
+            while (number != 0)
+            {
+                WhichIndividuals.Add(Kit.GiveRandomNumber2(Population.Count - 1, rand));
+                number--;
+            }
+            return WhichIndividuals;
+        }
 
         public List<int> RankingMethond()
         {
@@ -78,6 +91,40 @@ namespace kolejnaprobachartu
             return WhichIndividuals;
         }
 
+        public List<int> RankingMethond2()
+        {
+            List<int> WhichIndividuals = new List<int>();
+            List<int> WhichIndividualsIndex = new List<int>();
+            List<int> WhichIndividualBeforeSelection = new List<int>();
+            List<int> ResultsOfObjectiveFunction = inputdata.ObjectiveFunctionVector(Population);
+
+            var rand = new System.Random();
+            int size_tmp = size;
+            int number = 3;
+
+            while (size_tmp != 0)
+            {
+                var index = ResultsOfObjectiveFunction.IndexOf(ResultsOfObjectiveFunction.Min());
+                ResultsOfObjectiveFunction[index] = Int32.MaxValue;
+
+                int numberOfIter = size_tmp;
+                while (numberOfIter != 0)
+                {
+                    WhichIndividualBeforeSelection.Add(index);
+                    numberOfIter--;
+                }
+                size_tmp--;
+            }
+
+            while (number != 0)
+            {
+                var tmp = Kit.GiveRandomNumber2(WhichIndividualBeforeSelection.Count - 1, rand);
+
+                WhichIndividuals.Add(WhichIndividualBeforeSelection[tmp]);
+                number--;
+            }
+            return WhichIndividuals;
+        }
         public List<int> RouletteMethond()
         {
             List<int> WhichIndividuals = new List<int>();
@@ -156,6 +203,52 @@ namespace kolejnaprobachartu
             return WhichIndividuals;
         }
 
+        public List<int> TournamentMethond2()
+        {
+            List<int> WhichIndividuals = new List<int>();
+            List<int> ResultsOfObjectiveFunction = inputdata.ObjectiveFunctionVector(Population);
+            List<int> ResultsOfObjectiveFunction_const = new List<int>();
+            ResultsOfObjectiveFunction_const.AddRange(ResultsOfObjectiveFunction);
+            List<int> TournamentTable = new List<int>();
+            int number = 3;
+
+            while (number != 0)
+            {
+                int sizeOfTournament_const = ResultsOfObjectiveFunction.Count;
+                while (sizeOfTournament_const > 1)
+                {
+                    for (int i = 0; i < sizeOfTournament_const; i++)
+                    {
+                        TournamentTable.Add(Math.Min(ResultsOfObjectiveFunction[i], ResultsOfObjectiveFunction[i + 1]));
+                        i++;
+
+                        if ((sizeOfTournament_const % 2) == 1 && i == sizeOfTournament_const - 2)
+                        {
+                            TournamentTable.Add(ResultsOfObjectiveFunction.Last());
+                            i++;
+                        }
+                    }
+
+                    if (TournamentTable.Count == 1)
+                        break;
+                    sizeOfTournament_const = TournamentTable.Count;
+                    ResultsOfObjectiveFunction.RemoveAll(elem => ResultsOfObjectiveFunction.Contains(elem));
+                    ResultsOfObjectiveFunction.AddRange(TournamentTable);
+                    TournamentTable.RemoveAll(elem => TournamentTable.Contains(elem));
+                }
+
+                var index = ResultsOfObjectiveFunction_const.FindIndex(value => value == TournamentTable[0]);
+                WhichIndividuals.Add(index);
+                Console.WriteLine(index);
+                //ResultsOfObjectiveFunction_const[index] = Int32.MaxValue; // jak sie wstawi to 0 ten index nigdy juz nie wygra
+                ResultsOfObjectiveFunction.RemoveAll(elem => ResultsOfObjectiveFunction.Contains(elem));
+                ResultsOfObjectiveFunction.AddRange(ResultsOfObjectiveFunction_const);
+                TournamentTable.RemoveAt(0);
+                number--;
+            }
+            Console.WriteLine("-----");
+            return WhichIndividuals;
+        }
         public List<int> ElitistMethond()
         {
             List<int> WhichIndividuals = new List<int>();
@@ -191,6 +284,15 @@ namespace kolejnaprobachartu
                     break;
                 case 5:
                     WhichIndividuals = ElitistMethond();
+                    break;
+                case 6:
+                    WhichIndividuals = RandomWitoutRestrictions2();
+                    break;
+                case 7:
+                    WhichIndividuals = RankingMethond2();
+                    break;
+                case 8:
+                    WhichIndividuals = TournamentMethond2();
                     break;
                 default:
                     WhichIndividuals = RankingMethond();

@@ -1,8 +1,8 @@
-\chapter{Metody selekcji}\label{cha:pierwszyDokument}
+\chapter{Metody selekcji}\label{metody_selekcji}
 
 Jednym z etapów algorytmu ewolucyjnego jest selekcja polegająca na wyborze osobników, które zostaną wybrane do grupy rozrodczej tworzącej potomstwo. Znanych jest kilka metod selekcji na podstawie których dokonuje się wyboru osobników z różnym prawdopodobieństwem. Metody te w większości zostały opracowane w taki sposób by dawały większe szanse przetrwania osobnikom lepiej do tego przystosowanym, a więc osobnikom o większym współczynniku funkcji przystosowania. 
 
-Poniżej przestawiono metody selekcji podlegające rozważaniom w ramach tej pracy. Zgodnie z przyjętymi założeniami do grupy rozrodczej przedostają się 3 osobniki z populacji rodziców, co sprowadza się do faktu iż wybór należy powtórzyć trzykrotnie.
+Metody selekcji zostały zaimplementowane w dwojaki sposób. Pierwszym z nich jest możliwość pojawienia się danego osobnika w grupie rodzicielskiej wiecej niż jeden raz. Druga technika nakazuje różnorodność osobników w obrębie danej instancji grupy. Poniżej przestawiono idee metod selekcji podlegających rozważaniom w ramach tej pracy. Zgodnie z przyjętymi założeniami do grupy rozrodczej przedostają się 3 osobniki z populacji rodziców, co sprowadza się do faktu iż wybór należy powtórzyć trzykrotnie.
 
 
 %---------------------------------------------------------------------------
@@ -16,23 +16,20 @@ P = \frac{1}{n}
 $$
 
 \par
-Odpowiadająca funkcja w programie : RandomWitoutRestrictions()
+Odpowiadająca funkcja w programie :\textbf{ RandomWitoutRestrictions()}
 
 %---------------------------------------------------------------------------
 
 \section{Metoda rankingowa}\label{sec:kompilacja}
 
 
-W metodzie selekcji rankingowej dla osobników składających się na populacje rodziców    obliczana jest wartość funkcji celu, na której to podstawie tworzony jest ranking. Osobniki z najmniejszą wartością wyniku uzyskują najwyższe miejsca w rankingu. Miejsce w rankingu jest argumentem funkcji na podstawie której obliczane jest prawdopodobieństwo wyboru danego osobnika jako rodzica. Rodzic zostanie poddany kolejnym operacjom (mutacja, krzyżowanie). Funkcja stosowana na której to podstawie tworzony jest ranking może być funkcją:
-\vspace{0,4cm}
-\begin{itemize}
-\item
-Liniową – Osobniki zajmujące w rankingu będącym N elementowym wektorem konkretne miejsce określone rangą, gdzie N to ilość osobników w populacji otrzymują prawdopodobieństwo przejścia do grupy rodzicielskiej określone poniższą zależnością:
+W metodzie selekcji rankingowej dla osobników składających się na populacje rodziców obliczana jest wartość funkcji celu, na której to podstawie tworzony jest ranking. Osobniki z najmniejszą wartością wyniku uzyskują najwyższe miejsca w rankingu. Miejsce w rankingu jest argumentem funkcji na podstawie której obliczane jest prawdopodobieństwo wyboru danego osobnika jako rodzica. Rodzic zostanie poddany kolejnym operacjom (mutacja, krzyżowanie).\\
+ Funkcja stosowana na której to podstawie tworzony jest ranking może być funkcją liniową. Wówczas osobniki zajmujące w rankingu będącym N elementowym wektorem konkretne miejsce określone rangą, gdzie N to ilość osobników w populacji otrzymują prawdopodobieństwo przejścia do grupy rodzicielskiej określone poniższą zależnością:
 $$
 P = \frac{ranga}{\sum_{j=1}^{n}j}
 $$
 
-\begin{table}
+\begin{table}[h!]
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -49,24 +46,22 @@ Osobnik 4 & 136 & 4 & 26,(6)  \% \\
 Osobnik 5 & 10 & 5 & 33,(3)  \% \\
 \hline
 \end{tabular}
-\caption{Wartości parametrów na kolejnych osobników w metodzie ruletki}
+\caption{Wartości parametrów na kolejnych osobników w metodzie rankingowej}
 \end{center}
 \end{table}
 
 \vspace{0,4cm}
 
 \begin{figure}[h]
-		\includegraphics[scale=0.45]{../../Screeny/metoda_rankingowa.jpg}
+		\includegraphics[scale=0.45]{../../../../Screeny/metoda_rankingowa.jpg}
 		\caption{Rozkład prawdopodobieństwa w metodzie rankingowej}
 		\label{ranking}			
 \end{figure}
-
-\end{itemize} 
 \par
-Na podstawie \ref{ranking} zauważalny staje się fakt, iż rozkład prawdopodobieństwa jest niezależny od wartości funkcji celu. W metodzie tej zwiększone są więc szanse przejścia do grupy rodzicielskiej osobników z małą wartością funkcji dopasowania, które to miałyby małe szanse przejścia dalej w metodzie selekcji zależnej od wartości funkcji celu. Metoda może wydawać się niekorzystna z punktu widzenia osobników z dużą wartością funkcji dopasowania jako, że mogą otrzymać one niewiele większe prawdopodobieństwo przejścia do grupy rodzicielskiej od osobników znajdujących się range niżej pomimo iż ich wartości funkcji celu mogą różnić się znacząco.
+Na podstawie \ref{ranking} zauważalny staje się fakt, iż rozkład prawdopodobieństwa nie jest bezpośrednio zależny od wartości funkcji celu. W metodzie tej zwiększone są więc szanse przejścia do grupy rodzicielskiej osobników z małą wartością funkcji dopasowania, które to miałyby małe szanse przejścia dalej w metodzie selekcji zależnej od wartości funkcji celu. Metoda może wydawać się niekorzystna z punktu widzenia osobników z dużą wartością funkcji dopasowania jako, że mogą otrzymać one niewiele większe prawdopodobieństwo przejścia do grupy rodzicielskiej od osobników znajdujących się range niżej pomimo iż ich wartości funkcji celu mogą różnić się znacząco.
 \par
 \vspace{0,4cm}
-Odpowiadająca funkcja w programie : RankingMethod()
+Odpowiadająca funkcja w programie : \textbf{RankingMethod()}
 
 %---------------------------------------------------------------------------
 
@@ -79,9 +74,9 @@ P_i = \frac{f(i)}{\sum_{j=1}^{n}f(j)}
 $$
 Gdzie f(x) - funkcja przystosowania\\
 \par
-Funkcją przystosowania w rozważanym poniżej przypadku jest funkcja przyporządkowującą największej wartości funkcji celu wartość najmniejszą, a wartości najmniejszej wartość największą
+Funkcją przystosowania w rozważanym poniżej przypadku jest funkcja przyporządkowującą największej wartości funkcji celu wartość najmniejszą, a wartości najmniejszej wartość największą.
 
-\begin{table}
+\begin{table}[h!]
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -105,12 +100,14 @@ Osobnik 5 & 10 & 373 & 38,25  \% \\
 \vspace{0,4cm}
 
 \begin{figure}[h]
-		\includegraphics[scale=0.45]{../../Screeny/metoda_ruletki.jpg}
+		\includegraphics[scale=0.45]{../../../../Screeny/metoda_ruletki.jpg}
 		\caption{Rozkład prawdopodobieństwa w metodzie ruletki}
 		\label{ruletka}			
 \end{figure}
 \par
-Odpowiadająca funkcja w programie : RouletteMethod()
+W metodzie ruletki wkład każdego osobnika w rozkład prawdopodobieństwa jest wprost proporcjonalny do wartości jego funkcji dopasowania. Wady tej metody stają się widoczne, w sytuacji gdy dany osobnik zajmuje większość powierzchni koła, gdyż osobniki o małej wartości funkcji dopasowania są przedwcześnie eliminowane, a więc nie mają wielkiej szansy by zostać wylosowane. Prowadzi to do braku różnorodności w kolejnych grupach rozrodczych, co utrudnia dojście do lepszego wyniku. Z problemem tym dobrze sobie radzi wspomniana wyżej metoda rankingowa gzdei eliminowana jest możliwość dużej przewagi jednego z nich nad resztą.\\
+\par
+Odpowiadająca funkcja w programie : \textbf{RouletteMethod()}
 
 %---------------------------------------------------------------------------
 
@@ -119,13 +116,17 @@ Odpowiadająca funkcja w programie : RouletteMethod()
 
 Metoda selekcji turniejowej polega na rozgrywaniu turnieju pomiędzy osobnikami tworzącymi populacje. W wyniku jednorazowej rozgrywki wygrywa osobnik o większej wartości funkcji przystosowania, przechodząc tym samym do kolejnej rundy. W każdym turnieju zwycięża jeden osobnik, którego to genotyp jest wykorzystywany przy kolejnych operacjach genetycznych. Populacja dzielona jest na dwuosobnikowe podgrupy w których to dokonywane są rozgrywki. W przypadku nieparzystego rozmiaru populacji, osobnik ostatni przechodzi do kolejnej rundy bezkonkurencyjnie. \\
 \par
-Odpowiadająca funkcja w programie : TournamentMethod()
+Metoda turniejowa nie wymaga znajomości optymalizowanej funkcji, konieczny jest jedynie informacja o relacji zachodzącej pomiędzy dwoma kolejnymi osobnikami. 
+\par
+Odpowiadająca funkcja w programie : \textbf{TournamentMethod()}
 
 %---------------------------------------------------------------------------
 
 \section{Metoda elitarna}\label{sec:przygotowanieDokumentu}
 
-W metodzie tej nacisk położony jest na to, aby do grupy rozrodczej przedostały się z prawdopodobieństwem równym p=1 osobniki najlepiej przystosowane. W poprzednich metodach(ruletki, turniejowa, rankingowa) prawdopodobieństwo przejścia do grupy rozrodczej dla osobników z większym wskaźnikiem funkcji przystosowania jest jedynie większe niż dla pozostałych osobników. Nie ma jednak gwarancji przedostania się dalej osobników najlepiej przystosowanych. W strategii elitarnej do grupy na której zostanie dokonana operacja mutacji a następnie krzyżowania przedostaje się n osobników z populacji odznaczających się najwyższym wskaźnikiem funkcji przystosowania.\\
+W metodzie tej nacisk położony jest na to, aby do grupy rozrodczej przedostały się z prawdopodobieństwem równym p=100\% osobniki najlepiej przystosowane. W poprzednich metodach(ruletki, turniejowa, rankingowa) prawdopodobieństwo przejścia do grupy rozrodczej dla osobników z większym wskaźnikiem funkcji przystosowania jest jedynie większe niż dla pozostałych osobników. Nie ma jednak gwarancji przedostania się dalej osobników najlepiej przystosowanych. W strategii elitarnej do grupy na której zostanie dokonana operacja mutacji a następnie krzyżowania przedostaje się n osobników z populacji odznaczających się najwyższym wskaźnikiem funkcji przystosowania.\\
 \par
-Odpowiadająca funkcja w programie : ElitistMethod()
+Zastosowanie elitaryzmu jako metody selekcji daje pewność iż do grupy rodzicielskiej przedostaną się najlepiej do tego przystosowane osobniki. Dzięki temu unika sie sytuacji w której stosunkowo mocny osobnik w wyniku operacji genetycznych zostanie osłabiony a co za tym idzie, nie przechodzi on do grupy rodzicielskiej.\\
+\par
+Odpowiadająca funkcja w programie : \textbf{ElitistMethod()}
 

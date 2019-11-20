@@ -14,6 +14,12 @@ namespace kolejnaprobachartu
             int index = rand.Next(0, max_value - list.Count);
             return range.ElementAt(index);
         }
+        public static int GiveRandomNumber2(int max_value, Random rand)
+        {
+            var range = Enumerable.Range(1, max_value);
+            int index = rand.Next(0, max_value);
+            return range.ElementAt(index);
+        }
 
         public static void Normalize(List<double> MutatedIndividual_tmp, List<int> MutatedIndividual)
         {
