@@ -1,9 +1,8 @@
 \chapter{Metody selekcji}\label{metody_selekcji}
 
-Jednym z etapów algorytmu ewolucyjnego jest selekcja polegająca na wyborze osobników, które zostaną wybrane do grupy rozrodczej tworzącej potomstwo. Znanych jest kilka metod selekcji na podstawie których dokonuje się wyboru osobników z różnym prawdopodobieństwem. Metody te w większości zostały opracowane w taki sposób by dawały większe szanse przetrwania osobnikom lepiej do tego przystosowanym, a więc osobnikom o większym współczynniku funkcji przystosowania. 
+Jednym z etapów algorytmu ewolucyjnego jest selekcja polegająca na wyborze osobników, które przedostaną się do grupy rozrodczej tworzącej potomstwo. Znanych jest kilka metod selekcji na podstawie których dokonuje się wyboru osobników z różnym prawdopodobieństwem. Metody te w większości zostały opracowane w taki sposób by dawały większe szanse przetrwania osobnikom lepiej do tego przystosowanym, a więc osobnikom o większym współczynniku funkcji przystosowania. 
 
-Metody selekcji zostały zaimplementowane w dwojaki sposób. Pierwszym z nich jest możliwość pojawienia się danego osobnika w grupie rodzicielskiej wiecej niż jeden raz. Druga technika nakazuje różnorodność osobników w obrębie danej instancji grupy. Poniżej przestawiono idee metod selekcji podlegających rozważaniom w ramach tej pracy. Zgodnie z przyjętymi założeniami do grupy rozrodczej przedostają się 3 osobniki z populacji rodziców, co sprowadza się do faktu iż wybór należy powtórzyć trzykrotnie.
-
+Metody selekcji zostały zaimplementowane w dwojaki sposób. Pierwszym z nich jest możliwość pojawienia się danego osobnika w grupie rodzicielskiej wiecej niż jeden raz. Druga technika nakazuje różnorodność osobników w obrębie danej instancji grupy. Poniżej przestawiono idee metod selekcji podlegających rozważaniom w ramach tej pracy. Zgodnie z przyjętymi założeniami do grupy rozrodczej przedostają się 3 osobniki z populacji rodziców, co sprowadza się do faktu iż wybór należy powtórzyć trzykrotnie. Implementacje metod powstały w oparciu o \cite{maszynowe_sel}, \cite{gracjan}.
 
 %---------------------------------------------------------------------------
 
@@ -42,7 +41,7 @@ Odpowiadająca funkcja w programie :\textbf{ RandomWitoutRestrictions()}
 \section{Metoda rankingowa}\label{sec:kompilacja}
 
 
-W metodzie selekcji rankingowej dla osobników składających się na populacje rodziców obliczana jest wartość funkcji celu, na której to podstawie tworzony jest ranking. Osobniki z najmniejszą wartością wyniku uzyskują najwyższe miejsca w rankingu. Miejsce w rankingu jest argumentem funkcji na podstawie której obliczane jest prawdopodobieństwo wyboru danego osobnika jako rodzica. Rodzic zostanie poddany kolejnym operacjom (mutacja, krzyżowanie).\\
+W metodzie selekcji rankingowej dla osobników składających się na populacje rodziców obliczana jest wartość funkcji celu, na której to podstawie tworzony jest ranking. Osobniki z najmniejszą wartością wyniku uzyskują najwyższe miejsca w rankingu \cite{selekcje}. Miejsce w rankingu jest argumentem funkcji na podstawie której obliczane jest prawdopodobieństwo wyboru danego osobnika jako rodzica. Rodzic zostanie poddany kolejnym operacjom (mutacja, krzyżowanie).\\
  Funkcja stosowana na której to podstawie tworzony jest ranking może być funkcją liniową. Wówczas osobniki zajmujące w rankingu będącym N elementowym wektorem konkretne miejsce określone rangą, gdzie N to ilość osobników w populacji otrzymują prawdopodobieństwo przejścia do grupy rodzicielskiej określone poniższą zależnością \cite{Lam92}:
 $$
 P = \frac{ranga}{\sum_{j=1}^{n}j}
@@ -131,7 +130,7 @@ Odpowiadająca funkcja w programie : \textbf{RankingMethod()}
 \section{Metoda ruletki}\label{sec:narzedzia}
 
 
-W metodzie ruletki każdemu chromosomowi zostaje przypisany wycinek koła. Im silniejszy osobnik tym większy wycinek koła dostaje, gdyż zależność wartości funkcji przystosowania i prawdopodobieństwo wylosowania osobnika jest wprost proporcjonalna. Każdy osobnik tworzący populacje poddawany jest ocenie funkcji celu. Maksymalna wartość funkcji przystosowania oznacza najmniejszą wartość funkcji celu. Uzyskana wartość funkcji przystosowania w stosunku do sum wartości tej funkcji wszystkich osobników populacji wyznacza prawdopodobieństwo wylosowania danego osobnika na rodzica. Prawdopodobieństwo wylosowania danego osobnika dane jest następującą zależnością:
+W metodzie ruletki każdemu chromosomowi zostaje przypisany wycinek koła \cite{selekcje}. Im silniejszy osobnik tym większy wycinek koła dostaje, gdyż zależność wartości funkcji przystosowania i prawdopodobieństwo wylosowania osobnika jest wprost proporcjonalna. Każdy osobnik tworzący populacje poddawany jest ocenie funkcji celu. Maksymalna wartość funkcji przystosowania oznacza najmniejszą wartość funkcji celu. Uzyskana wartość funkcji przystosowania w stosunku do sum wartości tej funkcji wszystkich osobników populacji wyznacza prawdopodobieństwo wylosowania danego osobnika na rodzica. Prawdopodobieństwo wylosowania danego osobnika dane jest następującą zależnością:
 $$
 P_i = \frac{f(i)}{\sum_{j=1}^{n}f(j)}
 $$
@@ -275,7 +274,7 @@ Odpowiadająca funkcja w programie : \textbf{TournamentMethod()}
 
 \section{Metoda elitarna}\label{sec:przygotowanieDokumentu}
 
-W metodzie tej nacisk położony jest na to, aby do grupy rozrodczej przedostały się z prawdopodobieństwem równym p=100\% osobniki najlepiej przystosowane. W poprzednich metodach(ruletki, turniejowa, rankingowa) prawdopodobieństwo przejścia do grupy rozrodczej dla osobników z większym wskaźnikiem funkcji przystosowania jest jedynie większe niż dla pozostałych osobników. Nie ma jednak gwarancji przedostania się dalej osobników najlepiej przystosowanych. W strategii elitarnej do grupy na której zostanie dokonana operacja mutacji a następnie krzyżowania przedostaje się n osobników z populacji odznaczających się najwyższym wskaźnikiem funkcji przystosowania.\\
+W metodzie tej nacisk położony jest na to, aby do grupy rozrodczej przedostały się z prawdopodobieństwem równym p=100\% osobniki najlepiej przystosowane. W poprzednich metodach(ruletki, turniejowa, rankingowa) prawdopodobieństwo przejścia do grupy rozrodczej dla osobników z większym wskaźnikiem funkcji przystosowania jest jedynie większe niż dla pozostałych osobników. Nie ma jednak gwarancji przedostania się dalej osobników najlepiej przystosowanych. W strategii elitarnej do grupy na której zostanie dokonana operacja mutacji a następnie krzyżowania przedostaje się n osobników z populacji odznaczających się najwyższym wskaźnikiem funkcji przystosowania \cite{GPS}.\\
 \par
 Zastosowanie elitaryzmu jako metody selekcji daje pewność iż do grupy rodzicielskiej przedostaną się najlepiej do tego przystosowane osobniki. Dzięki temu unika sie sytuacji w której stosunkowo mocny osobnik w wyniku operacji genetycznych zostanie osłabiony a co za tym idzie, nie przechodzi on do grupy rodzicielskiej.\\
 \par

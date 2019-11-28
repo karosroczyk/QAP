@@ -1,10 +1,13 @@
 \chapter{Testy}\label{cha:pierwszyDokument}
 
-Ogolnie :
-zlozonosc algorytmu, zajmowana pamiec
 
-Poszczegolnych:
-szybkosc funkcji, odchylenie standardowe , srednie itp z np 20 runów, runy zrobic tez dla roznych ilosci iteracji bo moze sie cos nie wyrabia i potem jest lepiej 
+%Ogolnie :
+
+%zlozonosc algorytmu, zajmowana pamiec
+
+
+%Poszczegolnych:
+%szybkosc funkcji, odchylenie standardowe , srednie itp z np 20 runów, runy zrobic tez dla roznych ilosci iteracji bo moze sie cos nie wyrabia i potem jest lepiej 
 %---------------------------------------------------------------------------
 
 \section{Metody selekcji}\label{sec:strukturaDokumentu}
@@ -24,7 +27,7 @@ ilość iteracji algorytmu
 \end{itemize}
 \par
 \vspace{0,4cm}
-Testy zostały przeprowadzone dla poniżej zaprezentowanych instancji danych wejściowych, zaczerpniętych z WSTAWIĆ BIBLIOGRAFIUE, gdzie również znajduje się informacja o najlepszym otrzymanym wyniku funkcji celu dla danej instancji danych. Dzięki temu możliwe jest określenie jak blisko rozwiązania znajduje się wynik działania algorytmu dla każdej z metod. W celu uzyskania ostatecznego rozwiązania, a więc rozwiązania nie zmieniającego się dalej pod wpływem kolejnych iteracji algorytmu, analiza została przeprowadzona dla odpowiednio 20 000 oraz 50 000 iteracji.\\
+Testy zostały przeprowadzone dla poniżej zaprezentowanych instancji danych wejściowych, zaczerpniętych z \cite{qaplib}, gdzie również znajduje się informacja o najlepszym otrzymanym wyniku funkcji celu dla danej instancji danych. Dzięki temu możliwe jest określenie jak blisko rozwiązania znajduje się wynik działania algorytmu dla każdej z metod. W celu uzyskania ostatecznego rozwiązania, a więc rozwiązania nie zmieniającego się dalej pod wpływem kolejnych iteracji algorytmu, analiza została przeprowadzona dla odpowiednio 20 000 oraz 50 000 iteracji.\\
 
 \subsection{Dane wejściowe instancja I}
 
@@ -89,8 +92,7 @@ $$
 \begin{itemize}
 \item  \textbf{20 000 iteracji}\\
 \par
- MOZNA DODAC JESCZE PORÓWNANIE SZYBKOSCI DZIAŁANIA POSZCZEGOLNYCH METOD
- W \ref{instancja_1} zostały zestawione wartości funkcji celu w kolejnych iteracjach dla poszczególnych metod selekcji. Metody selekcji zostały szczegółowo opisane w \ref{metody_selekcji}. Dla każdej z metod została policzona średnia wartość funkcji celu, odchylenie standardowe oraz współczynnik zmienności będący stosunkiem wartości odchelenia standardowego i średniej. Za pomocą tych narzędzi statystycznych można określić zachowanie poszczególnych metod oraz wyodrębnić metodę dającą w tym kontekście najbardziej satysfakcjonujący wynik. Kolorem zielonym został również zaznaczony najlepszy otrzymany wynik.\\
+ W \ref{instancja1} zostały zestawione wartości funkcji celu w kolejnych iteracjach dla poszczególnych metod selekcji. Metody selekcji zostały szczegółowo opisane w \ref{metody_selekcji}. Dla każdej z metod została policzona średnia wartość funkcji celu, odchylenie standardowe oraz współczynnik zmienności będący stosunkiem wartości odchelenia standardowego i średniej. Za pomocą tych narzędzi statystycznych można określić zachowanie poszczególnych metod oraz wyodrębnić metodę dającą w tym kontekście najbardziej satysfakcjonujący wynik. Kolorem zielonym został również zaznaczony najlepszy otrzymany wynik.\\
 \par
 \begin{table}[h!]
 \begin{center}
@@ -159,25 +161,25 @@ Na podstawie powyższej tabeli zauważalny staje się fakt iż najbardziej satys
 \begin{table}[h!]
 \begin{center}
 \scalebox{0.8}{
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu}\\
+\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Ilość wygranych}\\
 \hline
- \textbf{1}&Rankingowa&1661 \\
+ \textbf{1}&Rankingowa&1661& 17 \\
 \hline
- \textbf{2}&Turniejowa&1677\\
+ \textbf{2}&Turniejowa&1677& 1\\
 \hline
- \textbf{3}&Losowa&1677\\
+ \textbf{3}&Losowa&1677& 1\\
 \hline
- \textbf{4}&Elitarna&1680\\
+ \textbf{4}&Elitarna&1680& 0\\
 \hline
- \textbf{5}&Rankingowa 2&1681\\
+ \textbf{5}&Rankingowa 2&1681& 1\\
 \hline
- \textbf{6}&Ruletki&1691\\
+ \textbf{6}&Ruletki&1691& 0\\
 \hline
- \textbf{7}&Losowa 2&1691\\
+ \textbf{7}&Losowa 2&1691& 0\\
 \hline
- \textbf{8}&Turniejowa 2&1746\\
+ \textbf{8}&Turniejowa 2&1746& 0\\
 \hline
 \end{tabular}}
 \caption{Ranking metod selekcji na podstawie średniej wartości funkcji celu}
@@ -197,13 +199,164 @@ Na podstawie \ref{ranking_1} zauważalne staje się zmniejszanie się wartości 
 \item  \textbf{50 000 iteracji}
 \end{itemize}
 
+ W \ref{instancja2} zostały zestawione wartości funkcji celu w kolejnych iteracjach dla poszczególnych metod selekcji. W tym przypadku zwiększona została liczba iteracji działania algorytmu dla każdej z metod z 20 000 na 50 000. 
 
+\begin{table}[h!]
+\begin{center}
+\scalebox{0.6}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Iteracja}  &\textbf{Losowa}  & \textbf{Rankingowa} & \textbf{Ruletka} & \textbf{Turniejowa} & \textbf{Elitarna} & \textbf{Losowa 2} & \textbf{Rankingowa 2} & \textbf{Turniejowa 2}\\
+\hline
+ \textbf{1}&1690&1662&1726&1656&1672&1696&1684	&1728 \\
+\hline
+ \textbf{2}&1720&1662&1686&1662&1674&1676&1692&1726 \\
+\hline
+ \textbf{3}&1656&1682&1684&1674&1684&1672&1672&1756  \\
+\hline
+ \textbf{4}&1718&1656&1682&1672&1676&1692&1660	&1784  \\
+\hline
+ \textbf{5}&1690&1662&1672&1668&1686&1726&1676&1790  \\
+\hline
+ \textbf{6}&1680&1660&1726&1690&1676&1694&1672&1804\\
+\hline
+ \textbf{7}&1674&1656&1684&1662&1676&1672&1670&1772 \\
+\hline
+ \textbf{8}&1692&1666&1682&1668&1664&1675&1686	&1764\\
+\hline
+ \textbf{9}&1666&\color{green}\textbf{1652}&1698&1664&1662&1686&1692&1798\\
+\hline
+ \textbf{10}&1694&1660&1698&1664&1670&1684&1696&1746\\
+\hline
+ \textbf{11}&1694&1656&1680&1674&1676&1704&1704&1716\\
+\hline
+ \textbf{12}&1662&1660&1686&1660&1662&1696&1668&1826\\
+\hline
+ \textbf{13}&1674&1666&1704&1670&1672&1696&1676&1794\\
+\hline
+ \textbf{14}&1666&1656&1690&1676&1672&1726&1672&1746\\
+\hline
+ \textbf{15}&1694&1676&1674&1662&1690&1712&1682&1756\\
+\hline
+ \textbf{16}&1670&1662&1696&1668&1682&1676&1670&1826\\
+\hline
+ \textbf{17}&1682&\color{green}\textbf{1652}&1674&1664&1672&1718&1660&1804\\
+\hline
+ \textbf{18}&1678&1660&1706&1684&1684&1688&1676&1770\\
+\hline
+ \textbf{19}&1670&1660&1678&1666&1690&1718&1668&1760\\
+\hline
+ \textbf{20}&1684&1662&1704&1692&1686&1676&1684&1826\\
+\hline
+ \textbf{ŚREDNIA}&1682&1661&1691&1669&1676&1694&1678&1774\\
+\hline
+ \textbf{ODCHYLENIE STANDARDOWE}&16,45&7,01&15,28&9,42&8,34&17,52&11,48&32,82\\
+\hline
+ \textbf{WSPÓŁCZYNNIK ZMIENNOŚCI}&0,97\%&0,42\%&0,90\%&0,56\%&0,49\%&1,03	\%&0,68\%&1,84\%\\
+\hline
+\end{tabular}}
+\caption{Wartości funkcji celu dla poszczególnych metod selekcji}
+\label{instancja2}
+\end{center}
+\end{table}
 
-WNIOSKI
-- W ilu iteracjch wygrywała jednak rnkingowa w 17 na 20
-- 20 000 operacji najlepszy wynik to 1654
--raczej 20 000 operacji jest wystarczajace ale nie zawsze sie wyrabia
-- ruletki działa słabo, jest jedn pik w dół i potem juz prawie zawsze do końca jest na tym samym poziomie ( mozna dac wykres przykładowo oprazujący o co chodzi)
--jak w stosunku do powtarzajacych się działaja te nie powtrzajace sie
+W przypadku 50 000 iteracji zauważalne jest uzyskiwanie lepszych średnich wyników przez metody takie jak : metoda turniejowa, metoda elitarna, metoda rankingowa oraz turniejowa dopuszczające istnienie powtorzeń w grupie rodzicielskiej. Dzieje się tak za przyczyną faktu, iż metody te nie kończą stabilizacji funkcji celu na poziomie 20 000, ponieważ następuje spadek wartośći funkcji celu również w dalszych iteracjach. Pozostałe metody utrzymały średnią na tym samym bądź też nieco wyższym poziomie w stosunku to próby testowej zakładającej 20 000 iteracji. Poniżej w tabeli \ref{ranking2} zestawiony został ranking metod uporządkowany od metody działającej najlepiej na pierwszym miejscu do metody działającej najmniej korzystnie na ostatnim.
+
+\begin{table}[h!]
+\begin{center}
+\scalebox{0.8}{
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Ilość wygranych}\\
+\hline
+ \textbf{1}&Rankingowa&1661& 15\\
+\hline
+ \textbf{2}&Turniejowa&1669& 3\\
+\hline
+ \textbf{3}&Elitarna&1676& 1\\
+\hline
+ \textbf{4}&Rankingowa 2&1678& 0\\
+\hline
+ \textbf{5}&Losowa&1682& 1\\
+\hline
+ \textbf{6}&Ruletki&1691& 0\\
+\hline
+ \textbf{7}&Losowa 2&1694& 0\\
+\hline
+ \textbf{8}&Turniejowa 2&1774& 0\\
+\hline
+\end{tabular}}
+\caption{Ranking metod selekcji na podstawie średniej wartości funkcji celu}
+\label{ranking2}
+\end{center}
+\end{table}
+
+Na podstawie tabeli \ref{ranking2} można wysunąc wniosek iż po raz kolejny nalepsze wyniki uzyskuje metoda rankingowa, a zaraz po niej po raz kolejny najbardziej korzystnie zachowuje się metoda turniejowa. Nie mniej jednak przodowanie tych metod może mieć miejsce w przypadku tej instancji danych wejściowych, dlatego należy przeprowadzić testy przy użyciu innej macierzy odległości, przepływu oraz pierwszej populacji. Przebieg funkcji celu we wszystkich 50000 iteracji widoczny jest na wykresie \ref{ranking2pic}. Konkretnie w przypadku wykresu \ref{ranking2pic} nie istnieją zmiany wartości funkcji po przekroczeniu bariery 20000 iteracji. Jednak analizujac wykres \ref{ranking2picun} widoczny jest spadek dla metody turniejowej w której istnieje zastrzeżenie co do niepowtarzalności się osoników w grupie rozrodczej.
+
+\begin{figure}[h!]
+		\includegraphics[scale=0.6]{../../../../Screeny/najlepsze_1652.png}
+		\caption{Przebiej działania algorytmu dla poszczególnych metod selekcji}
+		\label{ranking2pic}			
+\end{figure}
+
+\begin{figure}[h!]
+		\includegraphics[scale=0.6]{../../../../Screeny/50_tys.png}
+		\caption{Przebiej działania algorytmu dla poszczególnych metod selekcji}
+		\label{ranking2picun}			
+\end{figure}
+
+Analizując powyższe wykresy możliwe jest ustalenie optymalnej ilości iteracji na liczbę 30 000, wówczas wartości funkcji celu w poszczególnych metodach osiągną już stan stabilny, a dodatkoe obliczenia aż dla liczby 50 000 iteracji nie bądą musiały być wykonywane.
 
 \subsection{Dane wejściowe instancja II}
+
+\par
+$$
+\mathbf{Macierz\_przepływu} =
+\left( \begin{array}{cccccccccccccccccc}
+0& 1& 2& 2& 3& 4& 4& 5& 3& 5& 6& 7& 8& 9& 7& 8& 4& 5\\
+1& 0& 1& 1& 2& 3& 3& 4& 2& 4& 5& 6& 7& 8& 6& 7& 3& 4\\
+2& 1& 0& 2& 1& 2& 2& 3& 1& 3& 4& 5& 6& 7& 5& 6& 2& 3\\
+2& 1& 2& 0& 1& 2& 2& 3& 3& 3& 4& 5& 6& 7& 5& 6& 4& 5\\
+3& 2& 1& 1& 0& 1& 1& 2& 2& 2& 3& 4& 5& 6& 4& 5& 3& 4\\
+4& 3& 2& 2& 1& 0& 2& 3& 3& 1& 2& 3& 4& 5& 3& 4& 4& 5\\
+4& 3& 2& 2& 1& 2& 0& 1& 3& 1& 2& 3& 4& 5& 3& 4& 4& 5\\
+5& 4& 3& 3& 2& 3& 1& 0& 4& 2& 1& 2& 3& 4& 2& 3& 5& 6\\
+3& 2& 1& 3& 2& 3& 3& 4& 0& 4& 5& 6& 7& 8& 6& 7& 1& 2\\
+5& 4& 3& 3& 2& 1& 1& 2& 4& 0& 1& 2& 3& 4& 2& 3& 5& 6\\
+6& 5& 4& 4& 3& 2& 2& 1& 5& 1& 0& 1& 2& 3& 1& 2& 6& 7\\
+7& 6& 5& 5& 4& 3& 3& 2& 6& 2& 1& 0& 1& 2& 2& 3& 7& 8\\
+8& 7& 6& 6& 5& 4& 4& 3& 7& 3& 2& 1& 0& 1& 1& 2& 8& 9\\
+9& 8& 7& 7& 6& 5& 5& 4& 8& 4& 3& 2& 1& 0& 2& 1& 9& 10\\
+7& 6& 5& 5& 4& 3& 3& 2& 6& 2& 1& 2& 1& 2& 0& 1& 7& 8\\
+8& 7& 6& 6& 5& 4& 4& 3& 7& 3& 2& 3& 2& 1& 1& 0& 8& 9\\
+4& 3& 2& 4& 3& 4& 4& 5& 1& 5& 6& 7& 8& 9& 7& 8& 0& 1\\
+5& 4& 3& 5& 4& 5& 5& 6& 2& 6& 7& 8& 9& 10& 8& 9& 1& 0\\
+\end{array} \right)
+$$
+
+\par
+$$
+\mathbf{Macierz\_odległości} =
+\left( \begin{array}{cccccccccccccccccc}
+   0& 3& 4& 6& 8& 5& 6& 6& 5& 1& 4& 6& 1& 5& 4& 5& 6& 8\\
+    3& 0& 6& 3& 7& 9& 9& 2& 2& 7& 4& 7& 9& 6& 3& 2& 6& 6\\
+    4& 6& 0& 2& 6& 4& 4& 4& 2& 6& 3& 6& 5& 6& 2& 6& 5& 7\\
+    6& 3& 2& 0& 5& 5& 3& 3& 9& 4& 3& 6& 3& 4& 7& 8& 3& 2\\
+    8& 7& 6& 5& 0& 4& 3& 4& 5& 7& 6& 7& 7& 3& 3& 3& 4& 4\\
+    5& 9& 4& 5& 4& 0& 8& 5& 5& 5& 7& 5& 1& 8& 5& 4& 3& 3\\
+    6& 9& 4& 3& 3& 8& 0& 6& 8& 4& 6& 7& 1& 8& 5& 6& 7& 6\\
+    6& 2& 4& 3& 4& 5& 6& 0& 1& 5& 5& 3& 7& 5& 9& 4& 4& 4\\
+    5& 2& 2& 9& 5& 5& 8& 1& 0& 4& 5& 2& 4& 5& 4& 5& 4& 7\\
+    1& 7& 6& 4& 7& 5& 4& 5& 4& 0& 7& 7& 5& 6& 5& 5& 6& 10\\
+    4& 4& 3& 3& 6& 7& 6& 5& 5& 7& 0& 9& 6& 5& 1& 8& 5& 3\\
+    6& 7& 6& 6& 7& 5& 7& 3& 2& 7& 9& 0& 6& 5& 4& 5& 4& 6\\
+    1& 9& 5& 3& 7& 1& 1& 7& 4& 5& 6& 6& 0& 5& 7& 4& 5& 2\\
+    5& 6& 6& 4& 3& 8& 8& 5& 5& 6& 5& 5& 5& 0& 5& 3& 2& 4\\
+    4& 3& 2& 7& 3& 5& 5& 9& 4& 5& 1& 4& 7& 5& 0& 8& 5& 6\\
+    5& 2& 6& 8& 3& 4& 6& 4& 5& 5& 8& 5& 4& 3& 8& 0& 6& 8\\
+    6& 6& 5& 3& 4& 3& 7& 4& 4& 6& 5& 4& 5& 2& 5& 6& 0& 3\\
+    8& 6& 7& 2& 4& 3& 6& 4& 7& 10& 3& 6& 2& 4& 6& 8& 3& 0\\
+\end{array} \right)
+$$
+
+\par

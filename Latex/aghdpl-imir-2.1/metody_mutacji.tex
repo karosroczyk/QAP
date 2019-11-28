@@ -1,13 +1,36 @@
 \chapter{Metody mutacji}\label{cha:pierwszyDokument}
 
+Mutacja stosowana w algorytmie ewolucji różnicowej zdefiniowana jest w odmienny sposób w stosunku do algorytmu ewolucyjnego w którym to genotyp stanowią wartości binarne, a operator mutacji ma za zadanie wprowadzenie zmian na zasadzie negacji obecnej wartości genu. W mutacji różnicowej zastosowana jest operacja odejmowania od siebie dwóch wektorów tworząc tym samym wektor różnicowy, czemu również algorytm zawdzięcza swoją nazwe z ang. \textsl{difference} \cite{przystojny_koles}. Podobnie jak ma to miejsce w innych algorytmach należących do grona algorytmów ewolucyjnych, tak i ewolucja różnicowa posiada wiele alternatywnych modyfikacji metod mutacji. Metody mutacji różnicowej różnią się od siebie głównie elementami takimi jak:
+
+\begin{enumerate}
+\item Sposób  wyboru osobnika będącego wektorem celu, a więc wektorem znajdującym się w grupie rozrodczej lecz nie wchodzącym w skład wektora różnicowego,
+\item Liczba wektorów różnicowych
+\end{enumerate}
+
+W związku z powyższym, metody mutacji mogą przyjąć następującą nomenklature \textsl{DE/1/2/}. Wybór danej metody jest zależny od specyfiki rozwiązywanego problemu i dla różnych jego instancji może dawać odmienne rezultaty. Poniżej zestawione zostały strategie najczęściej spotykane w literaturze i opisane szczegółowo w \cite{doktorat}:
 %---------------------------------------------------------------------------
 
-\section{Mutacja równomierna}\label{sec:strukturaDokumentu}
+\section{Strategia I: DE/rand/1}\label{sec:strukturaDokumentu}
+
+Podstawową strategią  stosowaną jako operator mutacji jest strategia zakładająca wylosowanie spośród grupy rozrodczej osobnika mającego stanowić wektor celu. Jako, że grupa rozrodcza skłąda się z trzech osobników, dwa pozostałe są odpowiedzialne za utworzenie wektora różnicowego. Jest to zgodne z poniższym wzorem:
+$$
+ \forall U_{i} =S_{r_{1}i} + F \cdot (S_{r_{2}i} - S_{r_{3}i})
+$$
+Gdzie:\\
+$$
 
 %---------------------------------------------------------------------------
 
-\section{Mutacja brzegowa}\label{sec:kompilacja}
+\section{Strategia II: DE/best/1}\label{sec:kompilacja}
 
 %---------------------------------------------------------------------------
 
-\section{Mutacja nierównimierna}\label{sec:narzedzia}
+\section{Strategia III: DE/rand/$n_{v}$}\label{sec:narzedzia}
+
+%---------------------------------------------------------------------------
+
+\section{Strategia IV: DE/rand to best/$n_{v}$}\label{sec:narzedzia}
+
+%---------------------------------------------------------------------------
+
+\section{Strategia V: DE/current to best/$n_{v} +1$}\label{sec:narzedzia}
