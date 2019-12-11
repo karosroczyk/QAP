@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4EDAA90E-B7D4-44A7-8DF9-6011536EE38D}</ProjectGuid>
+    <ProjectGuid>{046DC30A-0933-4A1C-8EA6-8881AC97BB86}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>kolejnaprobachartu</RootNamespace>
-    <AssemblyName>kolejnaprobachartu</AssemblyName>
+    <RootNamespace>mutacje_charty</RootNamespace>
+    <AssemblyName>mutacje_charty</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -47,10 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs" />
-    <Compile Include="Class3.cs" />
-    <Compile Include="Class4.cs" />
     <Compile Include="Final.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

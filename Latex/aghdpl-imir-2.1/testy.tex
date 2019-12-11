@@ -10,9 +10,9 @@
 %szybkosc funkcji, odchylenie standardowe , srednie itp z np 20 runów, runy zrobic tez dla roznych ilosci iteracji bo moze sie cos nie wyrabia i potem jest lepiej 
 %---------------------------------------------------------------------------
 
-\section{Metody selekcji}\label{sec:strukturaDokumentu}
+\section{Metody reprodukcji}\label{sec:strukturaDokumentu}
 
-Analiza metod selekcji w obrębie jednej instancji została przeprowadzona przy założeniu stałych takich jak:
+Analiza metod reprodukcji w obrębie jednej instancji została przeprowadzona przy założeniu stałych takich jak:
 \begin{itemize}
 \item
  warunki początkowe, a więc stałej macierzy odległości, macierzy przepływu,
@@ -92,7 +92,7 @@ $$
 \begin{itemize}
 \item  \textbf{20 000 iteracji}\\
 \par
- W \ref{instancja1} zostały zestawione wartości funkcji celu w kolejnych iteracjach dla poszczególnych metod selekcji. Metody selekcji zostały szczegółowo opisane w \ref{metody_selekcji}. Dla każdej z metod została policzona średnia wartość funkcji celu, odchylenie standardowe oraz współczynnik zmienności będący stosunkiem wartości odchelenia standardowego i średniej. Za pomocą tych narzędzi statystycznych można określić zachowanie poszczególnych metod oraz wyodrębnić metodę dającą w tym kontekście najbardziej satysfakcjonujący wynik. Kolorem zielonym został również zaznaczony najlepszy otrzymany wynik.\\
+ W \ref{instancja1} zostały zestawione wartości funkcji celu w kolejnych iteracjach dla poszczególnych metod reprodukcji. Metody te zostały szczegółowo opisane w \ref{metody_selekcji}. Dla każdej z metod została policzona średnia wartość funkcji celu, odchylenie standardowe oraz współczynnik zmienności będący stosunkiem wartości odchelenia standardowego i średniej. Za pomocą tych narzędzi statystycznych można określić zachowanie poszczególnych metod oraz wyodrębnić metodę dającą w tym kontekście najbardziej satysfakcjonujący wynik. Kolorem zielonym został również zaznaczony najlepszy otrzymany wynik.\\
 \par
 \begin{table}[h!]
 \begin{center}
@@ -154,7 +154,7 @@ $$
 \end{table}
 
 
-Na podstawie powyższej tabeli zauważalny staje się fakt iż najbardziej satysfakcjonujące wyniki w przeciągu 20 000 iteracji otrzymuje metoda rankingowa. W 15 na 20 przypadków uzyskała ona najmniejsze wartości funkcji celu. W pozostałych przypadkach znajduje się na drugim bądź też trzecim miejscu. Posiada ona również najmniejszy współczynnik odchylenia standardowego oraz współczynnik zmienności co świadczy o stosunkowo najbliższym spośród wszystkich metod położeniu wyników wokół wartości średniej. Poniżej zestawiony został ranking metod selekcji utworzony w zależności od uzyskanej wartości średniej funkcji celu.\\
+Na podstawie powyższej tabeli zauważalny staje się fakt iż najbardziej satysfakcjonujące wyniki w przeciągu 20 000 iteracji otrzymuje metoda rankingowa. W 17 na 20 przypadków uzyskała ona najmniejsze wartości funkcji celu. W pozostałych przypadkach znajduje się na drugim bądź też trzecim miejscu. Posiada ona również najmniejszy współczynnik odchylenia standardowego oraz współczynnik zmienności co świadczy o stosunkowo najbliższym spośród wszystkich metod położeniu wyników wokół wartości średniej. Poniżej zestawiony został ranking metod selekcji utworzony w zależności od uzyskanej wartości średniej funkcji celu.\\
 
 
 
@@ -194,12 +194,12 @@ Widoczny staje się więc fakt iż lepiej działają metody w których stosujemy
 		\label{ranking}			
 \end{figure}
 
-Na podstawie \ref{ranking_1} zauważalne staje się zmniejszanie się wartości funkcji celu w kolejnych iteracjach algorytmu.  W przypadku metod takich jak metoda ruletki czy też metoda turniejowa, która dopuszcza powtórzeń wśrod osobników w grupie rodzicielskiej, stabilizacja poziomu następuje w początkowych iteracjach i utrzymuje się tak do końca. Powodem tak szybkiej zbieżności tych metod jest brak różnorodności w kolejnych grupach rodzicielskich. W metodzie ruletki spowodowane jest to dużym prawdopodobieństwem wylosowania osobnika najlepszego co prowadzi do jego dominanty nad innymi. Natomiast w metodzie selekcji turniejowej turniej jest w większości przypadków wygrywany przez ten sam osobnik, co przy dodatkowym założeniu iż w jednej grupie rodzicielskiej mogą znajdować się te same osobniki prowadzi do sytuacji że na grupę rodzicielską składają się 3 te same osobniki. Pomimo wrażenia iż rozwiązania osiągnęły stan stabilny już w 20 000 itreracji, należy sprawdzić czy nie nastąpi jeszcze spadek wartości funkcji celu gdy liczba iteracji zostanie zwiększona. W tym celu ponowione zostają badania metod dla 50 000 iteracji.\\
+Na podstawie \ref{ranking_1} zauważalne staje się zmniejszanie się wartości funkcji celu w kolejnych iteracjach algorytmu.  W przypadku metod takich jak metoda ruletki czy też metoda turniejowa, która dopuszcza powtórzeń wśrod osobników w grupie rodzicielskiej, stabilizacja poziomu następuje w początkowych iteracjach i utrzymuje się tak do końca. Powodem tak szybkiej zbieżności tych metod jest brak różnorodności w kolejnych grupach rodzicielskich. W metodzie ruletki spowodowane jest to dużym prawdopodobieństwem wylosowania osobnika najlepszego co prowadzi do jego dominanty nad innymi. Natomiast w metodzie  turniejowej turniej jest w większości przypadków wygrywany przez ten sam osobnik, co przy dodatkowym założeniu iż w jednej grupie rodzicielskiej mogą znajdować się te same osobniki prowadzi do sytuacji że na grupę rodzicielską składają się 3 te same osobniki. Pomimo wrażenia iż rozwiązania osiągnęły stan stabilny już w 20 000 itreracji, należy sprawdzić czy nie nastąpi jeszcze spadek wartości funkcji celu gdy liczba iteracji zostanie zwiększona. W tym celu ponowione zostają badania metod dla 50 000 iteracji.\\
 
 \item  \textbf{50 000 iteracji}
 \end{itemize}
 
- W \ref{instancja2} zostały zestawione wartości funkcji celu w kolejnych iteracjach dla poszczególnych metod selekcji. W tym przypadku zwiększona została liczba iteracji działania algorytmu dla każdej z metod z 20 000 na 50 000. 
+ W \ref{instancja2} zostały zestawione wartości funkcji celu w kolejnych iteracjach dla poszczególnych metod. W tym przypadku zwiększona została liczba iteracji działania algorytmu dla każdej z metod z 20 000 na 50 000. 
 
 \begin{table}[h!]
 \begin{center}

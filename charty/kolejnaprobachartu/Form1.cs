@@ -21,25 +21,26 @@ namespace kolejnaprobachartu
         Final final = new Final();
         private void Form1_Load(object sender, EventArgs e)
         {
-            chart1.Text = "Przebieg funkcji celu przy użyciu różnych metod selekcji";
+            chart1.Text = "Przebieg funkcji celu przy użyciu różnych metod mutacji";
             chart1.Titles.Add("Przebieg funkcji celu");
-            chart1.ChartAreas[0].AxisY.Minimum = 1600;
-            chart1.ChartAreas[0].AxisX.Maximum = 50000;
+            chart1.ChartAreas[0].AxisY.Minimum = 1500;
+            chart1.ChartAreas[0].AxisX.Maximum = 20000;
             int k = 1;
 
             for (int i = 0; i < 8; i++)
             {
-                final.Koncowa(i+1);
+                final.Koncowa(i+1, 2);
                 List<int> toChart_ = Final.toChart;
                 foreach (int elem in toChart_)
                 {
                     chart1.Series[i].Points.AddXY(k,elem);
                     //chart1.Series[0].IsValueShownAsLabel = true;
                     k++;
-                }
+                }               
                 Final.RemoveAllElems();
                 k = 1;
             }
+            MessageBox.Show(Final.final);
         }
 
         private void Chart1_Click(object sender, EventArgs e)
@@ -56,6 +57,21 @@ namespace kolejnaprobachartu
         }
 
         private void Prsztcisk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TrackBar1_Scroll(object sender, EventArgs e)
         {
 
         }

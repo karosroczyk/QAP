@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace kolejnaprobachartu
+namespace mutacje_charty
 {
     class Final
     {
@@ -84,7 +83,7 @@ namespace kolejnaprobachartu
 
         List<int> finals = new List<int>();
         public static string final;
-        public void Koncowa(int switchCase, int number_of_vectors)
+        public void Koncowa(int switchCase, int number_of_vectors = 2)
         {
             //Console.WriteLine(FirstPopulation[0][0]);
             // Dane wejściowe
@@ -111,7 +110,7 @@ namespace kolejnaprobachartu
 
             // Generacja pierwszej populacji 
             Mutation mutationdata = new Mutation(FirstPopulation);
-            int num_of_iter = 20000;
+            int num_of_iter = 200;
 
             //List<int> MutatedIndividual2 = mutationdata.TournamentMethond();
             while (num_of_iter != 0)
@@ -129,13 +128,12 @@ namespace kolejnaprobachartu
                 }
                 var wyniki = inputdata.ObjectiveFunctionVector(FirstPopulation);
                 toChart.Add(wyniki.Min());
-                if(num_of_iter == 1)
+                if (num_of_iter == 1)
                 {
                     finals.Add(wyniki.Min());
-                    final += wyniki.Min().ToString() + " " ;
+                    final += wyniki.Min().ToString() + " ";
                     //MessageBox.Show(wyniki.Min().ToString());
                 }
-
                 num_of_iter--;
             }
         }

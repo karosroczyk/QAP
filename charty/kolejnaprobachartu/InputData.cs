@@ -48,7 +48,6 @@ namespace kolejnaprobachartu
     new List<int>(){7, 6, 5, 5, 4, 3, 3, 2, 6, 2, 1, 0}
     };
 
-
             MatrixD = new List<List<int>>(){
     new List<int>(){0, 3, 4, 6, 8, 5, 6, 6, 5, 1, 4, 6},
     new List<int>(){3, 0, 6, 3, 7, 9, 9, 2, 2, 7, 4, 7},

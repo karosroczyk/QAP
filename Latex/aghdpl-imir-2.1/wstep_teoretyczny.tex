@@ -5,11 +5,11 @@
 \section{Opis algorytmu ewolucji różnicowej}\label{sec:strukturaDokumentu}
 
 
-Algorytm ewolucji różnicowej jest rodzajem heurystyki, a więc rodzajem algorytmu dla którego znalezione rozwiązanie nie jest objęte gwarancją bycia rozwiązaniem optymalnym. Metod heurystycznych używa się w sytuacji gdy przestrzeń potencjalnych rozwiązań jest zbyt duża iż nie jest możliwe w dostatecznie krótkim czasie przebadanie wszystkich  potencjalnych rozwiązań w celu znalezienia tego najlepszego. Algorytmy ewolucyjne, ktorych to pewnego rodzaju odmianą są algorytmy ewolucji różnicowej \cite{diff}, są jednym z narzędzi służących do ukierunkowania procesu poszukiwań poprzez zastosowanie technik probabilistycznych, a co za tym idzie służących do usprawnienia rozwiązywania wspomnianej wyżej sytuacji. W większości przypadków, przy odpowiednim doborze parametrów rozwiązanie będące wynikiem działania algorytmu ewolucyjnego jest zarazem rozwiązaniem najbardziej optymalnym, nie mniej jednak zależność ta nie występuje  we wrzystkich przypadkach.
+Algorytm ewolucji różnicowej jest rodzajem heurystyki, a więc rodzajem algorytmu dla którego znalezione rozwiązanie nie jest objęte gwarancją bycia rozwiązaniem optymalnym. Metod heurystycznych używa się w sytuacji gdy przestrzeń potencjalnych rozwiązań jest zbyt duża, iż nie jest możliwe w dostatecznie krótkim czasie przebadanie wszystkich  potencjalnych rozwiązań w celu znalezienia tego najlepszego. Algorytmy ewolucyjne, ktorych to pewnego rodzaju odmianą są algorytmy ewolucji różnicowej \cite{diff}, są jednym z narzędzi służących do ukierunkowania procesu poszukiwań poprzez zastosowanie technik probabilistycznych, a co za tym idzie służących do usprawnienia rozwiązywania wspomnianej wyżej sytuacji. W większości przypadków, przy odpowiednim doborze parametrów rozwiązanie będące wynikiem działania algorytmu ewolucyjnego jest zarazem rozwiązaniem optymalnym, nie mniej jednak zależność ta nie występuje  we wrzystkich przypadkach.
 
-Swoim działaniem algorytmy ewolucyjne przypominają zjawisko ewolucji biologicznej a kolejne etapy algorytmu stanowią operacje będące odpowiednikami zjawisk typowych dla świata przyrody, a więc zjawiska selekcji, mutacji oraz krzyżowania. Inspiracja zasadą doboru naturalnego sprowadza się do  kierowania się ideą iż tylko najlepiej przystosowane osobniki mają szanse na przeżycie i to one powinny zapoczątkowywać istnienie nowych co raz to lepszych osobników potomnych, które to z koleji tworzą nowe mocniejsze populacje. Dzięki temu algorytm ewolucyjny tworzy stopniowo coraz lepsze rozwiązania i może służyć on do rozwiązywania problemów optymalizacyjnych. Więcej informacji na ten temat można znaleźć w \cite{zeszyty}.
+Swoim działaniem algorytmy ewolucyjne przypominają zjawisko ewolucji biologicznej, a kolejne etapy algorytmu stanowią operacje będące odpowiednikami zjawisk typowych dla świata przyrody, a więc zjawiska selekcji, mutacji oraz krzyżowania. Inspiracja zasadą doboru naturalnego sprowadza się do  kierowania się ideą, iż tylko najlepiej przystosowane osobniki mają szanse na przeżycie i to one powinny zapoczątkowywać istnienie nowych co raz to lepszych osobników potomnych, które to z koleji tworzą nowe mocniejsze populacje. Dzięki temu algorytm ewolucyjny tworzy stopniowo coraz lepsze rozwiązania i może służyć on do rozwiązywania problemów optymalizacyjnych. Więcej informacji na ten temat można znaleźć w \cite{zeszyty}.
 
-Obecnie w skład algorytmów ewolucyjnych wchodzą między innymi algorytmy genetyczne, programowanie genetyczne czy też programowanie ewolucyjne. Jednak jeszcze w latach sześćdziesiątych istniały i rozwijały się one niezależnie od siebie jako oddzielne wersje wcielające w życie darwinowską zasadę doboru naturalnego. Dopiero od początku lat dwudziestych strategie ewolucyjne, algorytm genetyczny, programowanie ewolucyjne i programowanie genetyczne zaczęły być traktowane jako różne formy tej samej techniki określane wspólnym mianem algorytmów ewolucyjnych \cite{doktorat}.  Algorytm ewolucji różnicowej został zaproponowany w 1995 roku przez Ken Price. Główna różnica odróżniająca algorytm ewolucji różnicowej od klasycznego algorytmu ewolucyjnego dotyczy dokonywania operacji odejmowania od siebie wektorów w operacji mutacji.
+Obecnie w skład algorytmów ewolucyjnych wchodzą między innymi algorytmy genetyczne, programowanie genetyczne czy też programowanie ewolucyjne. Jednak jeszcze w latach sześćdziesiątych istniały i rozwijały się one niezależnie od siebie jako oddzielne wersje wcielające w życie darwinowską zasadę doboru naturalnego. Dopiero od początku lat 20 XX wieku strategie ewolucyjne, algorytm genetyczny, programowanie ewolucyjne i programowanie genetyczne zaczęły być traktowane jako różne formy tej samej techniki określane wspólnym mianem algorytmów ewolucyjnych \cite{doktorat}.  Algorytm ewolucji różnicowej został zaproponowany w 1995 roku przez Kene'a Price. Główna cecha odróżniająca algorytm ewolucji różnicowej od klasycznego algorytmu ewolucyjnego dotyczy dokonywania operacji odejmowania od siebie wektorów w operacji mutacji, a więc tworzenia wektorów różnicowych.
 
 \subsection{Optymalizacja lokalna i globalna}
 
@@ -54,9 +54,9 @@ Większość metod optymalizacyjnych ma zasięg lokalny, co znaczenie utrudnia p
 \par
 
 \subsection{Podstawowe pojęcia}
-W terminologi algorytmów genetycznych używa isę następująch pojęć zapożyczonych z genetyki naturalnej \cite{michal}, \cite{maszynowe_sel}:\\
+W terminologi algorytmów genetycznych używa się następująch pojęć zapożyczonych z genetyki naturalnej \cite{michal}, \cite{maszynowe_sel}:\\
 
-\textbf{Osobnik} - podstawowa jednostka charakteryzująca się pewnym przystosowaniem do środowiska w którym żyje czego miarą jest wartość funkcji celu obliczona dla tego osobnika. Dany osobnik jest wektorem liczb rzeczywistych będącym jednocześnie potencjalnym rozwiązaniem całego problemu optymalizacji.
+\textbf{Osobnik} - podstawowa jednostka charakteryzująca się pewnym przystosowaniem do środowiska w którym żyje czego miarą jest wartość funkcji celu obliczona dla tego osobnika. Dany osobnik jest wektorem liczb rzeczywistych, potencjalnym rozwiązaniem całego problemu optymalizacji.
 
 \textbf{Populacja} - zbiór osobników ulegający zmianie w kolejnych iteracjach algorytmu jako, że słabsze osobniki są zastępowane przez nowe, lepiej przystosowane.
 
@@ -94,30 +94,20 @@ Natomiast populacje można określić jako:\\
 $$
 X=\{\overrightarrow{x_{1}},\overrightarrow{x_{2}},...\overrightarrow{x_{i}}\}, i = 1,2,...,n
 $$
-Następnie w zależności od przyjętej metody przeprowadzana jest selekcja w wyniku której otrzymujemy grupę rozrodczą. Grupa rozrodcza stanowi podstawę do przeprowadzenia operacji genetycznych jakimi są mutacja oraz krzyżowanie. Operacja mutacji dokonuje przekształceń genetycznych, danej grupie rozrodczej, w wyniku których powstaje nowy osobnik. Poddawany jest on operacji krzyżowania. Dopiero wynik tych dwóch operacji daje rezultat w postaci osobnika potomnego, którego współczynnik przystosowania zostaje oceniony. W sytuacji gdy będzie on większy od współczynnika przystosowania osobnika z obecnej populacji, nastąpi ich podmiana. Osobnik potomny zajmie w populacji miejsce poprzednika tworząc tym samym nową populacje a więc podstawę do rozpoczęcia nowej iteracji algorytmu. Warunkiem zakończenia algorytmu może być na przykład brak zmienności wyniku w kolejnych n iteracjach, bądź też osiągnięcie zadawalającego poziomu przystosowania.\\
+Następnie przeprowadzana jest reprodukcja w wyniku której otrzymujemy grupę rozrodczą. Grupa rozrodcza stanowi podstawę do przeprowadzenia operacji genetycznych jakimi są mutacja oraz krzyżowanie. Operacja mutacji dokonuje przekształceń genetycznych na danej grupie rozrodczej, w wyniku których powstaje nowy osobnik. Poddawany jest on operacji krzyżowania. Dopiero wynik tych dwóch operacji daje rezultat w postaci osobnika potomnego, którego współczynnik przystosowania zostaje oceniony. W sytuacji gdy będzie on większy od współczynnika przystosowania osobnika z obecnej populacji, nastąpi ich podmiana, a więc osobnik potomny zajmie w populacji miejsce poprzednika. Warunkiem zakończenia algorytmu może być na przykład brak zmienności wyniku w kolejnych n iteracjach, bądź też osiągnięcie zadawalającego poziomu przystosowania.\\
 \par
-Opisane powyżej zależności można w ogólności zaprezentować w postaci schematu algorytmu przedstawionego na \ref{algo}.
+Opisane powyżej zależności można w ogólności zaprezentować w postaci pseudokodu algorytmu przedstawionego na \ref{algo}.
 
 \begin{figure}[h!]
 \begin{center}
-		\includegraphics[scale=0.8]{../../../../Screeny/algo.png}
+		\includegraphics[scale=1]{../../../../Screeny/algofinal.png}
 		\caption{Schemat algorytmu ewolucyjnego}
 		\label{algo}		
 \end{center}	
 \end{figure}
 
-Schemat \ref{algo} obrazuje główne elementy z jakich składa się algorytm ewolucyjny. Szczegółowe informacje na temat sposobu działania algorytmu ewolucji różnicowej oraz kolejne, odpowiednio ponumerowane kroki zostały zaprezentowane na \ref{algode}.
-
-\begin{figure}[h!]
-\begin{center}
-		\includegraphics[scale=0.8]{../../../../Screeny/schemat_DE.png}
-		\caption{Schemat algorytmu ewolucji różnicowej \cite{doktorat}}
-		\label{algode}		
-\end{center}	
-\end{figure}
-
-Na schemacie \ref{algode} zauważalna staje się odmienność algorytmu ewolucji różnicowej od klasycznych algorytmów ewolucyjnych na przykład w kontekście dokonywania operacji mutacji.
-Dobór metod selekcji, mutacji czy też krzyżowania nie może zostać jednoznacznie określony i być uniwersalny dla wszystkich problemów które ma on rozwiązywać. Poprawność i jakość działania metod jest ściśle zależna od charakteru rozwiązywanego problemu. Z tego również względu w niektórych przypadkach konieczne jest dokonanie zmian w klasycznym algorytmie ewolucyjnym, w wyniku czego mamy doczynienia ze zmodyfikowanym algorytmem ewolucji różnicowej.
+Na schemacie \ref{algo} zauważalna staje się odmienność algorytmu ewolucji różnicowej od klasycznych algorytmów ewolucyjnych głównie w kontekście sposobu dokonywania operacji mutacji.
+Dobór metod selekcji, mutacji czy też krzyżowania nie może zostać jednoznacznie określony i być uniwersalny dla wszystkich problemów, które ma on rozwiązywać. Poprawność i jakość działania metod jest ściśle zależna od charakteru rozwiązywanego problemu. Z tego również względu w niektórych przypadkach konieczne jest dokonanie zmian w klasycznym algorytmie ewolucyjnym, w wyniku czego mamy doczynienia ze zmodyfikowanym algorytmem ewolucji różnicowej.
 %---------------------------------------------------------------------------
 
 \section{Opis kwadratowego zagadnienia przydziału}\label{sec:strukturaDokumentu}
@@ -134,7 +124,7 @@ Dane są dwie rzeczywiste macierze F = ($f_{ij}$) oraz D = ($d_{ij}$) o wymiarze
 $f_{ij}$ - macierz przepływu pomiędzy punktami i oraz j,
 $d_{ij}$ - macierz odległości, określająca odległość pomiędzy punktami i oraz j,
 $$
-\sum_{i=1}^{n}\sum_{j=1}^{n}f_{ij}d_{ij} \longrightarrow min
+\sum_{i=1}^{n}\sum_{j=1}^{n}f_{ij} \cdot d_{ij} \longrightarrow min
 $$
 Należy zaznaczyć również fakt iż jeden budynek może zostać przypisany do jednej lokalizacji oraz do jednaj lokalizacji może zostać  przypisany tylko jeden budynek. Poniżej zamieszczono rysunek obrazujący kwadratowe zagadnienie przydziału.
 

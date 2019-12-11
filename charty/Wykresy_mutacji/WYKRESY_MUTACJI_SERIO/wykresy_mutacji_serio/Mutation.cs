@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace kolejnaprobachartu
+namespace wykresy_mutacji_serio
 {
     class Mutation : Selection
     {
@@ -23,7 +21,7 @@ namespace kolejnaprobachartu
         {
             List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
             List<double> MutatedIndividual_tmp = new List<double>();
-            List<int> Randoms = RankingMethond();
+            List<int> Randoms = RandomWitoutRestrictions();
             double DefaultValueForMut = 0.8;
 
             for (int j = 0; j < Population.Count; j++)
@@ -40,7 +38,7 @@ namespace kolejnaprobachartu
         {
             List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
             List<double> MutatedIndividual_tmp = new List<double>();
-            List<int> Randoms = RankingMethond();
+            List<int> Randoms = RandomWitoutRestrictions();
             double scaler = rand.NextDouble();
             Console.WriteLine(scaler);
             double DefaultValueForMut = 0.8;
@@ -64,7 +62,7 @@ namespace kolejnaprobachartu
             List<double> MutatedIndividual_tmp = new List<double>();
 
             List<int> Best = ElitistMethond(1);
-            List<int> Difference = RankingMethond(2);
+            List<int> Difference = RandomWitoutRestrictions(2);
 
             double DefaultValueForMut = 0.8;
 
@@ -84,7 +82,7 @@ namespace kolejnaprobachartu
             List<double> MutatedIndividual_tmp = new List<double>();
             double scaler = rand.NextDouble();
             List<int> Best = ElitistMethond(1);
-            List<int> Difference = RankingMethond(2);
+            List<int> Difference = RandomWitoutRestrictions(2);
 
             double DefaultValueForMut = 0.8;
 
@@ -111,7 +109,7 @@ namespace kolejnaprobachartu
                 number_of_vectors = (Population.Count - 1) / 2;
             }
 
-            List<int> Randoms = RankingMethond();
+            List<int> Randoms = RandomWitoutRestrictions(3);
             double DefaultValueForMut = 0.8;
             for (int j = 0; j < Population.Count; j++)
             {
@@ -142,7 +140,7 @@ namespace kolejnaprobachartu
                 number_of_vectors = (Population.Count - 1) / 2;
             }
 
-            List<int> Randoms = RankingMethond();
+            List<int> Randoms = RandomWitoutRestrictions(3);
             double DefaultValueForMut = 0.8;
             for (int j = 0; j < Population.Count; j++)
             {
@@ -175,7 +173,7 @@ namespace kolejnaprobachartu
             }
 
             List<int> Best = ElitistMethond(1);
-            List<int> Randoms = RankingMethond();
+            List<int> Randoms = RandomWitoutRestrictions(3);
             double DefaultValueForMut = 0.8;
             for (int j = 0; j < Population.Count; j++)
             {
@@ -206,7 +204,7 @@ namespace kolejnaprobachartu
             }
 
             List<int> Best = ElitistMethond(1);
-            List<int> Randoms = RankingMethond();
+            List<int> Randoms = RandomWitoutRestrictions(3);
             double DefaultValueForMut = 0.8;
             for (int j = 0; j < Population.Count; j++)
             {

@@ -1,36 +1,266 @@
-\chapter{Metody mutacji}\label{cha:pierwszyDokument}
+\chapter{Operacja mutacji}\label{cha:pierwszyDokument}
 
-Mutacja stosowana w algorytmie ewolucji różnicowej zdefiniowana jest w odmienny sposób w stosunku do algorytmu ewolucyjnego w którym to genotyp stanowią wartości binarne, a operator mutacji ma za zadanie wprowadzenie zmian na zasadzie negacji obecnej wartości genu. W mutacji różnicowej zastosowana jest operacja odejmowania od siebie dwóch wektorów tworząc tym samym wektor różnicowy, czemu również algorytm zawdzięcza swoją nazwe z ang. \textsl{difference} \cite{przystojny_koles}. Podobnie jak ma to miejsce w innych algorytmach należących do grona algorytmów ewolucyjnych, tak i ewolucja różnicowa posiada wiele alternatywnych modyfikacji metod mutacji. Metody mutacji różnicowej różnią się od siebie głównie elementami takimi jak:
+Mutacja stanowi najważniejszą część algorytmu ewolucyjnego, z tego względu stosuje się wiele modyfikacji w celu rozwoju i poprawy działania tego operatora.
+Mutacja stosowana w algorytmie ewolucji różnicowej zdefiniowana jest w odmienny sposób w stosunku do algorytmu ewolucyjnego w którym to genotyp stanowią wartości binarne, a operator mutacji ma za zadanie wprowadzenie zmian na zasadzie negacji obecnej wartości genu. W mutacji różnicowej zastosowana jest operacja odejmowania od siebie dwóch wektorów tworząc tym samym wektor różnicowy, czemu również algorytm zawdzięcza swoją nazwe z ang. \textsl{difference} \cite{przystojny_koles}. Podobnie jak ma to miejsce w innych algorytmach należących do grona algorytmów ewolucyjnych, tak i ewolucja różnicowa posiada wiele alternatywnych metod mutacji. Metody mutacji różnicowej różnią się od siebie głównie elementami takimi jak:
 
 \begin{enumerate}
-\item Sposób  wyboru osobnika będącego wektorem celu, a więc wektorem znajdującym się w grupie rozrodczej lecz nie wchodzącym w skład wektora różnicowego,
-\item Liczba wektorów różnicowych
+\item Sposób  wyboru osobnika będącego wektorem bazowym, a więc wektorem znajdującym się w grupie rozrodczej lecz nie wchodzącym w skład wektora różnicowego \textsl{X},
+\item Liczba wektorów różnicowych \textsl{Y}
 \end{enumerate}
+\par
+W związku z powyższym, metody mutacji mogą przyjąć następującą nomenklature \textsl{DE/X/Y/Z}. \textsl{Z} oznacza rodzaj zastosowanego operatora krzyżowania w związku z czym parametr ten nie będzie uwzględniony w poniższym opisie metod mutacji . Wybór danej metody jest zależny od specyfiki rozwiązywanego problemu i dla różnych jego instancji może dawać odmienne rezultaty. Ogólny wzór opisujący sposób powstawania genu osobnika potomnego można wyrazić następująco:
+$$
+ \forall U_{i} =S_{r_{1}i} + \sum_{j=1}^{n} F_{j} \cdot (S_{r_{2j}i} - S_{r_{3j}i})
+$$
+Gdzie:\\
+$j$ - liczba wektorów różnicowych,\\
+$U_{i}$ - i-ty gen osobnika potomnego,\\
+$r_{1}$,$ r_{2}$,$ r_{3}$ - osobniki wchodzące w skład populacji,\\
+$S_{r_{1}i}$ - i-ty gen osobnika $r_{1}$\\
+$F$ - współczynnik mutacji, $F \in (0,1)$,\\
+$S$ -populacja\\
 
-W związku z powyższym, metody mutacji mogą przyjąć następującą nomenklature \textsl{DE/1/2/}. Wybór danej metody jest zależny od specyfiki rozwiązywanego problemu i dla różnych jego instancji może dawać odmienne rezultaty. Poniżej zestawione zostały strategie najczęściej spotykane w literaturze i opisane szczegółowo w \cite{doktorat}:
+
+Wprowadzono zależność iż osobnikami biorącymi udział w procesie mutacji są osobniki uprzednio wybrane poprzez metodę selekcji \cite{diff2}. W implementacji metod mutacji dodatkowo należało zastosować pewnego rodzaju modyfikacje, wynikającą z faktu iż pojedyńczy osobnik jest ciągiem będącym permutacją, a więc nie dopuszcza istnienia wartości zmiennoprzecinkowych. Jako że wektor różnicowy mnożony jest przez współczynnik mutacji będący wartością zmiennoprzecinkową końcowy gen również jest wartością zmiennoprzecinkową. W celu eliminacji takiej sytuacji, należało dokonać stosownego rodzaju skalowanie uwzględniające relacje mniejszości i większości pomiędzy poszczególnymi genami, a jednocześnie zamieniające wartości zmiennoprzecinkowe na całkowite. Implementacje wspomnianej modyfikacji zamieszczono poniżej:
+
+\begin{program}[h!]
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+	public void Normalize(List<double> MutatedIndividual_tmp, List<int> MutatedIndividual)
+        {
+            List<double> ListToConvert = MutatedIndividual_tmp;
+            int cnt = 1;
+
+            while (cnt != (MutatedIndividual_tmp.Count + 1))
+            {
+                var index = ListToConvert.FindIndex(min => min == MutatedIndividual_tmp.Min());
+                MutatedIndividual[index] = cnt;
+                MutatedIndividual_tmp[index] = Double.MaxValue;//.RemoveAt(MutatedIndividual_tmp.FindIndex(min => min == MutatedIndividual_tmp.Min()));
+
+                cnt++;
+            }
+        }
+\end{lstlisting}
+\end{program}
+
+ Poniżej zestawione zostały strategie najczęściej spotykane w literaturze i opisane szczegółowo w \cite{doktorat}.
 %---------------------------------------------------------------------------
 
-\section{Strategia I: DE/rand/1}\label{sec:strukturaDokumentu}
+\section{Klasyczna mutacja: DE/rand/1}\label{sec:strukturaDokumentu}
 
-Podstawową strategią  stosowaną jako operator mutacji jest strategia zakładająca wylosowanie spośród grupy rozrodczej osobnika mającego stanowić wektor celu. Jako, że grupa rozrodcza skłąda się z trzech osobników, dwa pozostałe są odpowiedzialne za utworzenie wektora różnicowego. Jest to zgodne z poniższym wzorem:
+Podstawową strategią  stosowaną jako operator mutacji jest strategia zakładająca uznanie za wektor bazowy pierwszego osobnika znajdującego się w grupie rozrodczej \cite{diff2}. Jako, że grupa rozrodcza składa się z trzech osobników, dwa pozostałe są odpowiedzialne za utworzenie wektora różnicowego, który jest następnie skalowany współczynnikiem $F = 0,8$. Przyjęta wartość jest najczęściej spotykaną w literaturze wartością czynnika skalującego, analiza wpływu tego marametru na działanie metod mutacji zostanie przedstawiona w dalszej częsi pracy. Powyżej wspomniane zależności można opisać wzorem:
 $$
  \forall U_{i} =S_{r_{1}i} + F \cdot (S_{r_{2}i} - S_{r_{3}i})
 $$
-Gdzie:\\
+Poniżej zaprezentowano implementacje metody wraz z uwzględnieniem konieczności normalizacji wektora będącego wynikiem mutacji danej powyższym wzorem. 
+
+\begin{program}[h!]
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> ToMutate()
+        {
+            List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
+            List<double> MutatedIndividual_tmp = new List<double>();
+            List<int> Randoms = RandomWitoutRestrictions();
+            double DefaultValueForMut = 0.8;
+
+            for (int j = 0; j < Population.Count; j++)
+            {
+                double value = Population[Randoms[0]][j] + DefaultValueForMut * (Population[Randoms[1]][j] - Population[Randoms[2]][j]);
+                MutatedIndividual_tmp.Add(value);
+            }
+
+            Normalize(MutatedIndividual_tmp, MutatedIndividual);
+            return MutatedIndividual;
+        }
+\end{lstlisting}
+\end{program}
+
+%---------------------------------------------------------------------------
+\section{Modyfikacje metod mutacji}\label{sec:kompilacja}
+
+Klasyczna metoda mutacji pomimo częstego jej stosowania, nie zawsze daje oczekiwane rezultaty.  W pewnych instancjach problemów efektywniejszym działaniem mogą wykazać się metody mutacji do których zostały wprowadzone pewnego rodzaju modyfikacje. Poniżej zestawionych zostało kilka możliwych modyfikacji opisanych bardziej szczegółowo \cite{diff2}.
+
+\subsection{Strategia II: DE/best/1}\label{sec:kompilacja}
+
+W strategii II miejsce wektora bazowego zajmuje wektor odznaczający się zajwiekszą wartością funkcji celu, a więc wektor najlepszy. W celu znalezienia najlepszego osobnika konieczne jest przeszukanie całej populacji, co może okazać się niekorzystne w kontekście złożoności obliczeniowej i eksploatacji algorytmu. Wektor różnicowy jest różnicą dwóch losowo wybranych osobników przeskalowanych współczynnikiem mutacji. Zależność strategii DE/best/1 można opisać wzorem:
+$$
+ \forall U_{i} =S_{best,i} + F \cdot (S_{r_{1}i} - S_{r_{2}i})
+$$
+Poniżej zaprezentowano implementacje metody wraz z uwzględnieniem konieczności normalizacji wektora będącego wynikiem mutacji danej powyższym wzorem. 
+
+\begin{program}[h!]
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> ToMutate2()
+        {
+            List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
+            List<double> MutatedIndividual_tmp = new List<double>();
+
+            List<int> Best = ElitistMethond(1);
+            List<int> Difference = RandomWitoutRestrictions(2);
+
+            double DefaultValueForMut = 0.8;
+
+            for (int j = 0; j < Population.Count; j++)
+            {
+                double value = Population[Best[0]][j] + DefaultValueForMut * (Population[Difference[0]][j] - Population[Difference[1]][j]);
+                MutatedIndividual_tmp.Add(value);
+            }
+
+            Normalize(MutatedIndividual_tmp, MutatedIndividual);
+            return MutatedIndividual;
+        }
+\end{lstlisting}
+\end{program}
+
+%---------------------------------------------------------------------------
+
+\subsection{Strategia III: DE/rand/$n_{v}$}\label{sec:narzedzia}
+
+Strategię III od poprzednich metod wyróżnia fakt iż nowy osobnik powstaje w oparciu o sume wektorów różnicowych a nie na podstawie jednego wektora różnicowego tak jak miało to miejsce w przypadku poprzednich metod. Istnieje więc dodatkowy parametr $n_{v}$ określający ilość wektorów różnicowych. W sytuacji gdy $  2 * n_{v} + 1$ jest większe od rozmiaru populacji \textsl{n}, do $n_{v}$ zostaje przypisana defaultowa wartość równa największej liczbie wektorów różnicowych które można utworzyć przy danym rozmiarze populacji \textsl{n}\\
+$$
+ n_{v} = (n - 1) / 2
 $$
 
+Wartość będąca sumą wektorów różnicowych jest następnie skalowana współczynnikiem mutacji \textsl{F}. Opisane powyżej zależności można zapisać w postaci wzoru:\\
+$$
+ \forall U_{i} =S_{r_{1}i} +  F \cdot \sum_{k=1}^{n_{v}}(S_{r_{2}i} - S_{r_{3}i})
+$$
+Strategie III można wyrazić za pomocą poniższej implementacji.
+
+\begin{program}[h!]
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+public List<int> ToMutate3(int number_of_vectors)
+        {
+            List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
+            List<double> MutatedIndividual_tmp = new List<double>();
+            int n = 2 * number_of_vectors + 1;
+
+            if (n > Population.Count)
+            {
+                number_of_vectors = (Population.Count - 1) / 2;
+            }
+
+            List<int> Randoms = RandomWitoutRestrictions(3);
+            double DefaultValueForMut = 0.8;
+            for (int j = 0; j < Population.Count; j++)
+            {
+                int difference = 0;
+                int number = number_of_vectors;
+                while (number != 0)
+                {
+                    difference += (Population[Randoms[1]][j] - Population[Randoms[2]][j]);
+                    number--;
+                }
+
+                double value = Population[Randoms[0]][j] + DefaultValueForMut * difference;
+                MutatedIndividual_tmp.Add(value);
+            }
+            Normalize(MutatedIndividual_tmp, MutatedIndividual);
+            return MutatedIndividual;
+        }
+\end{lstlisting}
+\end{program}
+
 %---------------------------------------------------------------------------
 
-\section{Strategia II: DE/best/1}\label{sec:kompilacja}
+\subsection{Strategia IV: DE/current to best/$n_{v} +1$}\label{sec:narzedzia}
+
+
+Strategia ta zawiera w sobie pewne elementy zawarte we wcześniej opisanch metodach mutacji różnicowej. Na osobnika potomnego składa się  $n_{v}$ wektorów różnicowych, będących różnicą dwóch losowo wybranych osobników z populacji, pomnożonych razy współczynnik mutacji (strategia III). Sumuje się także wartość, przemnożonego przez współczynnik mutacji, odrębnego wektora różnicowego w skład którego wchodzi osobnik odznaczajacy się największym współczynnikiem funkcji celu (strategia II) oraz osobnik losowy. Dodatkowo należy również uwzględnić wartość osobnika o indeksie odpowiadającym iteracji w której znajduje się obecnie algorytm. Zależności te opisuje poniższy wzór:\\
+
+$$
+ \forall U_{i} = S_{r_{itert}i} +  F \cdot (S_{r_{best}i} - S_{r_{1}i}) +  F \cdot \sum_{k=1}^{n_{v}}(S_{r_{2}i} - S_{r_{3}i})
+$$
+Implementacje funkcji można określić w następujący sposób:
+\begin{program}[h!]
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+public List<int> ToMutate4(int number_of_vectors, int iter)
+        {
+            List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
+            List<double> MutatedIndividual_tmp = new List<double>();
+            int n = 2 * number_of_vectors + 1;
+
+            if (n > Population.Count)
+            {
+                number_of_vectors = (Population.Count - 1) / 2;
+            }
+
+            List<int> Best = ElitistMethond(1);
+            List<int> Randoms = RandomWitoutRestrictions(3);
+            double DefaultValueForMut = 0.8;
+            for (int j = 0; j < Population.Count; j++)
+            {
+                int difference = 0;
+                int number = number_of_vectors;
+                while (number != 0)
+                {
+                    difference += (Population[Randoms[1]][j] - Population[Randoms[2]][j]);
+                    number--;
+                }
+
+                double value = Population[iter][j] + DefaultValueForMut * (Population[Best[0]][j] - Population[Randoms[0]][j]) + DefaultValueForMut * difference;
+                MutatedIndividual_tmp.Add(value);
+            }
+            Normalize(MutatedIndividual_tmp, MutatedIndividual);
+            return MutatedIndividual;
+        }
+\end{lstlisting}
+\end{program}
 
 %---------------------------------------------------------------------------
 
-\section{Strategia III: DE/rand/$n_{v}$}\label{sec:narzedzia}
+\subsection{Mutacja z wprowadzeniem parametru $\leftthreetimes$} \label{sec:narzedzia}
+
+Modyfikacja powyżej wspomnianyh strategii parametrem $\leftthreetimes$ została wprowadzona w celu poprawy otrzymywanego rozwiązania oraz poprawy szybkości dochodzenia algorytmu do rozwiązania końcowego. Zmiany, w stosunku do poprzednich wersji, dotyczą jedynie pomnożenia wektora bazowego przez czynnik skalujący $\leftthreetimes$, gdzie $\leftthreetimes \in (0,1)$. W poprzednich strategiach niezależnie od ich rodzajów wektor bazowy był zawsze wartościa nieprzeskalowaną. Można to opisać poniższymi zależnościami:\\
+
+\begin{enumerate}
+\item Strategia I : $ \forall U_{i} = \leftthreetimes \cdot S_{r_{1}i} + F \cdot (S_{r_{2}i} - S_{r_{3}i})$
+\item Strategia II : $ \forall U_{i} = \leftthreetimes \cdot  S_{best,i} + F \cdot (S_{r_{1}i} - S_{r_{2}i}) $
+\item Strategia III : $ \forall U_{i} = \leftthreetimes \cdot  S_{r_{1}i} +  F \cdot \sum_{k=1}^{n_{v}}(S_{r_{2}i} - S_{r_{3}i}) $
+\item Strategia IV : $ \forall U_{i} = \leftthreetimes \cdot S_{r_{itert}i} +  F \cdot (S_{r_{best}i} - S_{r_{1}i}) +  F \cdot \sum_{k=1}^{n_{v}}(S_{r_{2}i} - S_{r_{3}i}) $
+\end{enumerate}
+\par
+Badania pokazują \cite{czynnik}, iż czynnik skalujący w znaczącym stopniu wpływa na poprawę zbieżności algorytmu, co oznacza dążenie algorytm do osiągnięcia ekstremum globalnego. Wpływ wektora bazowego staje się 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 %---------------------------------------------------------------------------
 
-\section{Strategia IV: DE/rand to best/$n_{v}$}\label{sec:narzedzia}
-
-%---------------------------------------------------------------------------
-
-\section{Strategia V: DE/current to best/$n_{v} +1$}\label{sec:narzedzia}
+\section{Dostrajanie parametrów mutacji}\label{sec:kompilacja}

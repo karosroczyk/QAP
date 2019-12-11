@@ -1,4 +1,4 @@
-﻿namespace kolejnaprobachartu
+﻿namespace mutacje_charty
 {
     partial class Form1
     {
@@ -48,41 +48,40 @@
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(12, -3);
+            this.chart1.Location = new System.Drawing.Point(1, 1);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Legend = "Legend1";
-            series1.Name = "Strategia DE/rand/1";
-            series1.XAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            series1.Name = "Series1";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series2.Legend = "Legend1";
-            series2.Name = "Strategia DE/rand/1 version 2";
+            series2.Name = "Series2";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series3.Legend = "Legend1";
-            series3.Name = "Strategia DE/best/1";
+            series3.Name = "Series3";
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series4.Legend = "Legend1";
-            series4.Name = "Strategia DE/best/1 version 2";
+            series4.Name = "Series4";
             series5.ChartArea = "ChartArea1";
             series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series5.Legend = "Legend1";
-            series5.Name = "Strategia DE/rand/n";
+            series5.Name = "Series5";
             series6.ChartArea = "ChartArea1";
             series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series6.Legend = "Legend1";
-            series6.Name = "Strategia DE/rand/n version 2";
+            series6.Name = "Series6";
             series7.ChartArea = "ChartArea1";
             series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series7.Legend = "Legend1";
-            series7.Name = "Strategia DE/current to best/n + ";
+            series7.Name = "Series7";
             series8.ChartArea = "ChartArea1";
             series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series8.Legend = "Legend1";
-            series8.Name = "Strategia DE/current to best/ n + 1 version 2 ";
+            series8.Name = "Series8";
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
             this.chart1.Series.Add(series3);
@@ -91,7 +90,7 @@
             this.chart1.Series.Add(series6);
             this.chart1.Series.Add(series7);
             this.chart1.Series.Add(series8);
-            this.chart1.Size = new System.Drawing.Size(1392, 683);
+            this.chart1.Size = new System.Drawing.Size(1698, 776);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             this.chart1.Click += new System.EventHandler(this.Chart1_Click);
@@ -100,17 +99,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1393, 679);
+            this.ClientSize = new System.Drawing.Size(1698, 779);
             this.Controls.Add(this.chart1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace kolejnaprobachartu
+namespace wykresy_mutacji_serio
 {
     class Final
     {
@@ -110,8 +107,8 @@ namespace kolejnaprobachartu
             };*/
 
             // Generacja pierwszej populacji 
-            Mutation mutationdata = new Mutation(FirstPopulation);
-            int num_of_iter = 20000;
+            Mutation mutationdata = new Mutation(FirstPopulation, switchCase);
+            int num_of_iter = 200000;
 
             //List<int> MutatedIndividual2 = mutationdata.TournamentMethond();
             while (num_of_iter != 0)
@@ -119,7 +116,7 @@ namespace kolejnaprobachartu
                 for (int i = 0; i < InputData.size; i++)
                 {
                     // Mutacja
-                    List<int> MutatedIndividual2 = mutationdata.SwitchMethod(switchCase, i, number_of_vectors);
+                    List<int> MutatedIndividual2 = mutationdata.ToMutate4B(2, i, number_of_vectors);
 
                     // Krzyżowanie
                     List<int> CrossedIndividual2 = BinomialCrossver(FirstPopulation[i], MutatedIndividual2);
@@ -129,10 +126,10 @@ namespace kolejnaprobachartu
                 }
                 var wyniki = inputdata.ObjectiveFunctionVector(FirstPopulation);
                 toChart.Add(wyniki.Min());
-                if(num_of_iter == 1)
+                if (num_of_iter == 1)
                 {
                     finals.Add(wyniki.Min());
-                    final += wyniki.Min().ToString() + " " ;
+                    final += wyniki.Min().ToString() + " ";
                     //MessageBox.Show(wyniki.Min().ToString());
                 }
 
