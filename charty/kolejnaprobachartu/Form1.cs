@@ -23,8 +23,8 @@ namespace kolejnaprobachartu
         {
             chart1.Text = "Przebieg funkcji celu przy użyciu różnych metod mutacji";
             chart1.Titles.Add("Przebieg funkcji celu");
-            chart1.ChartAreas[0].AxisY.Minimum = 1500;
-            chart1.ChartAreas[0].AxisX.Maximum = 20000;
+            chart1.ChartAreas[0].AxisY.Minimum = 1650;
+            chart1.ChartAreas[0].AxisX.Maximum = 50000;
             int k = 1;
 
             for (int i = 0; i < 8; i++)

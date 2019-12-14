@@ -42,7 +42,6 @@ namespace mutacje_charty
             List<double> MutatedIndividual_tmp = new List<double>();
             List<int> Randoms = RandomWitoutRestrictions();
             double scaler = rand.NextDouble();
-            Console.WriteLine(scaler);
             double DefaultValueForMut = 0.8;
 
             for (int j = 0; j < Population.Count; j++)

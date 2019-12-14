@@ -111,7 +111,7 @@ namespace kolejnaprobachartu
 
             // Generacja pierwszej populacji 
             Mutation mutationdata = new Mutation(FirstPopulation);
-            int num_of_iter = 20000;
+            int num_of_iter = 50000;
 
             //List<int> MutatedIndividual2 = mutationdata.TournamentMethond();
             while (num_of_iter != 0)

@@ -22,8 +22,8 @@ namespace mutacje_charty
         {
              chart1.Text = "Przebieg funkcji celu przy użyciu różnych metod selekcji";
              chart1.Titles.Add("Przebieg funkcji celu");
-             chart1.ChartAreas[0].AxisY.Minimum = 5000;
-             chart1.ChartAreas[0].AxisX.Maximum = 200;
+             chart1.ChartAreas[0].AxisY.Minimum = 1650;
+             chart1.ChartAreas[0].AxisX.Maximum = 20000;
              int k = 1;
 
              for (int i = 0; i < 8; i++)

@@ -1,7 +1,7 @@
 \chapter{Operacja mutacji}\label{cha:pierwszyDokument}
 
 Mutacja stanowi najważniejszą część algorytmu ewolucyjnego, z tego względu stosuje się wiele modyfikacji w celu rozwoju i poprawy działania tego operatora.
-Mutacja stosowana w algorytmie ewolucji różnicowej zdefiniowana jest w odmienny sposób w stosunku do algorytmu ewolucyjnego w którym to genotyp stanowią wartości binarne, a operator mutacji ma za zadanie wprowadzenie zmian na zasadzie negacji obecnej wartości genu. W mutacji różnicowej zastosowana jest operacja odejmowania od siebie dwóch wektorów tworząc tym samym wektor różnicowy, czemu również algorytm zawdzięcza swoją nazwe z ang. \textsl{difference} \cite{przystojny_koles}. Podobnie jak ma to miejsce w innych algorytmach należących do grona algorytmów ewolucyjnych, tak i ewolucja różnicowa posiada wiele alternatywnych metod mutacji. Metody mutacji różnicowej różnią się od siebie głównie elementami takimi jak:
+Mutacja stosowana w algorytmie ewolucji różnicowej zdefiniowana jest w odmienny sposób w stosunku do algorytmu ewolucyjnego w którym to genotyp stanowią wartości binarne, a operator mutacji ma za zadanie wprowadzenie zmian na zasadzie negacji obecnej wartości genu. W mutacji różnicowej zastosowana jest operacja odejmowania od siebie dwóch wektorów tworząc tym samym wektor różnicowy, czemu również algorytm zawdzięcza swoją nazwe z ang. \textsl{difference} \cite{przystojny_koles}. Wktor różnicowy jest zatem miarą określającą odległość pomiędzy dwoma osobnikami.  Podobnie jak ma to miejsce w innych algorytmach należących do grona algorytmów ewolucyjnych, tak i ewolucja różnicowa posiada wiele alternatywnych metod mutacji. Metody mutacji różnicowej różnią się od siebie głównie elementami takimi jak:
 
 \begin{enumerate}
 \item Sposób  wyboru osobnika będącego wektorem bazowym, a więc wektorem znajdującym się w grupie rozrodczej lecz nie wchodzącym w skład wektora różnicowego \textsl{X},
@@ -215,7 +215,7 @@ public List<int> ToMutate4(int number_of_vectors, int iter)
 
 \subsection{Mutacja z wprowadzeniem parametru $\leftthreetimes$} \label{sec:narzedzia}
 
-Modyfikacja powyżej wspomnianyh strategii parametrem $\leftthreetimes$ została wprowadzona w celu poprawy otrzymywanego rozwiązania oraz poprawy szybkości dochodzenia algorytmu do rozwiązania końcowego. Zmiany, w stosunku do poprzednich wersji, dotyczą jedynie pomnożenia wektora bazowego przez czynnik skalujący $\leftthreetimes$, gdzie $\leftthreetimes \in (0,1)$. W poprzednich strategiach niezależnie od ich rodzajów wektor bazowy był zawsze wartościa nieprzeskalowaną. Można to opisać poniższymi zależnościami:\\
+W literaturze \cite{czynnik} można także znaleźć wersje metod mutacji w których wprowadza się modyfikacje powyżej zaprezentowanych metod poprzez wprowadzenie czynnika skalującego $\leftthreetimes$. Parametr ten wprowadza w algorytmie dodatkową losowość, co może wpłynąć korzystnie na szybkość dochodzenia algorytmu do rozwiązania końcowego. Zmiany, w stosunku do poprzednich wersji, dotyczą pomnożenia wektora bazowego przez czynnik skalujący $\leftthreetimes$, gdzie $\leftthreetimes \in (0,1)$. W poprzednich strategiach niezależnie od ich rodzajów wektor bazowy był zawsze wartością nieprzeskalowaną. Można to opisać poniższymi zależnościami:\\
 
 \begin{enumerate}
 \item Strategia I : $ \forall U_{i} = \leftthreetimes \cdot S_{r_{1}i} + F \cdot (S_{r_{2}i} - S_{r_{3}i})$
@@ -224,43 +224,56 @@ Modyfikacja powyżej wspomnianyh strategii parametrem $\leftthreetimes$ została
 \item Strategia IV : $ \forall U_{i} = \leftthreetimes \cdot S_{r_{itert}i} +  F \cdot (S_{r_{best}i} - S_{r_{1}i}) +  F \cdot \sum_{k=1}^{n_{v}}(S_{r_{2}i} - S_{r_{3}i}) $
 \end{enumerate}
 \par
-Badania pokazują \cite{czynnik}, iż czynnik skalujący w znaczącym stopniu wpływa na poprawę zbieżności algorytmu, co oznacza dążenie algorytm do osiągnięcia ekstremum globalnego. Wpływ wektora bazowego staje się 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 %---------------------------------------------------------------------------
 
 \section{Dostrajanie parametrów mutacji}\label{sec:kompilacja}
+
+W literaturze \cite{przystojny_koles}, \cite{czynnik}, za wartość parametru mutacji $F$, który to odpowiada za przeskalowanie wektora różnicowego, najczęściej przyjmuje się wartość $F$ = 0.8. Nie mniej jednak jest to wartość uzyskana doświadczalnie, co oznacza iż daje ona najlepsze efekty w większości przypadków testowych. Należy jednak pamiętać o fakcie iż przypadkami testowymi są zazwyczaj standardowe funkcje, a więc w sytuacji gdy mamy doczynienia z bardziej złożonych zagadnieniami wartość $F$ = 0.8 może okazać się nie zadowalająca. Stała wartość parametru $F$ może być więc pewnego rodzaju ograniczeniem. Z tego względu wprowadzenie dynamicznej zmiany tego parametru może okazać się rozwiązaniem poprawiającym działanie algorytmu. Modyfikacja ta sprowadza się do zmiany wartości współczynnika mutacji $F$ w kolejnych iteracjach algorytmu zgodnie z danym wzorem \cite{doktorat}:
+$$
+F_{t+1} = F_{t} + \frac{(0.5 + F_0)}{g}
+$$
+\par
+Gdzie:\\
+$F_{t+1}$ - współczynnik skalującyw kolejnej iteracji,\\
+$F{0}$ - współczynnik skalujący w pierwszej iteracji,\\
+$g$ - liczba iteracji algorytmu\\
+\par
+Za początkową wartość parametru $F_{0}$ przyjmue się wartość równą $F_{0}$ = 0.3, w kolejnych iterajach algorytmu wartość ta jest sukcesywnie zwiększana o wartość zależną od założonej początkowo liczby iteracji algorytmu
+\par
+TODO
+Jak coś to można jeszcze zrobic o tym że F jest losowane zgodnie z rozkladem Gaussa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
