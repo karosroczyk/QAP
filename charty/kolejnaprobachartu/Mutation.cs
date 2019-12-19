@@ -64,7 +64,7 @@ namespace kolejnaprobachartu
             List<double> MutatedIndividual_tmp = new List<double>();
 
             List<int> Best = ElitistMethond(1);
-            List<int> Difference = RankingMethond(2);
+            List<int> Difference = RankingMethond();
 
             double DefaultValueForMut = 0.8;
 
@@ -84,7 +84,7 @@ namespace kolejnaprobachartu
             List<double> MutatedIndividual_tmp = new List<double>();
             double scaler = rand.NextDouble();
             List<int> Best = ElitistMethond(1);
-            List<int> Difference = RankingMethond(2);
+            List<int> Difference = RankingMethond();
 
             double DefaultValueForMut = 0.8;
 

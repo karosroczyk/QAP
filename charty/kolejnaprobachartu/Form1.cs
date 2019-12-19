@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.IO;
+
 
 namespace kolejnaprobachartu
 {
@@ -19,27 +21,40 @@ namespace kolejnaprobachartu
         }
 
         Final final = new Final();
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            string filePath = @"C:\Users\Lenovo\Desktop\Inżynierka\Testy\wyniki.csv";
+            var csv = new StringBuilder();
+            var newline = "";
+
             chart1.Text = "Przebieg funkcji celu przy użyciu różnych metod mutacji";
             chart1.Titles.Add("Przebieg funkcji celu");
-            chart1.ChartAreas[0].AxisY.Minimum = 1650;
-            chart1.ChartAreas[0].AxisX.Maximum = 50000;
+            //chart1.ChartAreas[0].AxisY.Minimum = 1650;
+            chart1.ChartAreas[0].AxisX.Maximum = 100000;
             int k = 1;
 
-            for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 20; j++)
             {
-                final.Koncowa(i+1, 2);
-                List<int> toChart_ = Final.toChart;
-                foreach (int elem in toChart_)
+                for (int i = 0; i < 8; i++)
                 {
-                    chart1.Series[i].Points.AddXY(k,elem);
-                    //chart1.Series[0].IsValueShownAsLabel = true;
-                    k++;
-                }               
-                Final.RemoveAllElems();
-                k = 1;
+                    final.Koncowa(i + 1, 2);
+                    List<int> toChart_ = Final.toChart;
+                    /*foreach (int elem in toChart_)
+                    {
+                        chart1.Series[i].Points.AddXY(k,elem);
+                        //chart1.Series[0].IsValueShownAsLabel = true;
+                        k++;
+                    }*/
+                    Final.RemoveAllElems();
+                    k = 1;
+                }
+                Final.final +=  '\n';
+                newline = string.Format("{0}", Final.final);
             }
+
+            csv.AppendLine(newline);
+            File.WriteAllText(filePath, csv.ToString());
             MessageBox.Show(Final.final);
         }
 

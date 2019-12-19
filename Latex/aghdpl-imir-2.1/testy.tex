@@ -123,7 +123,7 @@ $$
 \hline
  \textbf{12}&2,66\%&0,48\%&3,87\%&2,17\%&1,57\%&4,6\%&0,48\%&7,14\%\\
 \hline
- \textbf{13}&0,96\%&\color{green}\textbf{0,12\%}&2,42\%&1,69\%&1,93\%&3,02\%&1,21\%&7,38\% \\
+ \textbf{13}&0,96\%&0,12\%&2,42\%&1,69\%&1,93\%&3,02\%&1,21\%&7,38\% \\
 \hline
  \textbf{14}&0,96\%&0,48\%&0,96\%&1,21\%&3,26\%&2,66\%&2,78\%&4,6\%\\
 \hline
@@ -157,17 +157,17 @@ Na podstawie powyższej tabeli zauważalny staje się fakt iż najbardziej satys
 \scalebox{0.8}{
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Ilość wygranych}\\
+\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Liczba osiągnietych wartośći 0\%}\\
 \hline
- \textbf{1}&Rankingowa&0,58\%& 17 \\
+ \textbf{1}&Rankingowa&0,58\%& 0 \\
 \hline
- \textbf{2}&Turniejowa&1,51 \%& 1\\
+ \textbf{2}&Turniejowa&1,51 \%& 0\\
 \hline
- \textbf{3}&Losowa&1,51 \%& 1\\
+ \textbf{3}&Losowa&1,51 \%& 0\\
 \hline
  \textbf{4}&Elitarna&1,74 \%& 0\\
 \hline
- \textbf{5}&Rankingowa 2&1,75\%& 1\\
+ \textbf{5}&Rankingowa 2&1,75\%& 0\\
 \hline
  \textbf{6}&Ruletki&2,31\%& 0\\
 \hline
@@ -258,17 +258,17 @@ W przypadku 50 000 iteracji zauważalne jest uzyskiwanie lepszych średnich wyni
 \scalebox{0.8}{
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Ilość wygranych}\\
+\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Liczba osiągnietych wartośći 0\%}\\
 \hline
- \textbf{1}&Rankingowa&0,57\%& 15\\
+ \textbf{1}&Rankingowa&0,57\%& 2\\
 \hline
- \textbf{2}&Turniejowa&1,08\%& 3\\
+ \textbf{2}&Turniejowa&1,08\%& 0\\
 \hline
- \textbf{3}&Elitarna&1,47\%& 1\\
+ \textbf{3}&Elitarna&1,47\%& 0\\
 \hline
  \textbf{4}&Rankingowa 2&1,57\%& 0\\
 \hline
- \textbf{5}&Losowa&1,75\%& 1\\
+ \textbf{5}&Losowa&1,75\%& 0\\
 \hline
  \textbf{6}&Ruletki&2,4\%& 0\\
 \hline
@@ -354,7 +354,7 @@ $$
 
 \section{Metody mutacji}\label{sec:strukturaDokumentu}
 
-Testy metod mutacji  w obrębie jednej instancji danych zostały przeprowadzone przy założeniu stałych:
+Testy metod mutacji w obrębie jednej instancji danych zostały przeprowadzone przy uprzednim określeniu:
 \begin{itemize}
 \item
 macierzy odległości i macierzy przepływu,
@@ -366,11 +366,156 @@ metoda krzyżowania,
 ilość iteracji algorytmu
 \end{itemize}
 \par
-W klasycznych metodach mutacji stosowany jest wybór osobników do grupy rozrodczej poprzez metode losową. Niemniej jednak ze względu na wyjątkowo dobre wyniki uzyskiwane przez metode rankingową w testach przeprowadzanych w rozdziale 7.1, postanowiono sprawdzić jej działanie w połączeniu z różnymi wariantami metod mutacji. Ilość iteracji algorytmu była równa, podobnie jak w powyższych testach, 20 000 iteracji, a następnie, w celu zbadania czy w dalszych niż granica 20 000 następuje spadek wartości funkcji celu, również dla 50 000 iteracji. Zgodnie z podrozdziałem 4.2.4 metody mutacji zostaną dodatkowo przetestowane pod kątem wpływu na ich działanie parametru $\leftthreetimes$.
+W klasycznych metodach mutacji stosowany jest wybór osobników do grupy rozrodczej poprzez metodę losową. Niemniej jednak ze względu na wyjątkowo dobre wyniki uzyskiwane przez metode rankingową w testach przeprowadzanych w rozdziale 7.1, postanowiono sprawdzić jej działanie w połączeniu z różnymi wariantami metod mutacji. Ilość iteracji algorytmu była równa, podobnie jak w powyższych testach, 20 000 iteracji. Następnie, w celu zbadania czy dalej niż granica 20 000 następuje spadek wartości funkcji celu, również dla 50 000 iteracji. Zgodnie z podrozdziałem 4.2.4 metody mutacji zostaną dodatkowo przetestowane pod kątem wpływu na ich działanie parametru $\leftthreetimes$.
 
 \subsection{Dane wejściowe instancja I}
-Dane wejściowe, określające macierz odległości i macierz przepywu, umieszczone zostały w rozdziale 7.1.1 oraz 7.1.2.
+Dane wejściowe, określające macierz odległości i macierz przepływu, umieszczone zostały w rozdziale 7.1.1.
+
+%----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 \subsubsection{Reprodukcja losowa}
+W rozdziale tym testy metod mutacji zostały przeprowadzone z użyciem metody reprodukcji wykorzystywanej w klasycznej wersji algorytmu ewolucji różnicowej. Metodą decydującą o osobnikach wchodzących w skład grupy rozrodczej jest metoda losowa.\\
+\par
+
+\begin{itemize}
+\item  \textbf{20 000 iteracji}\\
+
+Wyniki zostały zaprezentowane w formie tabeli zawierającej wartości błędu względnego funkcji celu. Testy przeprowadzono dla 20 powtórzeń algorytmu. W wyniku tego działania możliwe było policzenie wartości średniej oraz odchylenia standardowego z kolejnych 20 prób.
+
+\begin{table}[h!]
+\begin{center}
+\scalebox{0.55}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Iteracja}  &\textbf{DE/rand/1}  & \textbf{DE/rand/1+$\leftthreetimes$} & \textbf{DE/best/1} & \textbf{DE/best/1+$\leftthreetimes$} & \textbf{DE/rand/$n_{v}$} & \textbf{DE/rand/$n_{v}$+$\leftthreetimes$} & \textbf{ DE/current to best/$n_{v}+1$} & \textbf{ DE/current to best/$n_{v}+1$+$\leftthreetimes$}\\\hline
+\textbf{1}&1,21\%&\color{green}\textbf{0}\%&3,39\%&1,94\%&0,85\%&0,48\%&0,61\%&0,73\% \\ \hline
+\textbf{2}&0,97\%&0,61\%&4,84\%&0,85\%&1,21\%&1,33\%&0,73\%&0,61\% \\ \hline
+\textbf{3}&2,91\%&0,61\%&2,66\%&1,21\%&1,33\%&0,85\%&0,12\%&0,12\% \\ \hline
+\textbf{4}&2,18\%&1,33\%&1,33\%&1,45\%&1,82\%&0,61\%&1,09\%&0,61\% \\ \hline
+\textbf{5}&2,06\%&2,42\%&2,42\%&3,51\%&1,57\%&1,69\%&0,24\%&1,09\% \\ \hline
+\textbf{6}&1,57\%&1,94\%&2,54\%&1,82\%&0,85\%&0,24\%&0,24\%&0,85\% \\ \hline
+\textbf{7}&3,15\%&1,69\%&3,75\%&0,85\%&2,54\%&1,09\%&0,48\%&1,09\% \\ \hline
+\textbf{8}&1,57\%&1,21\%&3,39\%&0,85\%&1,45\%&1,69\%&0,48\%&1,21\% \\ \hline
+\textbf{9}&1,82\%&4,84\%&5,08\%&1,82\%&0,97\%&0,48\%&0,61\%&0,61\% \\ \hline
+\textbf{10}&1,33\%&0,61\%&4,24\%&1,69\%&1,33\%&2,18\%&\color{green}\textbf{0}\%&0,48\% \\ \hline
+\textbf{11}&2,42\%&0,48\%&3,51\%&0,73\%&1,21\%&0,24\%&0,24\%&0,48\% \\ \hline
+\textbf{12}&3,15\%&1,69\%&1,82\%&1,69\%&2,18\%&1,82\%&0,61\%&0,48\% \\ \hline
+\textbf{13}&1,21\%&0,48\%&1,33\%&0,85\%&4,60\%&0,48\%&0,48\%&0,48\% \\ \hline
+\textbf{14}&1,21\%&\color{green}\textbf{0}\%&3,03\%&1,21\%&1,33\%&0,85\%&0,24\%&0,97\% \\ \hline
+\textbf{15}&1,21\%&0,48\%&1,45\%&0,97\%&1,45\%&0,48\%&0,61\%&1,21\% \\ \hline
+\textbf{16}&0,61\%&1,33\%&2,30\%&1,21\%&0,48\%&2,91\%&0,12\%&0,85\% \\ \hline
+\textbf{17}&1,94\%&0,48\%&4,24\%&3,39\%&0,61\%&\color{green}\textbf{0}\%&\color{green}\textbf{0}\%&1,21\% \\ \hline
+\textbf{18}&3,15\%&0,48\%&2,42\%&2,06\%&2,18\%&2,42\%&0,85\%&0,48\% \\ \hline
+\textbf{19}&4,24\%&1,94\%&6,17\%&1,45\%&0,85\%&3,75\%&\color{green}\textbf{0}\%&0,61\% \\ \hline
+\textbf{20}&0,48\%&0,24\%&1,45\%&0,73\%&1,33\%&2,78\%&\color{green}\textbf{0}\%&0,48\% \\ \hline
+\textbf{ŚREDNIA}&1,92\%&1,14\%&3,07\%&1,51\%&1,51\%&1,32\%&0,39\%&0,73\% \\ \hline
+\textbf{ODCHYLENIE}&0,96\%&1,09\%&1,33\%&0,77\%&0,88\%&1,02\%&0,31\%&0,30\% \\ \hline
+\end{tabular}}
+\caption{Wartości błędu względnego funkcji celu dla poszczególnych metod mutacji, metoda losowa, 20 000 iteracji}
+\label{losowa20}
+\end{center}
+\end{table}
+
+Sumaryczna ilość osiągnięcia przez algorytm wartości błędu względnego równego 0\% jest równa 7, z czego 4 są osiągane w wyniku zastosowania w algorytmie metody DE/current to best/$n_{v}+1$.
+
+\begin{table}[h!]
+\begin{center}
+\scalebox{0.8}{
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Liczba osiągnietych wartośći 0\%}\\\hline
+ \textbf{1}&DE/current to best/$n_{v}+1$&0,39\%& 4\\\hline
+ \textbf{2}& DE/current to best/$n_{v}+1$+$\leftthreetimes$&0,73\%& 0\\\hline
+ \textbf{3}&DE/rand/$n_{v}$+$\leftthreetimes$&1,14\%& 1\\\hline
+ \textbf{4}&DE/rand/1+$\leftthreetimes$&1,32\%& 2\\\hline
+ \textbf{5}&DE/rand/$n_{v}$&1,51\%&0\\\hline
+ \textbf{6}&DE/best/1+$\leftthreetimes$1&1,51\%& 0\\\hline
+ \textbf{7}&DE/rand/1&1,92\%& 0\\\hline
+ \textbf{8}&DE/best/1&3,07\%& 0\\\hline
+\end{tabular}}
+\caption{Ranking metod mutacji na podstawie średniej wartości błędu względnego funkcji celu, metoda losowa, 20 000 iteracji}
+\label{ranking5}
+\end{center}
+\end{table}
+
+Na podstawie tabeli \ref{ranking5} widoczny staje się fakt, iż najmniejszą średnią wartością błędu względnego, o wartości 0,39\%, charakteryzuje się metoda DE/current to best/$n_{v}+1$. W zestawieniu z pozostałymi metodami mutacji przyjmuje ona około dwukrotnie lepsze rezultaty, jako, że pozostałe metody uzyskują wartości błędu względnego wachające się w zakresie 0,73\% - 3,07\%. Wartość odchylenia standardowego dla tej metody wynosi 0,31\% co w porównaniu z pozostałymi testowanymi metodami mutacji jest wartością stosunkowo niewielką. Metoda DE/current to best/$n_{v}+1$ uzyskuje korzystniejsze rezultaty w porównaniu do jej odpowiednika z modyfikatorem DE/current to best/$n_{v}+1$+$\leftthreetimes$. Niemniej jednak w przypadku pozostałych metod, DE/rand/$n_{v}$, DE/rand/1 oraz DE/best/1, modyfikacja współczynnikiem $\leftthreetimes$ przynosi zadowalające efekty.\\
+
+
+\item  \textbf{50 000 iteracji}\\
+
+Poniższe testy w stosunku do poprzednich zestawionych w tabelach \ref{losowa20} oraz \ref{ranking5} różnią się od siebie liczbą iteracji algorytmu, zwiększoną z 20 000 do 50 000. Działanie to wprowadzone jest w celu zbadania czy nie następuje spadek wartości funkcji celu w iteracjach dalszych niż 20 000. Dodatkowym atutem jest możliwość konfrontacji wyników, a więc sprawdzenia czy uzyskane w poprzednich testach-- wartości utrzymują się na tym samy bądź też lepszym poziomie.
+
+\begin{table}[h!]
+\begin{center}
+\scalebox{0.55}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Iteracja}  &\textbf{DE/rand/1}  & \textbf{DE/rand/1+$\leftthreetimes$} & \textbf{DE/best/1} & \textbf{DE/best/1+$\leftthreetimes$} & \textbf{DE/rand/$n_{v}$} & \textbf{DE/rand/$n_{v}$+$\leftthreetimes$} & \textbf{ DE/current to best/$n_{v}+1$} & \textbf{ DE/current to best/$n_{v}+1$+$\leftthreetimes$}\\\hline
+\textbf{1}&1,09\%&0,85\%&2,06\%&2,91\%&0,85\%&1,57\%&\color{green}\textbf{0}\%&0,12\% \\ \hline
+\textbf{2}&1,82\%&0,48\%&2,91\%&2,06\%&0,73\%&1,09\%&\color{green}\textbf{0}\%&0,48\% \\ \hline
+\textbf{3}&1,57\%&1,45\%&1,82\%&2,54\%&1,57\%&0,48\%&0,48\%&0,12\% \\ \hline
+\textbf{4}&0,97\%&0,85\%&2,54\%&2,54\%&1,45\%&0,61\%&\color{green}\textbf{0}\%&0,24\% \\ \hline
+\textbf{5}&2,91\%&0,73\%&2,18\%&0,73\%&0,85\%&0,73\%&0,48\%&\color{green}\textbf{0}\% \\ \hline
+\textbf{6}&1,09\%&1,82\%&2,54\%&0,48\%&1,45\%&1,69\%&0,97\%&0,61\% \\ \hline
+\textbf{7}&0,73\%&2,06\%&3,27\%&1,94\%&1,21\%&2,42\%&\color{green}\textbf{0}\%&0,48\% \\ \hline
+\textbf{8}&2,66\%&8,23\%&2,06\%&2,30\%&2,06\%&0,61\%&0,12\%&0,48\% \\ \hline
+\textbf{9}&1,57\%&1,82\%&1,94\%&1,33\%&0,61\%&2,54\%&\color{green}\textbf{0}\%&0,61\% \\ \hline
+\textbf{10}&1,94\%&2,42\%&1,21\%&1,09\%&1,45\%&0,97\%&\color{green}\textbf{0}\%&0,12\% \\ \hline
+\textbf{11}&2,66\%&1,82\%&2,06\%&2,30\%&0,85\%&0,24\%&0,24\%&0,61\% \\ \hline
+\textbf{12}&\color{green}\textbf{0}\%&3,51\%&4,36\%&2,54\%&2,30\%&\color{green}\textbf{0}\%&0,12\%&0,12\% \\ \hline
+\textbf{13}&0,48\%&0,12\%&1,82\%&2,18\%&1,45\%&\color{green}\textbf{0}\%&\color{green}\textbf{0}\%&0,48\% \\ \hline
+\textbf{14}&0,97\%&0,12\%&1,45\%&2,42\%&1,94\%&1,94\%&0,12\%&0,24\% \\ \hline
+\textbf{15}&0,85\%&0,61\%&2,78\%&2,91\%&1,33\%&0,61\%&0,73\%&0,24\% \\ \hline
+\textbf{16}&1,09\%&0,48\%&5,08\%&0,85\%&0,61\%&3,27\%&0,24\%&0,48\% \\ \hline
+\textbf{17}&2,06\%&\color{green}\textbf{0}\%&2,42\%&1,57\%&0,85\%&1,21\%&0,12\%&0,48\% \\ \hline
+\textbf{18}&0,48\%&\color{green}\textbf{0}\%&2,30\%&2,66\%&0,61\%&1,57\%&0,48\%&0,48\% \\ \hline
+\textbf{19}&5,57\%&\color{green}\textbf{0}\%&2,78\%&2,30\%&6,90\%&\color{green}\textbf{0}\%&0,24\%&0,48\% \\ \hline
+\textbf{20}&1,94\%&0,12\%&3,27\%&1,69\%&0,61\%&1,09\%&\color{green}\textbf{0}\%&0,24\% \\ \hline
+\textbf{ŚREDNIA}&1,62\%&1,37\%&2,54\%&1,97\%&1,48\%&1,13\%&0,22\%&0,36\% \\ \hline
+\textbf{ODCHYLENIE}&1,19\%&1,83\%&0,90\%&0,72\%&1,34\%&0,88\%&0,27\%&0,19\% \\ \hline
+\end{tabular}}
+\caption{Wartości błędu względnego funkcji celu dla poszczególnych metod mutacji, metoda losowa, 50 000 iteracji}
+\label{losowa50}
+\end{center}
+\end{table}
+
+Liczba próbek w których algorytm uzyskiwał wartość błędu względnego równą 0\% wzrostła o 9 w stosunku do wersji algorytmu z liczbą iteracji równą 20 000. Świadczy to o zmniejszaniu się wartość funkcji celu w iteracjach dalszych niż 20 000. W przypadku większości z metod następuje spadek średniej wartości błędu bezwzględnego funkcji celu. Niemniej jednak w przypadku metod takich jak DE/rand/1+$\leftthreetimes$ oraz DE/best/1+$\leftthreetimes$ następuje wzrost tej wartości. Zjawisko to spowodowane jest zadziałaniem czynnika losowego w korzystny dla tych metod sposób. 
+
+\begin{table}[h!]
+\begin{center}
+\scalebox{0.8}{
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Liczba osiągnietych wartośći 0\%}\\\hline
+ \textbf{1}&DE/current to best/$n_{v}+1$&0,22\%& 8\\\hline
+ \textbf{2}& DE/current to best/$n_{v}+1$+$\leftthreetimes$&0,36\%& 1\\\hline
+ \textbf{3}&DE/rand/$n_{v}$+$\leftthreetimes$&1,13\%& 3\\\hline
+ \textbf{4}&DE/rand/1+$\leftthreetimes$&1,37\%& 3\\\hline
+ \textbf{5}&DE/rand/$n_{v}$&1,48\%&0\\\hline
+ \textbf{6}&DE/rand/1&1,62\%&1\\\hline
+ \textbf{7}&DE/best/1+$\leftthreetimes$&1,97\%& 0\\\hline
+ \textbf{8}&DE/best/1&2,54\%& 0\\\hline
+\end{tabular}}
+\caption{Ranking metod mutacji na podstawie średniej wartości błędu względnego funkcji celu, metoda losowa, 50 000 iteracji}
+\label{ranking3}
+\end{center}
+\end{table}
+
+Na podstawie tabeli będącej zestawieniem wszystkich testowanych metod mutacji, tabeli \ref{ranking3}, potwierdza się zauważona w poprzednich testach zależność, iż najlepiej działającą metodą jest metoda DE/current to best/$n_{v}+1$. Średni błąd względny jest równy 0,22\%, co jest wartością około dwukrotnie mniejszą od wyników uzyskiwanych przez inne metody mutacji.
+
+\end{itemize}
+
+%----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\subsubsection{Reprodukcja rankingowa}
+W poniżej przeprowadzonej analizie za metodę reprodukcji przyjmuje się metodę rankingową. Testy zostaną przeprowadzone zarówno dla 20 000 jak i dla 50 000 iteracji.\\
+\par
+\begin{itemize}
+\item  \textbf{20 000 iteracji}\\
+\par
+ Analiza wyników przeprowadzona zostanie w oparciu o sprowadzenie uzyskanych wartości funkcji celu do postaci ich błędu wzglednego. Ilość iteracji algorytmu jest równa 20 000.
 
 \begin{table}[h!]
 \begin{center}
@@ -424,45 +569,130 @@ Dane wejściowe, określające macierz odległości i macierz przepywu, umieszcz
  \textbf{ODCHYLENIE}&0,41\%&0,25\%&0,73\%&0,49\%&0,41\%&0,21\%&0,3\%&0,32\%\\
 \hline
 \end{tabular}}
-\caption{Wartości błędu względnego funkcji celu dla poszczególnych metod mutacji}
-\label{losowa20}
+\caption{Wartości błędu względnego funkcji celu dla poszczególnych metod mutacji, metoda rankingowa, 20 000 iteracji}
+\label{rankingowa20}
 \end{center}
 \end{table}
 \par
-Analizując tabele \ref{losowa20} widoczny staje się fakt iż, najlepsze wyniki uzyskiwane są dla strategii \textbf{DE/current to best/\textbf{$n_{v}+1$}} jako, że aż 4 razy algorytm z udziałem tej metody mutacji osiągał błąd względy równy 0\%. W pozostałych iteracjach wartości błedu względnego w przeważajacej części również były niewielkie, rzędu 0 - 0,48\%.  Współczynnik  odchylenia standardowego dla wspomnianej powyżej metody jest równy 0,3 \%, co świadczy o bliskim skupieniu wartości w poszczególnych iteracjach wokół średniej. Jest to również jedna z mniejszych wartości odchylenia standardowego biorąc pod uwagę inne metody mutacji.\\
-Strategia  DE/current to best/$n_{v}+1$ z uwzględnieniem zależności opisanych w podrozdziale 4.2.4, a więc z wprowadzeniem dodatkowego współczynnika $\leftthreetimes$, również przynosi satysfakcjonujące wyniki. Średni błąd względny wynosi 0,45\%, a algorytm 2 razy doprowadza funkcję celu do wartości uznawanej przez \cite{qaplib} za najmniejszą znaną wartość. W tabeli \ref{ranking3} został przedstawiony ranking metod mutacji ułożony w zależności od uzyskanej przez metody te średniej wartości błędu wzglednego.
+Analizując tabele \ref{rankingowa20} widoczny staje się fakt iż, najlepsze wyniki uzyskiwane są dla strategii DE/current to best/$n_{v}+1$ jako, że aż 4 razy algorytm z udziałem tej metody mutacji osiągał błąd względy równy 0\%. W pozostałych iteracjach wartości błędu względnego w przeważajacej części również były niewielkie, rzędu 0 - 0,48\%.  Współczynnik  odchylenia standardowego dla wspomnianej powyżej metody jest równy 0,3 \%, co świadczy o bliskim skupieniu wartości w poszczególnych iteracjach wokół średniej. Jest to również jedna z mniejszych wartości odchylenia standardowego biorąc pod uwagę wartości uzyskiwane przez inne metody mutacji.\\
+Strategia  DE/current to best/$n_{v}+1$ z uwzględnieniem zależności opisanych w podrozdziale 4.2.4, a więc z wprowadzeniem dodatkowego współczynnika $\leftthreetimes$, także przynosi satysfakcjonujące wyniki. Średni błąd względny wynosi 0,45\%, a algorytm 2 razy doprowadza funkcję celu do wartości uznawanej przez \cite{qaplib} za najmniejszą znaną wartość. W tabeli \ref{ranking3} został przedstawiony ranking metod mutacji ułożony w zależności od uzyskanej przez metody te średniej wartości błędu wzglednego.
 
 \begin{table}[h!]
 \begin{center}
 \scalebox{0.8}{
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Ilość wygranych}\\
-\hline
- \textbf{1}&DE/current to best/$n_{v}+1$&0,44\%& 7\\
-\hline
- \textbf{2}& DE/current to best/$n_{v}+1$+$\leftthreetimes$&0,45\%& 9\\
-\hline
- \textbf{3}&DE/rand/$n_{v}$+$\leftthreetimes$&0,46\%& 5\\
-\hline
- \textbf{4}&DE/rand/1+$\leftthreetimes$&0,46\%& 7\\
-\hline
- \textbf{5}&DE/rand/$n_{v}$&0,75\%&3\\
-\hline
- \textbf{6}&DE/rand/1&0,77\%& 2\\
-\hline
- \textbf{7}&DE/best/1+$\leftthreetimes$&1,32\%& 0\\
-\hline
- \textbf{8}&DE/best/1&1,48\%& 0\\
-\hline
+\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Liczba osiągnietych wartośći 0\%}\\\hline
+ \textbf{1}&DE/current to best/$n_{v}+1$&0,44\%& 4\\\hline
+ \textbf{2}& DE/current to best/$n_{v}+1$+$\leftthreetimes$&0,45\%& 2\\\hline
+ \textbf{3}&DE/rand/$n_{v}$+$\leftthreetimes$&0,46\%& 0\\\hline
+ \textbf{4}&DE/rand/1+$\leftthreetimes$&0,46\%& 1\\\hline
+ \textbf{5}&DE/rand/$n_{v}$&0,75\%&0\\\hline
+ \textbf{6}&DE/rand/1&0,77\%& 1\\\hline
+ \textbf{7}&DE/best/1+$\leftthreetimes$&1,32\%& 0\\\hline
+ \textbf{8}&DE/best/1&1,48\%& 0\\\hline
 \end{tabular}}
-\caption{Ranking metod mutacji na podstawie średniej wartości błędu względnego funkcji celu}
-\label{ranking3}
+\caption{Ranking metod mutacji na podstawie średniej wartości błędu względnego funkcji celu, metoda rankingowa, 20 000 iteracji}
+\label{ranking6}
 \end{center}
 \end{table}
 
-Na podstawie tabeli \ref{ranking3} można wysnuć wniosek, iż metody takie jak  DE/current to best/$n_{v}+1$+$\leftthreetimes$, DE/rand/1+$\leftthreetimes$ oraz  DE/best/1+$\leftthreetimes$, a wiec metody które zostały zmodyfikowane współczynnikiem $\leftthreetimes$ uzyskują korzystniejsze wyniki w porównaniu do ich odpowiedników bez modyfikatora. Widoczna staje się zatem skuteczność działania czynnika skalującego $\leftthreetimes$.
+Na podstawie tabeli \ref{ranking3} można wysnuć wniosek, iż metody takie jak  DE/current to best/$n_{v}+1$+$\leftthreetimes$, DE/rand/1+$\leftthreetimes$ oraz  DE/best/1+$\leftthreetimes$, a wiec metody które zostały zmodyfikowane współczynnikiem $\leftthreetimes$ uzyskują korzystniejsze wyniki w porównaniu do ich odpowiedników bez modyfikatora. Widoczna staje się zatem skuteczność działania czynnika skalującego $\leftthreetimes$.\\
 
+\item  \textbf{50 000 iteracji }
+
+Poniższe testy zostały przeprowadzone w celu zbadania czy uzyskane wyniki utrzymają się na poziomie który osiągają na etapie 20 000 iteracji czy też następuje poprawa w sytuacji zwiększenia liczby iteracji. Wyniki testów zestawiono w tabeli \ref{losowa50}\\
+
+\begin{table}[h!]
+\begin{center}
+\scalebox{0.55}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Iteracja}  &\textbf{DE/rand/1}  & \textbf{DE/rand/1+$\leftthreetimes$} & \textbf{DE/best/1} & \textbf{DE/best/1+$\leftthreetimes$} & \textbf{DE/rand/$n_{v}$} & \textbf{DE/rand/$n_{v}$+$\leftthreetimes$} & \textbf{ DE/current to best/$n_{v}+1$} & \textbf{ DE/current to best/$n_{v}+1$+$\leftthreetimes$}\\
+\hline
+ \textbf{1}&1,08 \%&0,48\%&1,57\%&0,6\%&0,24\%&0,48\%&0,6\%&0,24\% \\ \hline
+ \textbf{2}&0,84\%&0,24\%&2,66\%&\color{green}\textbf{0\%}&0,84\%&\color{green}\textbf{0\%}&0,24\%&0,48\% \\
+\hline
+ \textbf{3}&0,48\%&0,6\%&0,48\%&0,6\%&\color{green}\textbf{0\%}&0,12\%&0,24\%&0,84\%  \\
+\hline
+ \textbf{4}&0,72\%&0,12\%&0,96\%&0,48\%&0,48\%&0,24\%&0,24\%&0,6\%  \\
+\hline
+ \textbf{5}&1,33\%&0,48\%&3,02\%&0,72\%&0,24\%&\color{green}\textbf{0\%}&0,72\%&0,24\%  \\
+\hline
+ \textbf{6}&\color{green}\textbf{0\%}&0,48\%&0,48\%&1,57\%&1,45\%&\color{green}\textbf{0\%}&0,24\%&0,48\%\\
+\hline
+ \textbf{7}&0,48\%&0,12\%&0,48\%&0,72\%&0,24\%&0,48\%&0,84\%&0,24\% \\
+\hline
+ \textbf{8}&0,24\%&0,48\%&1,21\%&0,6\%&0,6\%&0,48\%&0,24\%&0,12\%\\
+\hline
+ \textbf{9}&0,84\%&0,6\%&1,69\%&1,45\%&\color{green}\textbf{0\%}&0,12\%&0,12\%&\color{green}\textbf{0\%}\\
+\hline
+ \textbf{10}&0,48\%&0,12\%&1,57\%&1,81\%&0,96\%&0,12\%&0,48\%&0,84\%\\
+\hline
+ \textbf{11}&0,72\%&\color{green}\textbf{0\%}&0,72\%&1,08\%&0,6\%&0,6\%&0,72\%&0,48\%\\
+\hline
+ \textbf{12}&0,48\%&0,24\%&0,24\%&2,05\%&0,48\%&0,48\%&0,48\%&0,24\%\\
+\hline
+ \textbf{13}&\color{green}\textbf{0\%}&0,72\%&1,21\%&0,84\%&0,84\%&0,72\%&\color{green}\textbf{0\%}&0,48\%\\
+\hline
+ \textbf{14}&0,12\%&0,96\%&2,66\%&2,05\%&0,84\%&\color{green}\textbf{0\%}&0,48\%&0,48\%\\
+\hline
+ \textbf{15}&0,24\%&0,6\%&1,93\%&1,45\%&0,12\%&\color{green}\textbf{0\%}&0,24\%&0,24\%\\
+\hline
+ \textbf{16}&0,72\%&0,48\%&0,84\%&1,69\%&0,24\%&0,24\%&0,48\%&0,48\%\\
+\hline
+ \textbf{17}&\color{green}\textbf{0\%}&0,84\%&1,21\%&1,08\%&0,48\%&0,48\%&0,84\%&0,24\%\\
+\hline
+ \textbf{18}&0,96\%&0,48\%&2,9\%&0,84\%&0,24\%&\color{green}\textbf{0\%}&0,48\%&0,24\%\\
+\hline
+ \textbf{19}&0,24\%&0,48\%&1,57\%&0,48\%&0,84\%&0,48\%&0,48\%&\color{green}\textbf{0\%}\\
+\hline
+ \textbf{20}&0,12\%&0,12\%&1,57\%&1,33\%&0,6\%&\color{green}\textbf{0\%}&0,24\%&0,12\%\\
+\hline
+ \textbf{ŚREDNIA}&0,5\%&0,44\%&1,45\%&1,1\%&0,52\%&0,25\%&0,42\%&0,34\%\\
+\hline
+ \textbf{ODCHYLENIE}&0,38\%&0,26\%&0,82\%&0,56\%&0,36\%&0,24\%&0,27\%&0,21\%\\
+\hline
+\end{tabular}}
+\caption{Wartości błędu względnego funkcji celu dla poszczególnych metod mutacji, metoda rankingowa, 50 000 iteracji}
+\label{rankingowa50}
+\end{center}
+\end{table}
+\par
+
+Wartości błędu względnego dla danych metod uległy poprawie w stosunku do ograniczenia liczby iteracji do 20 000. Wynika to z faktu , iż po przekroczeniu tej granicy, w grupach rodzicielskich nadal występują osobniki o różnym od siebie genotypie co prowadzi do polepszania się wartości funkcji dopasowania. Analizując przebiegi \ref{rankingowa50pic} można zauważyć iż stan stabilny utrzymuje się dopiero na poziomie 30 000 iteracji, co widoczne jest na poniższym wykresie .
+
+\begin{figure}[h!]
+		\includegraphics[scale=0.6]{../../../../Screeny/50000_2metody_1652.png}
+		\caption{Przebiej działania algorytmu dla poszczególnych metod selekcji}
+		\label{rankingowa50pic}			
+\end{figure}
+
+Poniżej zamieszczono zestawienie funkcji uporządkowanych w kolejności zależnej od uzyskanej przez metody te wartości błedu względnego funkcji celu.
+
+\begin{table}[h!]
+\begin{center}
+\scalebox{0.8}{
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Miejsce}  &\textbf{Metoda}  & \textbf{Funkcja celu} & \textbf{Liczba osiągnietych wartośći 0\%}\\\hline
+ \textbf{1}&DE/rand/$n_{v}$+$\leftthreetimes$&0,25\%& 9\\\hline
+ \textbf{2}& DE/current to best/$n_{v}+1$+$\leftthreetimes$&0,34\%& 4\\\hline
+ \textbf{3}&DE/current to best/$n_{v}+1$&0,42\%& 1\\\hline
+ \textbf{4}&DE/rand/1+$\leftthreetimes$&0,44\%& 5\\\hline
+ \textbf{5}&DE/rand/1&0,5\%&3\\\hline
+ \textbf{6}&DE/rand/$n_{v}$&0,52\%&4\\\hline
+ \textbf{7}&DE/best/1+$\leftthreetimes$&1,1\%& 1\\\hline
+ \textbf{8}&DE/best/1&1,45\%& 1\\\hline
+\end{tabular}}
+\caption{Ranking metod mutacji na podstawie średniej wartości błędu względnego funkcji celu, metoda rankingowa, 50 000 iteracji}
+\label{ranking4}
+\end{center}
+\end{table}
+
+Ranking dla 20 000 iteracji zmienił się w stosunku do rankingu 50 000 iteracji nie tylko w kontekście mniejszych wartości błędu względnego dla poszczególnych funkcji, ale również w kontekście metody uzyskującej najlepsze wyniki. Bład względny metody DE/current to best/$n_{v}+1$ zmniejszył się o 0,02 \% to metoda ta,  pomimo przodowania nad innymi przy 20 000 iteracji, w rankingu zajmuje obecnie 3 miejsce. Najlepsze efekty i wyjątkowo niewielką wartość błedu względnego,  0,25\%, uzyskuje metoda DE/rand/$n_{v}$+$\leftthreetimes$, gdzie $n_{v}$ = 3. Aż w 9 na 20 prób wartość funkcji celu uzyskiwana dla tej metody jest równa 1652, co zgodnie z \cite{qaplib} jest najmniejszą wartościa jaką udało się uzyskać dla daej instancji danych wejściowych.
+
+\end{itemize}
 
 
 

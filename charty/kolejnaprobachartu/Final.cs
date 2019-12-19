@@ -82,7 +82,7 @@ namespace kolejnaprobachartu
             toChart.Clear();
         }
 
-        List<int> finals = new List<int>();
+        public static List<int> finals = new List<int>();
         public static string final;
         public void Koncowa(int switchCase, int number_of_vectors)
         {
@@ -111,7 +111,7 @@ namespace kolejnaprobachartu
 
             // Generacja pierwszej populacji 
             Mutation mutationdata = new Mutation(FirstPopulation);
-            int num_of_iter = 50000;
+            int num_of_iter = 100000;
 
             //List<int> MutatedIndividual2 = mutationdata.TournamentMethond();
             while (num_of_iter != 0)
@@ -132,7 +132,7 @@ namespace kolejnaprobachartu
                 if(num_of_iter == 1)
                 {
                     finals.Add(wyniki.Min());
-                    final += wyniki.Min().ToString() + " " ;
+                    final += wyniki.Min().ToString() + "," ;
                     //MessageBox.Show(wyniki.Min().ToString());
                 }
 
