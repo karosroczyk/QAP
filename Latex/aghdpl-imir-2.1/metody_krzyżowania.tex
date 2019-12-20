@@ -174,40 +174,134 @@ Implementacja metody krzyżowania CX została umieszczona poniżej.
         }
 \end{lstlisting}
 \end{program}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 %---------------------------------------------------------------------------
 
 \subsection{Krzyżowanie PMX}\label{sec:kompilacja}
+
+Metoda PMX ang. \textit{Partial-Mapped Crossover} jest jedną z bardziej skomplikowanych strategii krzyżowania. Jej działanie, podobnie jak uprzednio opisanych metod, jest zależne od osobników będących rodzicami. Spośród nich wybierany jest podciąg rozpoczynający się w miejscu o losowym indeksie i posiadający losową długość. Następnie dokonuje się wymiany podciągów pomiedzy dwoma rodzicami, w wyniku czego w osobnikach mogą wystąpić powtórzenia. Wówczas pomiędzy osobnikami tworzą się relacje mapowania, rysunek. Relacje te wykorzystywane są w celu usunięcia powtórzeń w osobnikach. Opisane zależności przedstawione są na poniższym schemacie.
+
+\begin{figure}[h!]
+\centering
+		\includegraphics[scale=0.6]{../../../../Screeny/pmx_schemat.png}
+		\caption{Schemat działania operatora krzyżowania PMX}
+		\label{schematCX}			
+\end{figure}
+
+\begin{program}[h!]
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> PMXCrossver(List<int> ParentIndividual, List<int> MutatedIndividual)
+        {
+            List<int> Results = new List<int>();
+            for (int i = 0; i < MutatedIndividual.Count; i++)
+            {
+                Results.Add(MutatedIndividual[i]);
+            }
+
+            List<int> Results2 = new List<int>();
+            for (int i = 0; i < ParentIndividual.Count; i++)
+            {
+                Results2.Add(ParentIndividual[i]);
+            }
+
+            List<int> CrossedIndividual1 = new List<int>();
+            List<int> CrossedIndividual2 = new List<int>();
+            List<int> MutatedIndividualSubstring = new List<int>();
+            List<int> ParentIndividualSubstring = new List<int>();
+            Random rnd = new Random();
+            int offset = rnd.Next(0, ParentIndividual.Count);
+            int length = rnd.Next(1, ParentIndividual.Count - offset);
+            int iter = 0;
+
+            while (iter != length)
+            {
+                MutatedIndividualSubstring.Add(MutatedIndividual[offset + iter]);
+                ParentIndividualSubstring.Add(ParentIndividual[offset + iter]);
+                iter++;
+            }
+
+            for (int i = offset; i < offset + MutatedIndividualSubstring.Count; i++)
+            {
+                Results[i] = 0;
+                Results2[i] = 0;
+            }
+
+            for (int i = 0; i < MutatedIndividualSubstring.Count; i++)
+            {
+                CrossedIndividual1.Add(MutatedIndividualSubstring[i]);
+                CrossedIndividual2.Add(ParentIndividualSubstring[i]);
+            }
+
+            for (int i = 0; i < MutatedIndividualSubstring.Count; i++)
+            {
+                if (ParentIndividualSubstring.Contains(MutatedIndividualSubstring[i]))
+                {
+                    var index = ParentIndividualSubstring.FindIndex(x => x == MutatedIndividualSubstring[i]);
+                    MutatedIndividualSubstring[i] = MutatedIndividualSubstring[index];
+                    MutatedIndividualSubstring.RemoveAt(index);
+                    ParentIndividualSubstring.RemoveAt(index);
+                    i = -1;
+                }
+            }
+
+            for (int i = 0; i < Results.Count; i++)
+            {
+                if (!Results.Contains(Results2[i]))
+                {
+                    int  index_2 = MutatedIndividualSubstring.FindIndex(x => x == Results2[i]);
+                    var value = ParentIndividualSubstring[index_2];
+                    var index = Results.FindIndex(x => x == value);
+                    Results[index] = Results2[i];
+                    Results2[i] = value;
+                }
+            }
+
+            var i_tmp = 0;
+            var i_tmp2 = 0;
+
+            for (int i = 0; i < Results.Count; i++)
+            {
+                if (Results[i] == 0)
+                {
+                    Results[i] = CrossedIndividual2[i_tmp];
+                    i_tmp ++;
+                }
+                if (Results2[i] == 0)
+                {
+                    Results2[i] = CrossedIndividual1[i_tmp2];
+                    i_tmp2 ++;
+                }
+            }
+            return Results;
+        }
+    }
+\end{lstlisting}
+\end{program}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 %---------------------------------------------------------------------------
 
