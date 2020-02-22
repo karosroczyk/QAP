@@ -1,0 +1,421 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{none/global//global/global}
+
+ 
+
+  \entry{michal}{article}{}
+    \name{author}{2}{}{%
+      {{hash=CA}{%
+         family={Bereta},
+         familyi={C\bibinitperiod},
+         given={Michał},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PM}{%
+         family={Jarosz},
+         familyi={P\bibinitperiod},
+         given={Paweł},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CAPM1}
+    \strng{fullhash}{CAPM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Algorytmy genetyczne}
+    \field{journaltitle}{Politechnika Krakowska}
+  \endentry
+  
+     \entry{przystojny_koles}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Rodriguez-Mier},
+         familyi={S\bibinitperiod},
+         given={Pablo},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Wykład 10}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+	\field{title}{{A tutorial on Differential Evolution with Python}}
+    \field{langid}{polish}
+    \field{year}{2017}
+  \endentry
+  
+   \entry{qap_rys}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Haydar},
+         familyi={S\bibinitperiod},
+         given={Kilic},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Wykład 10}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+	\field{title}{{Tournament selection based antlion optimization algorithm for solving quadratic assignment problem}}
+    \field{langid}{polish}
+    \field{year}{2018}
+  \endentry
+  
+  
+  
+  
+  
+  
+       \entry{chmiel}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Chmiel},
+         familyi={S\bibinitperiod},
+         given={Wojciech},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Wykład 10}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+	\field{title}{{Matematyczne Metody Wspomagania Decyzji - Wykłady}}
+    \field{langid}{polish}
+	\field{year}{nieokreślone}
+  \endentry
+  
+  
+  
+  
+  
+   \entry{selekcje}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Banasiak},
+         familyi={S\bibinitperiod},
+         given={Dariusz},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{
+      {Politechnika Wrocławska}
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+	\field{title}{{Algorytmy genetyczne}}
+    \field{langid}{polish}
+    \field{year}{2009}
+  \endentry
+
+
+
+   \entry{maszynowe_sel}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Gdańska},
+         familyi={S\bibinitperiod},
+         given={Politechnika},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{
+      {Politechnika Gdańska}
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+	\field{title}{{Uczenie maszynowe - algorytmy genetyczne}}
+    \field{langid}{polish}
+    \field{year}{2009}
+  \endentry
+   
+  
+       \entry{zeszyty}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Figielska},
+         familyi={S\bibinitperiod},
+         given={Ewa},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Toruń}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{note}{\\\texttt{https://www.wt.pw.edu.pl/Badania-i-nauka\\
+  /Prace-Naukowe-Politechniki-Warszawskiej-Transport/Zeszyty/(offset)/30}}
+    \field{title}{{Zeszyty naukowe 81-92}}
+    \field{langid}{polish}
+    \field{year}{2011}
+  \endentry
+ 
+ 
+ 
+ 
+   \entry{gracjan}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Wilczewski},
+         familyi={S\bibinitperiod},
+         given={Gracjan},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Toruń}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{note}{\\\texttt{http://zasada.zut.edu.pl/ag/Wilczewski}}
+    \field{title}{{Algorytmy ewolucyjne - wprowadzenie}}
+    \field{langid}{polish}
+    \field{year}{2005}
+  \endentry
+ 
+    \entry{qaplib}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Anjos},
+         familyi={S\bibinitperiod},
+         given={Miguel},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {COR@L}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{note}{\\\texttt{http://coral.ise.lehigh.edu/data-sets/qaplib/}}
+    \field{title}{{Quadratic Assignment Problem Library}}
+    \field{langid}{polish}
+    \field{year}{1997}
+  \endentry
+  
+  \entry{doktorat}{article}{}
+    \name{author}{1}{}{%
+      {{hash=MK}{%
+         family={Juszczuk},
+         familyi={M\bibinitperiod},
+         given={Przemysław},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MK1}
+    \strng{fullhash}{MK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{6\bibrangedash 62}
+    \field{title}{Adaptacyjny algorytm ewolucji różnicowej w rozwiązywaniu problemów teorii gier}
+    \field{journaltitle}{Uniwersytet Śląski}
+    \field{year}{2013}
+  \endentry
+
+
+    \entry{diff}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Noghabi},
+         familyi={S\bibinitperiod},
+         given={Hossein Sharifi},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {COR@L}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{note}{\\\texttt{https://arxiv.org/ftp/arxiv/papers/1510/1510.02516}}
+    \field{title}{{Differential Evolution with Generalized
+Mutation Operator for Parameters Optimization
+in Gene Selection for Cancer Classification}}
+    \field{langid}{polish}
+    \field{year}{1997}
+  \endentry
+  
+  
+  \entry{diff2}{article}{}
+    \name{author}{1}{}{%
+      {{hash=MK}{%
+         family={Opara},
+         familyi={M\bibinitperiod},
+         given={Karol},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MK1}
+    \strng{fullhash}{MK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{6\bibrangedash 62}
+    \field{title}{Analiza algorytmu ewolucji
+różnicowej i jego zastosowanie
+w wyznaczaniu zależności
+statystycznych}
+    \field{journaltitle}{Uniwersytet Śląski}
+    \field{year}{2014}
+  \endentry
+  
+  
+  
+    \entry{diff3}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={Mohamed},
+         familyi={S\bibinitperiod},
+         given={Ali Wagdy},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {COR@L}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{note}{\\\texttt{https://www.hindawi.com/journals/acisc/2017/7974218/}}
+    \field{title}{{Differential Evolution with Novel Mutation and \\
+	Adaptive Crossover Strategies for Solving Large Scale Global Optimization Problems}}
+    \field{langid}{polish}
+    \field{year}{1997}
+  \endentry
+  
+  
+\entry{czynnik}{article}{}
+    \name{author}{2}{}{%
+      {{hash=CA}{%
+         family={Boryczka},
+         familyi={C\bibinitperiod},
+         given={U.},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PM}{%
+         family={Juszczuk},
+         familyi={P\bibinitperiod},
+         given={P.},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CAPM1}
+    \strng{fullhash}{CAPM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{A new evolutionary method for generating nash equilibria
+in bimatrix games with known support.}
+    \field{journaltitle}{ Central European Journal of Computer
+Science}
+  \endentry
+
+    \entry{cross}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={unknown},
+         familyi={S\bibinitperiod},
+         given={Author},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {COR@L}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{note}{\\\texttt{http://www.rubicite.com/Tutorials/\\
+  GeneticAlgorithms/CrossoverOperators/Order1CrossoverOperator.aspx}}
+    \field{title}{{Genetic Algorithms}}
+    \field{langid}{polish}
+    \field{year}{unknown}
+  \endentry
+  
+  
+  
+    \entry{crossovers}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SM}{%
+         family={unknown},
+         familyi={S\bibinitperiod},
+         given={Author},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {COR@L}%
+    }
+    \strng{namehash}{SM1}
+    \strng{fullhash}{SM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{note}{\\\texttt{http://mat.uab.cat/~alseda/MasterOpt/GeneticOperations}}
+    \field{title}{{Genetic Algorithms}}
+    \field{langid}{polish}
+    \field{year}{unknown}
+  \endentry
+  
+  
+    \entry{modf}{article}{}
+    \name{author}{1}{}{%
+      {{hash=MK}{%
+         family={Chang},
+         familyi={M\bibinitperiod},
+         given={C.S.},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MK1}
+    \strng{fullhash}{MK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{6\bibrangedash 62}
+    \field{title}{Differential evolution based tuning of fuzzy automatic train
+operation for mass rapid transit system.}
+    \field{journaltitle}{IEE Proceedings of Electric Power Applications}
+    \field{year}{2000}
+  \endentry
+  
+
+\enddatalist
+\endinput

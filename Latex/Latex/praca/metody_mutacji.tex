@@ -1,0 +1,167 @@
+\chapter{Operacja mutacji}\label{cha:pierwszyDokument}
+
+Mutacja stanowi najważniejszą część algorytmu ewolucyjnego, z~tego względu stosuje się~wiele modyfikacji w~celu rozwoju i~poprawy działania tego operatora.
+Mutacja stosowana w~algorytmie ewolucji różnicowej zdefiniowana jest~w~odmienny sposób w~stosunku do~algorytmu ewolucyjnego, w~którym to~genotyp stanowią wartości binarne, a~operator mutacji ma za~zadanie wprowadzenie zmian na~zasadzie negacji obecnej wartości genu. W~mutacji różnicowej zastosowana jest~operacja odejmowania od~siebie dwóch wektorów, tworząc tym samym wektor różnicowy, czemu również algorytm zawdzięcza swoją nazwę z~ang. \textsl{difference} \cite{przystojny_koles}. Wektor różnicowy jest~zatem miarą określającą odległość pomiędzy dwoma osobnikami. Podobnie jak~ma to~miejsce w~innych algorytmach należących do~grona algorytmów ewolucyjnych, tak~i~ewolucja różnicowa posiada wiele alternatywnych metod mutacji. Metody mutacji różnicowej różnią się~od~siebie głównie elementami takimi jak:
+
+
+\begin{enumerate}
+\item Sposób  wyboru osobnika będącego wektorem bazowym, a więc wektorem znajdującym się w grupie rozrodczej, lecz nie wchodzącym w skład wektora różnicowego \textsl{X},
+\item Liczba wektorów różnicowych \textsl{Y},
+\end{enumerate}
+\par
+W~związku z~powyższym, metody mutacji mogą przyjąć następującą nomenklaturę \textsl{DE/X/Y/Z}. \textsl{Z} oznacza rodzaj zastosowanego operatora krzyżowania w~związku z~czym parametr ten nie~będzie uwzględniony w~poniższym opisie metod mutacji . Wybór danej metody jest~zależny od~specyfiki rozwiązywanego problemu i~dla różnych jego instancji może dawać odmienne rezultaty. Ogólny wzór opisujący sposób powstawania genu osobnika potomnego można wyrazić następująco:
+\begin{equation}
+ \forall U_{i} =S_{r_{1}i} + \sum_{j=1}^{n} F_{j} \cdot (S_{r_{2j}i} - S_{r_{3j}i})
+\end{equation}
+Gdzie:\\
+$j$ - liczba wektorów różnicowych,\\
+$U_{i}$ - i-ty gen osobnika potomnego,\\
+$r_{1}$,$ r_{2}$,$ r_{3}$ - osobniki wchodzące w~skład populacji,\\
+$S_{r_{1}i}$ - i-ty gen osobnika $r_{1}$\\
+$F$ - współczynnik mutacji, $F \in (0,1)$,\\
+$S$ -populacja,\\
+
+
+Wprowadzono zależność, iż~osobnikami biorącymi udział w~procesie mutacji są~osobniki uprzednio wybrane poprzez~metodę reprodukcji \cite{diff2}. W~implementacji metod mutacji dodatkowo należało zastosować pewnego rodzaju modyfikacje, wynikającą z~faktu, iż~pojedynczy osobnik jest~ciągiem będącym permutacją, a~więc nie~dopuszcza istnienia wartości np. zmiennoprzecinkowych. Jako że~wektor różnicowy mnożony jest~przez~współczynnik mutacji, będący wartością zmiennoprzecinkową, wektor końcowy posiada geny będące wartościami zmiennoprzecinkowymi. W~celu eliminacji takiej sytuacji należało dokonać stosownego rodzaju skalowanie uwzględniające relacje mniejszości i~większości pomiędzy poszczególnymi genami, a~jednocześnie zamieniające wartości zmiennoprzecinkowe na~całkowite. Pseudokod wspomnianej modyfikacji zamieszczono poniżej:
+
+\begin{flushleft}
+\scriptsize
+\hspace{5cm}$cnt$ = 1\\
+\hspace{5cm}while ( $cnt$ != $ Rozmiar Osobnika + 1$) do\\
+\hspace{5.5cm}	1. $index \leftarrow$ indeks najmniejszego elementu w wektorze wynikowym mutacji\\
+\hspace{5.5cm}	2. W wektorze wynikowym mutacji, pod $index$, wstaw $MaxSizeOf(double)$\\
+\hspace{5.5cm}	3. W wektorze wynikowym operacji, pod $index$, wstaw wartość $cnt$\\
+\hspace{5.5cm}	4. Zwiększ $cnt$\\
+\hspace{5cm}end while \\
+\end{flushleft}
+
+ Poniżej zestawione zostały strategie najczęściej spotykane w~literaturze i~opisane szczegółowo w~\cite{doktorat}. Listingi poszczególnych metod mutacji można znaleźć w~dodatku \ref{repomutacji}.
+%---------------------------------------------------------------------------
+
+\section{Klasyczna mutacja: DE/rand/1}\label{sec:strukturaDokumentu}
+
+Podstawową strategią stosowaną jako operator mutacji jest~strategia zakładająca uznanie za~wektor bazowy pierwszego osobnika znajdującego się~w~grupie rozrodczej \cite{diff2}. Jako że~grupa rozrodcza składa się~z~trzech osobników, dwa pozostałe są~odpowiedzialne za~utworzenie wektora różnicowego, który~jest następnie skalowany współczynnikiem $F = 0,8$. Przyjęta wartość jest~najczęściej spotykaną w~literaturze wartością czynnika skalującego. Analiza wpływu tego parametru na~działanie metod mutacji zostanie przedstawiona w~dalszej części pracy. Powyżej wspomniane zależności można opisać wzorem:
+\begin{equation}
+\label{firatmutate}
+ \forall U_{i} =S_{r_{1}i} + F \cdot (S_{r_{2}i} - S_{r_{3}i})
+\end{equation}
+%---------------------------------------------------------------------------
+\section{Modyfikacje metod mutacji}\label{sec:kompilacja}
+
+Klasyczna metoda mutacji pomimo częstego jej stosowania, nie~zawsze daje oczekiwane rezultaty. W~pewnych instancjach problemów efektywniejszym działaniem mogą wykazać się~metody mutacji, do~których zostały wprowadzone pewnego rodzaju modyfikacje. Poniżej zestawionych zostało kilka możliwych modyfikacji opisanych bardziej szczegółowo \cite{diff2}.
+
+\subsection{Strategia II: DE/best/1}\label{sec:kompilacja}
+
+W~strategii II miejsce wektora bazowego zajmuje wektor odznaczający się~największą wartością funkcji celu. W~celu znalezienia najlepszego osobnika konieczne jest~przeszukanie całej populacji, co może okazać się~niekorzystne w~kontekście złożoności obliczeniowej i~eksploatacji algorytmu. Wektor różnicowy jest~różnicą dwóch losowo wybranych osobników przeskalowanych współczynnikiem mutacji. Zależność strategii DE/best/1 można opisać wzorem:
+
+\begin{equation}
+ \forall U_{i} =S_{best,i} + F \cdot (S_{r_{1}i} - S_{r_{2}i})
+\end{equation}
+%---------------------------------------------------------------------------
+
+\subsection{Strategia III: DE/rand/$n_{v}$}\label{sec:narzedzia}
+
+Strategię III od~poprzednich metod wyróżnia fakt, iż~nowy osobnik powstaje w~oparciu o~sumę wektorów różnicowych, a~nie na~podstawie jednego wektora różnicowego tak~jak~miało to~miejsce w~przypadku poprzednich metod. Istnieje więc~dodatkowy parametr $n_{v}$ określający ilość wektorów różnicowych. W~sytuacji gdy $ 2 * n_{v} + 1$ jest~większe od~rozmiaru populacji \textsl{n}, do~$n_{v}$ zostaje przypisana odgórna wartość równa największej liczbie wektorów różnicowych, które~można utworzyć przy danym rozmiarze populacji \textsl{n}.\\
+\begin{equation}
+ n_{v} = (n - 1) / 2
+\end{equation}
+
+Wartość będąca sumą wektorów różnicowych jest~następnie skalowana współczynnikiem mutacji \textsl{F}. Opisane powyżej zależności można zapisać w~postaci wzoru:\\
+\begin{equation}
+ \forall U_{i} =S_{r_{1}i} +  F \cdot \sum_{k=1}^{n_{v}}(S_{r_{2}i} - S_{r_{3}i})
+\end{equation}
+%---------------------------------------------------------------------------
+
+\subsection{Strategia IV: DE/current to best/$n_{v} +1$}\label{sec:narzedzia}
+
+
+Strategia ta zawiera w~sobie pewne elementy zawarte we wcześniej opisanych metodach mutacji różnicowej. Na~osobnika potomnego składa się~suma $n_{v}$ wektorów różnicowych, będących różnicą dwóch losowo wybranych osobników z~populacji, pomnożonych razy współczynnik mutacji (strategia III). Sumuje się~także wartość, przemnożonego przez~współczynnik mutacji, odrębnego wektora różnicowego, w~skład którego~wchodzi najlepszy (strategia II) oraz~losowy osobnik. Dodatkowo należy również uwzględnić wartość osobnika o~indeksie odpowiadającym iteracji, w~której znajduje się~obecnie algorytm. Zależności te~opisuje wzór \ref{wzormutacja4}:\\
+
+\begin{equation}
+ \forall U_{i} = S_{r_{itert}i} +  F \cdot (S_{r_{best}i} - S_{r_{1}i}) +  F \cdot \sum_{k=1}^{n_{v}}(S_{r_{2}i} - S_{r_{3}i})
+\label {wzormutacja4}
+\end{equation}
+%---------------------------------------------------------------------------
+
+\subsection{Mutacja z wprowadzeniem parametru $\leftthreetimes$} \label{parametrffunkcja}
+
+W~literaturze \cite{czynnik} można także znaleźć wersje metod mutacji, w~których wprowadza się~modyfikacje powyżej zaprezentowanych metod poprzez~wprowadzenie czynnika skalującego $\leftthreetimes$. Parametr ten wprowadza w~algorytmie dodatkową losowość, co może wpłynąć korzystnie na~szybkość dochodzenia algorytmu do~rozwiązania końcowego. Zmiany, w~stosunku do~poprzednich wersji, dotyczą pomnożenia wektora bazowego przez~czynnik skalujący $\leftthreetimes$, gdzie $\leftthreetimes \in (0,1)$. W~poprzednich strategiach niezależnie od~ich rodzajów wektor bazowy był zawsze wartością nieprzeskalowaną. Można to~opisać poniższymi zależnościami:\\
+
+\begin{enumerate}
+\item Strategia I : $ \forall U_{i} = \leftthreetimes \cdot S_{r_{1}i} + F \cdot (S_{r_{2}i} - S_{r_{3}i})$
+\item Strategia II : $ \forall U_{i} = \leftthreetimes \cdot  S_{best,i} + F \cdot (S_{r_{1}i} - S_{r_{2}i}) $
+\item Strategia III : $ \forall U_{i} = \leftthreetimes \cdot  S_{r_{1}i} +  F \cdot \sum_{k=1}^{n_{v}}(S_{r_{2}i} - S_{r_{3}i}) $
+\item Strategia IV : $ \forall U_{i} = \leftthreetimes \cdot S_{r_{itert}i} +  F \cdot (S_{r_{best}i} - S_{r_{1}i}) +  F \cdot \sum_{k=1}^{n_{v}}(S_{r_{2}i} - S_{r_{3}i}) $
+\end{enumerate}
+\par
+
+%---------------------------------------------------------------------------
+
+\section{Dostrajanie parametru mutacji}\label{rozklad}
+
+W~literaturze \cite{przystojny_koles}, \cite{czynnik}, za~wartość parametru mutacji $F$, który~to odpowiada za~przeskalowanie wektora różnicowego, najczęściej przyjmuje się~wartość $F$ = 0,8. Nie~mniej jednak jest~to~wartość uzyskana doświadczalnie, co oznacza, iż~daje ona najlepsze efekty w~większości przypadków testowych. Należy jednak pamiętać o~fakcie, iż~przypadkami testowymi są~zazwyczaj standardowe funkcje, a~więc w~sytuacji, gdy zagadnienia są~bardziej złożone, wartość $F$ = 0,8 może okazać się~niezadowalająca. Stała wartość parametru $F$ może być~więc pewnego rodzaju ograniczeniem. Z~tego względu wprowadzenie dynamicznej zmiany tego parametru może okazać się~rozwiązaniem poprawiającym działanie algorytmu. Poniżej zaprezentowano dwie metody modyfikacji czynnika skalującego $F$.
+
+\subsection{Modyfikacja parametru $F$ zgodnie z daną funkcją} \label{funkcja}
+
+Zgodnie ze~sposobem opisanym w~pracy \cite{modf}, zmiana wartości współczynnika mutacji $F$ w~kolejnych iteracjach algorytmu sprowadza się~do~modyfikacji współczynnika zgodnie ze~wzorem:
+\begin{equation}
+F_{t+1} = F_{t} + \frac{(0.5 + F_0)}{g}
+\end{equation}
+\par
+Gdzie:\\
+$F_{t+1}$ - współczynnik skalującyw kolejnej iteracji,\\
+$F_{0}$ - współczynnik skalujący w~pierwszej iteracji,\\
+$g$ - liczba iteracji algorytmu,\\
+\par
+Początkowo parametr $F_{0}$ przyjmuje wartość $F_{0}$ = 0,3. W~kolejnych iteracjach algorytmu wielkość ta jest~sukcesywnie zwiększana o~wartość zależną od~założonej początkowo liczby iteracji algorytmu.
+\par
+
+\subsection{Modyfikacja parametru $F$ zgodnie z rozkładem normalnym} \label{gauss1}
+
+Istnieje również podejście, w~którym rozkład prawdopodobieństwa wylosowania danej wartości parametru określony jest~rozkładem normalnym. W~podejściu tym zmiana czynnika skalującego dokonywana jest~w~każdej iteracji algorytmu i~nie jest~ona zależna od~poprzedniej iteracji, tak~jak~miało to~miejsce w~działaniach opisanych w~podpunkcie \ref{funkcja}. \\
+Jednym ze~sposobów opisu rozkładu normalnego jest~funkcja gęstości prawdopodobieństwa dana wzorem:\\
+
+\begin{equation}
+f_{\mu, \sigma} (x) =  \frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-(x-\mu)^2}{2\sigma^2}}
+\end{equation}
+
+Gdzie:\\
+$\mu$ - wartość średnia,\\
+$\sigma$ - odchylenie standardowe,\\
+
+Konieczne staje się~zatem przypisanie pewnych wartości do~parametrów $\mu$ oraz~$\sigma$. Wielkość  $\mu$ powinna być~wartością współczynnika $F$, który~wykazuje się,~największą skutecznościa spośród wszystkich badanych. W~sytuacji gdy nie~jest~możliwe wyodrębienie najlepszej wartości parametru, gdyż zależność wartości współczynnika oraz~funkcji celu jest~losowa, wspomniane w~niniejszym podrozdziale zależności nie~zdajdują zastosowania. Z~kolei parametr $\sigma$ powinien być~ustalony w~taki sposób by~w~przedziale (0,1) znajdowała się~większość obszaru prawdopodobieństwa. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

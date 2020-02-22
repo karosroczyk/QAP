@@ -1,0 +1,456 @@
+\chapter{Fragmenty implementacji}\label{cha:pierwszyDokument}
+
+\section*{Metody reprodukcji}\label{reporeprodukcji}
+\subsection*{Klasyczna reprodukcja : losowy wybór}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> RandomWitoutRestrictions()
+        {
+            List<int> WhichIndividuals = new List<int>();
+            int number = 3;
+            var rand = new System.Random();
+
+            while (number != 0)
+            {
+                WhichIndividuals.Add(Kit.GiveRandomNumber(WhichIndividuals, Population.Count - 1, rand));
+                number--;
+            }
+            return WhichIndividuals;
+        }
+\end{lstlisting}
+
+\subsection*{Metoda rankingowa}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> RankingMethond()
+        {
+            List<int> WhichIndividuals = new List<int>();
+            List<int> WhichIndividualsIndex = new List<int>();
+            List<int> WhichIndividualBeforeSelection = new List<int>();
+            List<int> ResultsOfObjectiveFunction = inputdata.ObjectiveFunctionVector(Population);
+
+            var rand = new System.Random();
+            int size_tmp = size;
+            int number = 3;
+
+            while (size_tmp != 0)
+            {
+                var index = ResultsOfObjectiveFunction.IndexOf(ResultsOfObjectiveFunction.Min());
+                ResultsOfObjectiveFunction[index] = Int32.MaxValue;
+
+                int numberOfIter = size_tmp;
+                while (numberOfIter != 0)
+                {
+                    WhichIndividualBeforeSelection.Add(index);
+                    numberOfIter--;
+                }
+                size_tmp--;
+            }
+
+            while (number != 0)
+            {
+                var tmp = Kit.GiveRandomNumber(WhichIndividualsIndex, WhichIndividualBeforeSelection.Count - 1, rand);
+                for (int i~= 0; i~< WhichIndividualBeforeSelection.Count; i++) // to~w~celu uniknięcia powtórzeń w~wektorach
+                {
+                    if (WhichIndividualBeforeSelection[i] == WhichIndividualBeforeSelection[tmp])
+                        WhichIndividualsIndex.Add(i);
+                }
+
+                WhichIndividuals.Add(WhichIndividualBeforeSelection[tmp]);
+                number--;
+            }
+            return WhichIndividuals;
+        }
+\end{lstlisting}
+
+\subsection*{Metoda ruletki}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> RouletteMethond()
+        {
+            List<int> WhichIndividuals = new List<int>();
+            List<int> ResultsOfObjectiveFunction = inputdata.ObjectiveFunctionVector(Population);
+            List<Tuple<int, int>> tuple = new List<Tuple<int, int>>();
+            int range_begin = 0;
+            int range_end = 0;
+            var rand = new System.Random();
+            int number = 3;
+
+            foreach (var elem in ResultsOfObjectiveFunction)
+            {
+                range_end += elem;
+                tuple.Add(new Tuple<int, int>(range_begin, range_end));
+                range_begin = elem + 1;
+            }
+
+            while (number != 0)
+            {
+                var tmp = Kit.GiveRandomNumber(WhichIndividuals, ResultsOfObjectiveFunction.Sum(), rand);
+                for (int i~= 0; i~< tuple.Count; i++)
+                {
+                    if (tuple[i].Item2 > tmp)
+                    {
+                        WhichIndividuals.Add(i);
+                        number--;
+                        break;
+                    }
+                }
+            }
+            return WhichIndividuals;
+        }
+\end{lstlisting}
+
+\subsection*{Metoda turniejowa}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+ public List<int> TournamentMethond()
+        {
+            List<int> WhichIndividuals = new List<int>();
+            List<int> ResultsOfObjectiveFunction = inputdata.ObjectiveFunctionVector(Population);
+            List<int> ResultsOfObjectiveFunction_const = new List<int>();
+            ResultsOfObjectiveFunction_const.AddRange(ResultsOfObjectiveFunction);
+            List<int> TournamentTable = new List<int>();
+            int number = 3;
+
+            while (number != 0)
+            {
+                int sizeOfTournament_const = ResultsOfObjectiveFunction.Count;
+                while (sizeOfTournament_const > 1)
+                {
+                    for (int i~= 0; i~< sizeOfTournament_const; i++)
+                    {
+                        TournamentTable.Add(Math.Min(ResultsOfObjectiveFunction[i], ResultsOfObjectiveFunction[i + 1]));
+                        i++;
+
+                        if ((sizeOfTournament_const/2) == 1 && i~== sizeOfTournament_const - 2)
+                        {
+                            TournamentTable.Add(ResultsOfObjectiveFunction.Last());
+                            i++;
+                        }
+                    }
+
+                    if (TournamentTable.Count == 1)
+                        break;
+                    sizeOfTournament_const = TournamentTable.Count;
+                    ResultsOfObjectiveFunction.RemoveAll(elem => ResultsOfObjectiveFunction.Contains(elem));
+                    ResultsOfObjectiveFunction.AddRange(TournamentTable);
+                    TournamentTable.RemoveAll(elem => TournamentTable.Contains(elem));
+                }
+
+                var index = ResultsOfObjectiveFunction_const.FindIndex(value => value == TournamentTable[0]);
+                WhichIndividuals.Add(index);
+                ResultsOfObjectiveFunction_const[index] = Int32.MaxValue;
+                ResultsOfObjectiveFunction.RemoveAll(elem => ResultsOfObjectiveFunction.Contains(elem));
+                ResultsOfObjectiveFunction.AddRange(ResultsOfObjectiveFunction_const);
+                TournamentTable.RemoveAt(0);
+                number--;
+            }
+            return WhichIndividuals;
+        }
+\end{lstlisting}
+
+\subsection*{Metoda elitarna}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> ElitistMethond()
+        {
+            List<int> WhichIndividuals = new List<int>();
+            List<int> ResultsOfObjectiveFunction = inputdata.ObjectiveFunctionVector(Population);
+            int number = 3;
+
+            while (number != 0)
+            {
+                int index = ResultsOfObjectiveFunction.FindIndex(min => min == ResultsOfObjectiveFunction.Min());
+                WhichIndividuals.Add(index);
+                ResultsOfObjectiveFunction[index] = Int32.MaxValue;
+                number--;
+            }
+
+            return WhichIndividuals;
+        }
+\end{lstlisting}
+
+\section*{Metody mutacji}\label{repomutacji}
+
+\subsection*{Klasyczna mutacja: DE/rand/1}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> ToMutate()
+        {
+            List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
+            List<double> MutatedIndividual_tmp = new List<double>();
+            List<int> Randoms = RandomWitoutRestrictions();
+            double DefaultValueForMut = 0.8;
+
+            for (int j = 0; j < Population.Count; j++)
+            {
+                double value = Population[Randoms[0]][j] + DefaultValueForMut * (Population[Randoms[1]][j] - Population[Randoms[2]][j]);
+                MutatedIndividual_tmp.Add(value);
+            }
+
+            Normalize(MutatedIndividual_tmp, MutatedIndividual);
+            return MutatedIndividual;
+        }
+\end{lstlisting}
+
+\subsection*{Strategia II: DE/best/1}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> ToMutate2()
+        {
+            List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
+            List<double> MutatedIndividual_tmp = new List<double>();
+
+            List<int> Best = ElitistMethond(1);
+            List<int> Difference = RandomWitoutRestrictions(2);
+
+            double DefaultValueForMut = 0.8;
+
+            for (int j = 0; j < Population.Count; j++)
+            {
+                double value = Population[Best[0]][j] + DefaultValueForMut * (Population[Difference[0]][j] - Population[Difference[1]][j]);
+                MutatedIndividual_tmp.Add(value);
+            }
+
+            Normalize(MutatedIndividual_tmp, MutatedIndividual);
+            return MutatedIndividual;
+        }
+\end{lstlisting}
+
+\subsection*{Strategia III: DE/rand/$n_{v}$}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+public List<int> ToMutate3(int number_of_vectors)
+        {
+            List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
+            List<double> MutatedIndividual_tmp = new List<double>();
+            int n = 2 * number_of_vectors + 1;
+
+            if (n > Population.Count)
+            {
+                number_of_vectors = (Population.Count - 1) / 2;
+            }
+
+            List<int> Randoms = RandomWitoutRestrictions(3);
+            double DefaultValueForMut = 0.8;
+            for (int j = 0; j < Population.Count; j++)
+            {
+                int difference = 0;
+                int number = number_of_vectors;
+                while (number != 0)
+                {
+                    difference += (Population[Randoms[1]][j] - Population[Randoms[2]][j]);
+                    number--;
+                }
+
+                double value = Population[Randoms[0]][j] + DefaultValueForMut * difference;
+                MutatedIndividual_tmp.Add(value);
+            }
+            Normalize(MutatedIndividual_tmp, MutatedIndividual);
+            return MutatedIndividual;
+        }
+\end{lstlisting}
+
+\subsection*{Strategia IV: DE/current to best/$n_{v} +1$}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+public List<int> ToMutate4(int number_of_vectors, int iter)
+        {
+            List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
+            List<double> MutatedIndividual_tmp = new List<double>();
+            int n = 2 * number_of_vectors + 1;
+
+            if (n > Population.Count)
+            {
+                number_of_vectors = (Population.Count - 1) / 2;
+            }
+
+            List<int> Best = ElitistMethond(1);
+            List<int> Randoms = RandomWitoutRestrictions(3);
+            double DefaultValueForMut = 0.8;
+            for (int j = 0; j < Population.Count; j++)
+            {
+                int difference = 0;
+                int number = number_of_vectors;
+                while (number != 0)
+                {
+                    difference += (Population[Randoms[1]][j] - Population[Randoms[2]][j]);
+                    number--;
+                }
+
+                double value = Population[iter][j] + DefaultValueForMut * (Population[Best[0]][j] - Population[Randoms[0]][j]) + DefaultValueForMut * difference;
+                MutatedIndividual_tmp.Add(value);
+            }
+            Normalize(MutatedIndividual_tmp, MutatedIndividual);
+            return MutatedIndividual;
+        }
+\end{lstlisting}
+
+\section*{Metody krzyżowania}\label{repocross}
+
+\subsection*{Klasyczne krzyżowanie : krzyżowanie dwumianowe}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+	public List<int> BinomialCrossver(List<int> ParentIndividual, List<int> MutatedIndividual)
+        {
+            List<int> CrossedIndividual = new List<int>();
+            Random random = new Random();
+            double Cr = random.NextDouble();
+            Random random2 = new Random();
+
+            int size = ParentIndividual.Count;
+            for (int i~= 0; i~< size; i++){
+                double Cr_tmp = random.NextDouble();
+
+                if (Cr_tmp < Cr){
+                    if (CrossedIndividual.Contains(MutatedIndividual[i])){
+                        var ind = GiveRandomNumber(CrossedIndividual, MutatedIndividual.Count, random2);
+                        CrossedIndividual.Add(ind);
+                    }
+                    else
+                        CrossedIndividual.Add(MutatedIndividual[i]);
+                }
+                else //Parent{
+                    if (CrossedIndividual.Contains(ParentIndividual[i])){
+                        var ind = GiveRandomNumber(CrossedIndividual, ParentIndividual.Count, random2);
+                        CrossedIndividual.Add(ind);
+                    }
+                    else
+                        CrossedIndividual.Add(ParentIndividual[i]);
+                }
+            }
+            return CrossedIndividual;
+        }
+\end{lstlisting}
+
+\subsection*{Krzyżowanie OX}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+	public List<int> OXCrossver(List<int> ParentIndividual, List<int> MutatedIndividual)
+        {
+            List<int> CrossedIndividual = new List<int>();
+            for (int i~= 0; i~< ParentIndividual.Count; i++){
+                CrossedIndividual.Add(0);
+            }
+
+            Random rnd = new Random();
+            int offset = rnd.Next(0, ParentIndividual.Count);
+            int length = rnd.Next(1, ParentIndividual.Count - offset);
+            int iter = 0;
+            while (iter != length){
+                CrossedIndividual[offset + iter] = MutatedIndividual[offset + iter];
+                iter++;
+            }
+
+            for (int i~= 0; i~< ParentIndividual.Count; i++){
+                if (CrossedIndividual[i] == 0){
+                    var i_tmp = 0;
+                    while(CrossedIndividual.Contains(ParentIndividual[i_tmp])){
+                        i_tmp++;
+                    }
+                    CrossedIndividual[i] = ParentIndividual[i_tmp];
+                }
+            }
+            return CrossedIndividual;
+        }
+\end{lstlisting}
+
+\subsection*{Krzyżowanie CX}
+
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> CXCrossver(List<int> ParentIndividual, List<int> MutatedIndividual)
+        {
+            List<int> CrossedIndividual = new List<int>();
+            for (int i~= 0; i~< ParentIndividual.Count; i++){
+                CrossedIndividual.Add(0);
+            }
+
+            CrossedIndividual[0] = MutatedIndividual[0];
+            var index = 0;
+
+            while (ParentIndividual[index] != MutatedIndividual[0]){
+                index = MutatedIndividual.FindIndex(x => x == ParentIndividual[index]);
+                CrossedIndividual[index] = MutatedIndividual[index];
+            }
+
+            for(int i~= 0; i~< ParentIndividual.Count; i++){
+                if (CrossedIndividual[i] == 0){
+                    var i_tmp = 0;
+                    while (CrossedIndividual.Contains(ParentIndividual[i_tmp])){
+                        i_tmp++;
+                    }
+                    CrossedIndividual[i] = ParentIndividual[i_tmp];
+                }
+            }
+            return CrossedIndividual;
+        }
+\end{lstlisting}
+
+\subsection*{Krzyżowanie PMX}
+\begin{lstlisting}[
+ basicstyle=\scriptsize,]
+        public List<int> PMXCrossver(List<int> ParentIndividual, List<int> MutatedIndividual){
+            List<int> MutatedIndividualSubstringCopy = new List<int>();
+            List<int> ParentIndividualSubstringCopy = new List<int>();
+            List<int> MutatedIndividualSubstring = new List<int>();
+            List<int> ParentIndividualSubstring = new List<int>();
+            Random rnd = new Random();
+            int offset = rnd.Next(0, ParentIndividual.Count);
+            int length = rnd.Next(1, ParentIndividual.Count - offset);
+            int iter = 0;
+
+            while (iter != length){
+                MutatedIndividualSubstring.Add(MutatedIndividual[offset + iter]);
+                ParentIndividualSubstring.Add(ParentIndividual[offset + iter]);
+                iter++;}
+
+            for (int i~= offset; i~< offset + MutatedIndividualSubstring.Count; i++){
+                MutatedIndividual[i] = 0;
+                ParentIndividual[i] = 0;}
+
+            for (int i~= 0; i~< MutatedIndividualSubstring.Count; i++){
+                MutatedIndividualSubstringCopy.Add(MutatedIndividualSubstring[i]);
+                ParentIndividualSubstringCopy.Add(ParentIndividualSubstring[i]);}
+
+            for (int i~= 0; i~< MutatedIndividualSubstring.Count; i++){
+                if (ParentIndividualSubstring.Contains(MutatedIndividualSubstring[i])){
+                    var index = ParentIndividualSubstring.FindIndex(x => x == MutatedIndividualSubstring[i]);
+                    MutatedIndividualSubstring[i] = MutatedIndividualSubstring[index];
+                    MutatedIndividualSubstring.RemoveAt(index);
+                    ParentIndividualSubstring.RemoveAt(index);
+                    i~= -1;}
+            }
+            for (int i~= 0; i~< MutatedIndividual.Count; i++){
+                if (!MutatedIndividual.Contains(ParentIndividual[i])){
+                    int  index_2 = MutatedIndividualSubstring.FindIndex(x => x == ParentIndividual[i]);
+                    var value = ParentIndividualSubstring[index_2];
+                    var index = MutatedIndividual.FindIndex(x => x == value);
+                    MutatedIndividual[index] = ParentIndividual[i];
+                    ParentIndividual[i] = value;}
+            }
+            var i_tmp = 0;
+            var i_tmp2 = 0;
+
+            for (int i~= 0; i~< MutatedIndividual.Count; i++){
+                if (MutatedIndividual[i] == 0){
+                    MutatedIndividual[i] = ParentIndividualSubstringCopy[i_tmp];
+                    i_tmp ++;}
+                if (ParentIndividual[i] == 0){
+                    ParentIndividual[i] = MutatedIndividualSubstringCopy[i_tmp2];
+                    i_tmp2 ++;}
+            }
+            return MutatedIndividual;
+        }
+\end{lstlisting}

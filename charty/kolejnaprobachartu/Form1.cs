@@ -31,12 +31,12 @@ namespace kolejnaprobachartu
             chart1.Text = "Przebieg funkcji celu przy użyciu różnych metod mutacji";
             chart1.Titles.Add("Przebieg funkcji celu");
             //chart1.ChartAreas[0].AxisY.Minimum = 1650;
-            chart1.ChartAreas[0].AxisX.Maximum = 100000;
+            chart1.ChartAreas[0].AxisX.Maximum = 30000;
             int k = 1;
 
             for (int j = 0; j < 20; j++)
             {
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     final.Koncowa(i + 1, 2);
                     List<int> toChart_ = Final.toChart;

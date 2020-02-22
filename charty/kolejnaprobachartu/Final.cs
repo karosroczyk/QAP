@@ -29,43 +29,6 @@ namespace kolejnaprobachartu
             return FirstPopulation;
         }
 
-        public static List<int> BinomialCrossver(List<int> ParentIndividual, List<int> MutatedIndividual)
-        {
-            List<int> CrossedIndividual = new List<int>();
-            Random random = new Random();
-            double Cr = random.NextDouble();
-
-            Random random2 = new Random();
-
-            int size = ParentIndividual.Count;
-            for (int i = 0; i < size; i++)
-            {
-                double Cr_tmp = random.NextDouble();
-
-                if (Cr_tmp < Cr) // Mutated
-                {
-                    if (CrossedIndividual.Contains(MutatedIndividual[i]))
-                    {
-                        var ind = Kit.GiveRandomNumber(CrossedIndividual, MutatedIndividual.Count, random2);
-                        CrossedIndividual.Add(ind);
-                    }
-                    else
-                        CrossedIndividual.Add(MutatedIndividual[i]);
-                }
-                else //Parent
-                {
-                    if (CrossedIndividual.Contains(ParentIndividual[i]))
-                    {
-                        var ind = Kit.GiveRandomNumber(CrossedIndividual, ParentIndividual.Count, random2);
-                        CrossedIndividual.Add(ind);
-                    }
-                    else
-                        CrossedIndividual.Add(ParentIndividual[i]);
-                }
-            }
-            return CrossedIndividual;
-        }
-
         public static void Replacement(List<List<int>> FirstPopulation, List<int> CrossedIndividual, int i)
         {
             InputData inputdata = new InputData();
@@ -109,9 +72,10 @@ namespace kolejnaprobachartu
                 new List<int>(){16,1,4,8,11,6,15,2,5,12,13,7,9,3,14,10}
             };*/
 
-            // Generacja pierwszej populacji 
-            Mutation mutationdata = new Mutation(FirstPopulation);
-            int num_of_iter = 100000;
+            // Generacja pierwszej populacji
+            int num_of_iter = 150000;
+            Mutation mutationdata = new Mutation(FirstPopulation, num_of_iter);
+            Crossover crosseddata = new Crossover(FirstPopulation.Count, num_of_iter);
 
             //List<int> MutatedIndividual2 = mutationdata.TournamentMethond();
             while (num_of_iter != 0)
@@ -119,10 +83,10 @@ namespace kolejnaprobachartu
                 for (int i = 0; i < InputData.size; i++)
                 {
                     // Mutacja
-                    List<int> MutatedIndividual2 = mutationdata.SwitchMethod(switchCase, i, number_of_vectors);
+                    List<int> MutatedIndividual2 = mutationdata.SwitchMethod(7, i, number_of_vectors);
 
                     // Krzyżowanie
-                    List<int> CrossedIndividual2 = BinomialCrossver(FirstPopulation[i], MutatedIndividual2);
+                    List<int> CrossedIndividual2 = crosseddata.SwitchMethodCrossover(1, FirstPopulation[i], MutatedIndividual2);
 
                     // Replacement
                     Replacement(FirstPopulation, CrossedIndividual2, i);

@@ -11,20 +11,45 @@ namespace kolejnaprobachartu
         public List<int> MutatedIndividual { get; set; }
         public List<int> ResultsOfObjectiveFunction { get; }
         public Random rand = new Random();
+        public double PreviousValue = 0.3;
+        public int NumberOfIter;
+        public int actual_iter = 0;
 
-        public Mutation(List<List<int>> FirstPopulation) : base(FirstPopulation)
+        public Mutation(List<List<int>> FirstPopulation, int NumberOfIter_) : base(FirstPopulation)
         {
             //Population = FirstPopulation;
             InputData inputdata = new InputData();
             ResultsOfObjectiveFunction = inputdata.ObjectiveFunctionVector(Population);
+            NumberOfIter = NumberOfIter_;
         }
+        public double SetDynamicParameter()
+        {
+            double StartValue = 0.3;
+            double NewValue = PreviousValue + (0.5 + StartValue) / (NumberOfIter * Population.Count);
 
+            PreviousValue = NewValue;
+            return NewValue;
+        }
+        public double GaussianLayout()
+        {
+            actual_iter++;
+            const double medium = 5;
+            const double sigma = 2.5;
+            const double PI = 3.14;
+            const double diff = 0.00033;
+            double x = (diff * actual_iter);
+
+            var first = 1 / Math.Sqrt(2 * PI) * sigma;
+            var y = first * Math.Exp((-(x - medium) * (x - medium)) / (2 * sigma * sigma));
+
+            return y;
+        }
         public List<int> ToMutate()
         {
             List<int> MutatedIndividual = new List<int>(new int[Population.Count]);
             List<double> MutatedIndividual_tmp = new List<double>();
             List<int> Randoms = RankingMethond();
-            double DefaultValueForMut = 0.8;
+            double DefaultValueForMut = GaussianLayout();
 
             for (int j = 0; j < Population.Count; j++)
             {
@@ -43,7 +68,7 @@ namespace kolejnaprobachartu
             List<int> Randoms = RankingMethond();
             double scaler = rand.NextDouble();
             Console.WriteLine(scaler);
-            double DefaultValueForMut = 0.8;
+            double DefaultValueForMut = SetDynamicParameter();
 
             for (int j = 0; j < Population.Count; j++)
             {
@@ -66,7 +91,7 @@ namespace kolejnaprobachartu
             List<int> Best = ElitistMethond(1);
             List<int> Difference = RankingMethond();
 
-            double DefaultValueForMut = 0.8;
+            double DefaultValueForMut = SetDynamicParameter();
 
             for (int j = 0; j < Population.Count; j++)
             {
@@ -86,7 +111,7 @@ namespace kolejnaprobachartu
             List<int> Best = ElitistMethond(1);
             List<int> Difference = RankingMethond();
 
-            double DefaultValueForMut = 0.8;
+            double DefaultValueForMut = SetDynamicParameter();
 
             for (int j = 0; j < Population.Count; j++)
             {
@@ -112,7 +137,7 @@ namespace kolejnaprobachartu
             }
 
             List<int> Randoms = RankingMethond();
-            double DefaultValueForMut = 0.8;
+            double DefaultValueForMut = SetDynamicParameter();
             for (int j = 0; j < Population.Count; j++)
             {
                 int difference = 0;
@@ -143,7 +168,7 @@ namespace kolejnaprobachartu
             }
 
             List<int> Randoms = RankingMethond();
-            double DefaultValueForMut = 0.8;
+            double DefaultValueForMut = SetDynamicParameter();
             for (int j = 0; j < Population.Count; j++)
             {
                 int difference = 0;
@@ -175,7 +200,7 @@ namespace kolejnaprobachartu
             }
 
             List<int> Best = ElitistMethond(1);
-            List<int> Randoms = RankingMethond();
+            List<int> Randoms = RandomWitoutRestrictions();
             double DefaultValueForMut = 0.8;
             for (int j = 0; j < Population.Count; j++)
             {
@@ -206,7 +231,7 @@ namespace kolejnaprobachartu
             }
 
             List<int> Best = ElitistMethond(1);
-            List<int> Randoms = RankingMethond();
+            List<int> Randoms = RandomWitoutRestrictions();
             double DefaultValueForMut = 0.8;
             for (int j = 0; j < Population.Count; j++)
             {

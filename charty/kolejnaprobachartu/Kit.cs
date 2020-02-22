@@ -20,7 +20,6 @@ namespace kolejnaprobachartu
             int index = rand.Next(0, max_value);
             return range.ElementAt(index);
         }
-
         public static void Normalize(List<double> MutatedIndividual_tmp, List<int> MutatedIndividual)
         {
             List<double> ListToConvert = MutatedIndividual_tmp;

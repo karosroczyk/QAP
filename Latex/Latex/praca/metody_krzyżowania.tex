@@ -1,0 +1,103 @@
+\chapter{Operacja krzyżowania}\label{cha:pierwszyDokument}
+
+Operacja krzyżowania jest~drugą, obok mutacji, operacją należącą do~grupy operatorów genetycznych. Głównym celem istnienia krzyżowania w~algorytmie ewolucji różnicowej jest~wprowadzenie dodatkowego zróżnicowania wśród osobników. Potomek będący wynikiem operacji krzyżowania $o_{i}$ zgodnie z~pseudokodem zmieszczonym w~podrozdziale 2.1.3 powstaje poprzez~wymianę kodu genetycznego osobnika wynikowego operatora mutacji $u_{i}$ oraz~osobnika $x_{i}$ należącego do~populacji rodziców. Operacji tej towarzyszy również parametr $C{r}$ określany mianem współczynnika krzyżowania. Wartości tego współczynnika może zostać przypisana stała wartość bądź~też może ona ulegać zmianie wraz~z~biegiem algorytmu. \\
+W~algorytmach ewolucyjnych stosuje się~między innymi metody krzyżowania takie jak~krzyżowanie dwupunktowe, wielopunktowe czy~też równomierne \cite{diff2}, natomiast w~przypadku algorytmów ewolucji różnicowej spotykane warianty to~krzyżowanie dwumianowe czy~też wykładnicze (odpowiednik krzyżowania dwupunktowego w~algorytmie ewolucyjnym). Wspomniane wyżej metody nie~znajdują jednak bezpośredniego zastosowania w~kontekście problemów optymalizacji, w~których to~poszczególne osobniki są~permutacjami, jako że~osobniki w~metodach tych są~ciągami bitowymi. Istnieje wówczas ryzyko duplikacji genu w~osobniku wynikowym. W~celu dostosowania algorytmu ewolucji różnicowej tak~by~rozwiązywał on problem NP-trudny, jakim jest~kwadratowe zagadnienie przydziału (QAP) należy dokonać modyfikacji standardowej implementacji metod krzyżowania, w~taki sposób by~powtórzenia w~genach nie~występowały. Niemniej jednak wspomniane wyżej modyfikacje wprowadzają do~algorytmu dodatkową losowość, co niekoniecznie może wpłynąć korzystnie na~całość działania algorytmu. \\
+W~literaturze \cite{cross} można znaleźć metody krzyżowania dostosowane do~problemów, w~których to~osobniki są~reprezentowane przez~permutacje, a~nie poprzez~wartości binarne jak~ma to~miejsce w~klasycznym algorytmie ewolucyjnym. Do~grona tych metod zaliczamy między innymi OX(Order Crossover), CX(Cycle Crossover) czy~też PMX(Parcial Mapped Crossover). Implementacje i~omówienie wspomnianych metod krzyżowania zostanie zaprezentowane w~poniższych podrozdziałach. Listingi poszczególnych metod krzyżowania można znaleźć w~dodatku \ref{repocross}.
+
+%---------------------------------------------------------------------------
+
+\section{Klasyczne krzyżowanie : krzyżowanie dwumianowe}\label{sec:strukturaDokumentu}
+
+Zgodnie z~\cite{doktorat}, \cite{diff2} w~klasycznym algorytmie ewolucji różnicowej najczęściej wykorzystywaną metodą odpowiedzialną za~operacje krzyżowania jest~krzyżowanie dwumianowe (ang. \textit{binomial}). Polega ono na~przypisaniu do~genu osobnika potomnego, wartości genu osobnika zmutowanego bądź~też osobnika należącego do~populacji rodzicielskiej. O~wyborze, z~którego osobnika ma pochodzić gen wynikowy, decyduje zależność wartości wylosowanej liczby zmiennoprzecinkowej z~zakresu (0,1) i~parametru krzyżowania $C_{r}$. Opisane wyżej zależności można przedstawić w~formie zapisu.
+
+\begin{equation}
+o_{i} = \left\{ \begin{array}{ll}
+u_{i} & \textrm{,gdy $rand(0,1) \le C_{r}$}\\
+x_{i} & \textrm{,gdy $rand(0,1) > C_{r}$}
+\end{array} \right.
+\end{equation}
+gdzie $i = 1,...,n$
+ 
+W~celu wykorzystania metody krzyżowania w~taki sposób, by~wektor wynikowy był permutacją danego zbioru, należy wprowadzić pewne modyfikacje w~algorytmie działania tej metody. Modyfikacje te~dotyczą sytuacji w~której do~osobnika wynikowego ma zostać wpisany gen, pochodzący od~osobnika zmutowanego czy~też od~rodzica, który~występuje już w~osobniku wynikowym. Wówczas z~pozostałych, niewykorzystanych jeszcze genów osobnika zmutowanego lub~rodzica, zostaje losowany kolejny gen. Czynność ta jest~powtarzana aż do~momentu wylosowania genu, który~nie zawiera się~w~osobniku wynikowym.
+%---------------------------------------------------------------------------
+
+\section{Pozostałe metody krzyżowania}\label{sec:strukturaDokumentu}
+
+W~literaturze \cite{crossovers} istnieją metody krzyżowania mające bezpośrednie zastosowanie w~przypadku osobników będących permutacjami pewnego zbioru. Poniżej zostały opisane zasady działania oraz~implementacje poszczególnych metod krzyżowania.
+
+%---------------------------------------------------------------------------
+
+\subsection{Krzyżowanie OX}\label{sec:kompilacja}
+
+Strategia OX ang.\textit{Order Crossover} zakłada utworzenie osobnika potomnego poprzez~wybór podciągu w~jednym z~osobników będącym rodzicem \cite{cross}. Następnie podciąg ustawiany jest~w~potomku na~miejscach o~tych samych indeksach, na~których znajdował się~on w~osobniku będącym rodzicem. Pozostałe luki w~osobniku potomnym wypełnianie są~wartościami genów drugiego z~rodziców, przy jednoczesnym sprawdzeniu, czy~osobnik potomny nie~zawiera już danej wartości. Gen potomny jest~dopełniany od~lewej do~prawej strony. Opisane zależności przedstawione zostały na~poniższym schemacie.
+
+
+\begin{figure}[h!]
+\centering
+		\includegraphics[scale=0.6]{../../../../Screeny/OXCross.png}
+		\caption{Schemat działania operatora krzyżowania OX.}
+		\label{schematOX}			
+\end{figure}
+
+Długość podciągu oraz~indeks jego początku również są~losowane programowo.
+
+%---------------------------------------------------------------------------
+
+\subsection{Krzyżowanie CX}\label{crossCX_sub}
+
+Operacja krzyżowania CX ang. \textit{Cycle Crossover} opiera się~na~utworzeniu domkniętego obiegu zawierającego w~sobie elementy każdego z~rodziców \cite{crossovers}. Obieg rozpoczyna się~od~pierwszego elementu osobnika zmutowanego, kolejny fragment stanowi zaś element znajdujący się~na~tej samej pozycji, lecz~w~osobniku wywodzącym się~z~populacji rodzicielskiej. Następnie na~podstawie wartości tego elementu odszukiwany jest~odpowiadający mu gen w~osobniku zmutowanym. Czynności te~powtarzane są~do~chwili, gdy kandydatem na~dołączenie do~obiegu jest~gen odpowiadający wartości pierwszego elementu w~obiegu. Sytuacja ta oznacza zakończenie pętli. \\
+Geny osobnika zmutowanego, odznaczające się~wartościami zawartymi w~obiegu, zostają wpisane na~odpowiadających im pozycjach w~genie wynikowym operacji. Dopełnienie luk zostaje realizowane poprzez~inicjalizacje danej pozycji wartością pochodzącą od~osobnika z~populacji rodzicielskiej, w~kolejności od~lewej do~prawej strony. Opisane wyżej zależności przedstawione zostały na~poniższym schemacie.
+
+
+\begin{figure}[h!]
+\centering
+		\includegraphics[scale=0.6]{../../../../Screeny/crossCX.png}
+		\caption{Schemat działania operatora krzyżowania CX.}
+		\label{schematCX}			
+\end{figure}
+
+%---------------------------------------------------------------------------
+
+\subsection{Krzyżowanie PMX}\label{sec:kompilacja}
+
+Metoda PMX ang. \textit{Partial-Mapped Crossover} jest~jedną z~bardziej skomplikowanych strategii krzyżowania. Jej działanie, podobnie jak~uprzednio opisanych metod, jest~zależne od~osobników będących rodzicami. Zarówno z~pierwszego, jak~i~z drugiego rodzica wybierany jest~podciąg rozpoczynający się~w~miejscu o~losowym indeksie i~posiadający losową długość. Wartości te~są takie same dla~obydwu rodziców. Następnie dokonuje się~wymiany podciągów pomiędzy dwoma rodzicami, w~wyniku czego w~osobnikach mogą wystąpić powtórzenia. Rozwiązaniem tego konfliktu jest~stworzenie relacji mapowania, rysunek. Geny tworzą miedzy sobą relacje, wtedy gdy jeden z~nich stanowi początek, a~drugi koniec zamkniętego obiegu. Obieg tworzony jest~na~tej samej zasadzie co odpowiadający mu i~opisany w~podrozdziale \ref{crossCX_sub}, z~uwzględnieniem faktu, iż~zbiorem danych jest~wylosowany podciąg. Opisane zależności przedstawione są~na~poniższym schemacie.
+
+\begin{figure}[h!]
+\centering
+		\includegraphics[scale=0.6]{../../../../Screeny/pmx_schemat.png}
+		\caption{Schemat działania operatora krzyżowania PMX.}
+		\label{schematPMX}			
+\end{figure}
+
+Metodę krzyżowania PMX od~poprzednich metod odróżnia fakt, iż~w~wyniku jej działania uzyskujemy dwa osobniki potomne.
+%---------------------------------------------------------------------------
+
+\section{Dostrajanie parametru krzyżowania}\label{dostrajaniecr}
+
+Dostrajanie parametru krzyżowania w~niniejszej pracy zastosowanie znajduje jedynie w~kontekście metody krzyżowania dwumianowego, gdyż tylko~w~tej metodzie stosowany jest~współczynnik $C_{r}$. Zmiana wartości tego parametru dokonywana jest~na~podobnych zasadach co parametru mutacji, opisanego w~podrozdziale \ref{rozklad}, z~uwzględnieniem jednak innej postaci funkcji, na~podstawie której~dokonywane jest~dostrajanie \cite{doktorat}. Szczegółowy opis metod modyfikacji znajduje się~poniżej.
+
+\subsection{Modyfikacja parametru $C_{r}$ zgodnie z daną funkcją}\label{funkcjacr}
+
+W~oparciu o~prace \cite{modf} dostrajanie współczynnika krzyżowania powinno być~dokonywane zgodnie z~funkcją opisaną zależnością \ref{wzordostrajaniecr}:
+
+\begin{equation}
+C_{r, t+1} = C_{r,t} - \frac{(C_{r,0} - 0.7)}{g}
+\label{wzordostrajaniecr}
+\end{equation}
+
+Gdzie :\\
+$ C_{r, t+1} $ - współczynnik krzyżowania w~kolejnej iteracji, \\
+$ C_{r, 0} $ - współczynnik krzyżowania w~pierwszej iteracji, \\
+$g$ - liczba iteracji algorytmu, \\
+
+Początkowo parametrowi $ C_{r, 0} $ zostaje przypisywana wartość $ C_{r, 0} $ = 0,3. Następnie w~miarę działania algorytmu i~występowania nowych iteracji wartość ta ulega aktualizacji, tworząc tym samym cały proces dynamicznym.
+
+
+\subsection{Modyfikacja parametru $C_{r}$ zgodnie z rozkładem normalnym}\label{gauss2}
+
+W~podstawowej wersji algorytmu ewolucyjnego współczynnik $C_{r}$ jest~wartością losową z~przedziału (0,1), tak~samo jak~współczynnik mutacji. W~związku z~powyższym metoda modyfikacji współczynnika krzyżowania zgodnie z~rozkładem normalnym jest~identyczna z~parametrem $F$. Metoda ta została szczegółowo opisana w~podrozdziale \ref{rozklad}.
+
+
+
+
+
